@@ -3,7 +3,7 @@ import MateBetsHeader from './header';
 import HeroBanner from './hero-banner';
 import FilterOptions from './filter-options';
 
-const MateBets = () => {
+const Hero = () => {
   const handleLogin = () => {
     // Handle login logic
   };
@@ -32,4 +32,4 @@ const MateBets = () => {
   );
 };
 
-export default MateBets;
+export default hero;
