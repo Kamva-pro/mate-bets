@@ -1,7 +1,7 @@
 import React from 'react';
-import MateBetsHeader from './MateBetsHeader';
-import HeroBanner from './HeroBanner';
-import FilterOptions from './FilterOptions';
+import MateBetsHeader from './header';
+import HeroBanner from './hero-banner';
+import FilterOptions from './filter-options';
 
 const MateBets = () => {
   const handleLogin = () => {

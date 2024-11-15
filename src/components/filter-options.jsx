@@ -1,16 +1,6 @@
 import React from 'react';
 
-type FilterOption = {
-  label: string;
-  iconSrc: string;
-};
-
-type FilterOptionsProps = {
-  options: FilterOption[];
-  onFilter: () => void;
-};
-
-const FilterOptions: React.FC<FilterOptionsProps> = ({ options, onFilter }) => {
+const FilterOptions = ({ options, onFilter }) => {
   return (
     <div className="flex flex-wrap gap-5 justify-between mt-40 w-full text-xl font-medium whitespace-nowrap max-w-[1148px] max-md:mt-10 max-md:max-w-full">
       {options.map((option, index) => (
