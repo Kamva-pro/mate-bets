@@ -1,0 +1,228 @@
+.heroSection {
+    background-color: #1b1b1b;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Montserrat, sans-serif;
+    color: #fff;
+    font-weight: 700;
+    padding: 27px 80px 110px;
+  }
+  
+  @media (max-width: 991px) {
+    .heroSection {
+      padding: 0 20px 100px;
+    }
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 1198px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  @media (max-width: 991px) {
+    .container {
+      max-width: 100%;
+    }
+  }
+  
+  .header {
+    align-self: stretch;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 40px 100px;
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 991px) {
+    .header {
+      max-width: 100%;
+    }
+  }
+  
+  .logo {
+    align-self: stretch;
+    flex-grow: 1;
+    width: 175px;
+    margin: auto 0;
+    font: 40px Inter, sans-serif;
+  }
+  
+  .logoGreen {
+    color: #238b57;
+  }
+  
+  .navigation {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 40px 66px;
+    font-size: 20px;
+    font-weight: 500;
+    justify-content: start;
+    margin: auto 0;
+  }
+  
+  @media (max-width: 991px) {
+    .navigation {
+      max-width: 100%;
+    }
+  }
+  
+  .navItem {
+    align-self: stretch;
+    margin: auto 0;
+  }
+  
+  .loginButton {
+    border-radius: 8px;
+    background-color: #238b57;
+    align-self: stretch;
+    font-size: 24px;
+    white-space: nowrap;
+    padding: 21px 54px;
+  }
+  
+  @media (max-width: 991px) {
+    .loginButton {
+      white-space: initial;
+      padding: 0 20px;
+    }
+  }
+  
+  .heroContent {
+    display: flex;
+    width: 803px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: start;
+    font-size: 28px;
+    margin: 275px 0 0 72px;
+  }
+  
+  @media (max-width: 991px) {
+    .heroContent {
+      margin-top: 40px;
+    }
+  }
+  
+  .heroTitle {
+    font-size: 64px;
+    align-self: stretch;
+  }
+  
+  @media (max-width: 991px) {
+    .heroTitle {
+      max-width: 100%;
+      font-size: 40px;
+    }
+  }
+  
+  .heroSubtitle {
+    font-weight: 500;
+    margin-top: 18px;
+  }
+  
+  @media (max-width: 991px) {
+    .heroSubtitle {
+      max-width: 100%;
+    }
+  }
+  
+  .ctaButton {
+    border-radius: 4px;
+    background-color: #000;
+    box-shadow: 12px 12px 25px rgba(255, 255, 255, 0.5);
+    margin-top: 17px;
+    overflow: hidden;
+    padding: 24px 65px;
+  }
+  
+  @media (max-width: 991px) {
+    .ctaButton {
+      padding: 0 20px;
+    }
+  }
+  
+  .filterSection {
+    display: flex;
+    margin-top: 153px;
+    width: 100%;
+    max-width: 1148px;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 991px) {
+    .filterSection {
+      max-width: 100%;
+      margin-top: 40px;
+      white-space: initial;
+    }
+  }
+  
+  .filterItem {
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px 100px;
+    overflow: hidden;
+    padding: 11px 7px 21px 36px;
+    border: 1px solid #fff;
+  }
+  
+  @media (max-width: 991px) {
+    .filterItem {
+      padding-left: 20px;
+      white-space: initial;
+    }
+  }
+  
+  .filterText {
+    margin: auto 0;
+  }
+  
+  .filterIcon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 50px;
+    align-self: start;
+  }
+  
+  .filterButton {
+    border-radius: 4px;
+    background-color: #2ecc71;
+    overflow: hidden;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 24px 70px;
+  }
+  
+  @media (max-width: 991px) {
+    .filterButton {
+      white-space: initial;
+      padding: 0 20px;
+    }
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
