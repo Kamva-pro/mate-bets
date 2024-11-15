@@ -1,10 +1,6 @@
 import React from 'react';
 
-type MateBetsHeaderProps = {
-  onLogin: () => void;
-};
-
-const MateBetsHeader: React.FC<MateBetsHeaderProps> = ({ onLogin }) => {
+const MateBetsHeader = ({ onLogin }) => {
   return (
     <header className="flex flex-wrap gap-10 items-center self-stretch w-full max-md:max-w-full">
       <h1 className="grow shrink self-stretch my-auto text-4xl w-[175px]">
