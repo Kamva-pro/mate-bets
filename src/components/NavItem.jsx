@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './HeroSection.module.css';
+import styles from '../HeroSection.module.css';
 
 const NavItem = ({ text }) => {
   return (
