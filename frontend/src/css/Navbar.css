@@ -26,6 +26,15 @@
   .navbar-brand {
     font-size: 24px;
     font-weight: bold;
+    color: #fff;
+  }
+
+  .navbar-brand:hover{
+    color: #fff;
+  }
+
+  #bets-text{
+    color: #238B57;
   }
   
   .navbar-links {
@@ -41,11 +50,11 @@
   }
   
   .navbar-link:hover {
-    color: #f0a500; /* Highlight color on hover */
+    color: #238B57; /* Highlight color on hover */
   }
   
   .navbar-button {
-    background-color: #f0a500; /* Button color */
+    background-color: #238B57; /* Button color */
     color: white;
     border: none;
     padding: 10px 20px;
