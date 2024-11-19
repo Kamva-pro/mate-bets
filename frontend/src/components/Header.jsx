@@ -1,53 +1,50 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { Layout, Menu, Button, Drawer } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
+
+const { Header } = Layout;
 
 function Navbar() {
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const showDrawer = () => setDrawerVisible(true);
+  const closeDrawer = () => setDrawerVisible(false);
+
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark bg-transparent shadow-sm sticky-top"
-      style={{ backdropFilter: 'blur(10px)' }}
-    >
-      <div className="container">
-        <a className="navbar-brand" href="#">
-          MyWebsite
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+    <Layout>
+      <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
+        <div className="logo" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>My App</div>
+
+        {/* Hamburger Menu for Mobile/Tablet */}
+        <Button 
+          className="mobile-menu" 
+          icon={<MenuOutlined />} 
+          onClick={showDrawer}
+          style={{ display: 'block', marginLeft: 'auto', background: 'transparent', border: 'none', color: 'white' }}
+        />
+
+        {/* Mobile Drawer */}
+        <Drawer
+          title="Menu"
+          placement="right"
+          onClose={closeDrawer}
+          visible={drawerVisible}
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#home">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#about">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#services">
-                Services
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#contact">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+          <Menu mode="vertical">
+            <Menu.Item key="1"><a href="#home">Home</a></Menu.Item>
+            <Menu.Item key="2"><a href="#about">About</a></Menu.Item>
+            <Menu.Item key="3"><a href="#contact">Contact</a></Menu.Item>
+          </Menu>
+        </Drawer>
+
+        {/* Desktop Menu */}
+        <Menu theme="dark" mode="horizontal" style={{ display: 'inline-block', width: 'auto' }}>
+          <Menu.Item key="1"><a href="#home">Home</a></Menu.Item>
+          <Menu.Item key="2"><a href="#about">About</a></Menu.Item>
+          <Menu.Item key="3"><a href="#contact">Contact</a></Menu.Item>
+        </Menu>
+      </Header>
+    </Layout>
   );
 }
 

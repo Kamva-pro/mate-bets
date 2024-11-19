@@ -4,7 +4,9 @@ import React from 'react';
 
 export function HeroLayout() {
   return (
-    <Navbar/>
+            <Navbar/>
+            // <Text>Hello</Text>
+
   );
 }
 
