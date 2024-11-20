@@ -1,9 +1,9 @@
 /* Basic reset */
-/* * {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  } */
+  } 
   
   body {
     font-family: Arial, sans-serif; /*change this to montserrat*/
@@ -11,16 +11,17 @@
   
   /* Navbar styles */
   .navbar {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px !important;
     background-color: #121212;
     color: white;
-    position: sticky;
+    position: fixed !important;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(212, 210, 210, 0.479);   
+    box-shadow: 0 2px 12px rgba(212, 210, 210, 0.479);   
   }
   
   .navbar .navbar-brand {

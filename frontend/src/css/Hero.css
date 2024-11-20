@@ -1,0 +1,22 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.hero-section{
+    background-color: #121212;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/54137006576_e18ae539cc_o.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 20;
+    
+}
+
+.hero-content{
+    color: white;
+}

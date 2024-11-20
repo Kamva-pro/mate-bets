@@ -1,11 +1,15 @@
 import React from "react";
 import Navbar from "./Header";
-import { HeroLayout } from "./HeroSection";
+import HeroSection from "./HeroSection";
 
 export default function Home ()
 {
     return(
-        <Navbar/>
+        <div>
+            <Navbar/>
+            <HeroSection/>
+        </div>
+        
     );
 
 }

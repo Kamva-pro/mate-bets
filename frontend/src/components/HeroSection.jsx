@@ -1,11 +1,18 @@
 import React from 'react';
+import "../css/Hero.css";
 
-
-export function HeroLayout() {
+ function HeroSection() {
   return (
-    <Div>
+    <div className='hero-section'>
+      <div className='hero-banner'>
+        <div className='hero-content'>
+        <h1>Put Your Money Where Your Moves Are!</h1>
+        <h6>Play against your friends and win big!</h6>
+      </div></div>
       
-    </Div>
+    </div>
   );
 }
 
+
+export default HeroSection
