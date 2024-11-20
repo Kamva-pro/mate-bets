@@ -1,0 +1,77 @@
+/* Basic reset */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } 
+  
+  body {
+    font-family: Arial, sans-serif; /*change this to montserrat*/
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px !important;
+    background-color: #121212;
+    color: white;
+    position: fixed !important;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(212, 210, 210, 0.479);   
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .navbar .navbar-brand:hover{
+    color: #fff;
+  }
+
+  #bets-text{
+    color: #238B57;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 80px;
+  }
+  
+  .navbar-links .navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  
+  .navbar-link:hover {
+    color: #238B57; 
+  }
+
+  .navbar-links .navbar-link.active{
+    font-weight: 600;
+    font-size: 18px;
+    color: #238B57;
+  }
+  
+  .navbar-button {
+    background-color: #238B57; 
+    color: white;
+    border: none;
+    padding: 10px 50px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    box-shadow: 0 1px 12px rgba(255, 255, 255, 0.479);     
+
+  }
+  
