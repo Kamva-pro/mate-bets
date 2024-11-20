@@ -20,11 +20,11 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+    box-shadow: 0 4px 12px rgba(212, 210, 210, 0.479);   
   }
   
   .navbar .navbar-brand {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     color: #fff;
   }
@@ -70,11 +70,7 @@
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
-    box-shadow: 0 4px 8px rgb(170, 196, 175);     
+    box-shadow: 0 1px 12px rgba(255, 255, 255, 0.479);     
 
-  }
-  
-  .navbar-button:hover {
-    box-shadow: 0 4px 8px rgb(170, 196, 175);     
   }
   
