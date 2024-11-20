@@ -7,10 +7,10 @@ function Navbar() {
       <div className="navbar-brand">Mate<span id='bets-text'> Bets</span></div>
       <div className="navbar-links">
         <a href="#home" className="navbar-link">Home</a>
-        <a href="#about" className="navbar-link">About</a>
-        <a href="#contact" className="navbar-link">Contact</a>
+        <a href="#about" className="navbar-link">Play a Friend</a>
+        <a href="#contact" className="navbar-link">Pro Games</a>
       </div>
-      <button className="navbar-button">Sign Up</button>
+      <button className="navbar-button">Login</button>
     </nav>
   );
 }

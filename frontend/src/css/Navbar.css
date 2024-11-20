@@ -1,12 +1,12 @@
 /* Basic reset */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+  } */
   
   body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /*change this to montserrat*/
   }
   
   /* Navbar styles */
@@ -14,22 +14,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px 40px !important;
     background-color: #121212;
     color: white;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Drop shadow */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
   }
   
-  .navbar-brand {
+  .navbar .navbar-brand {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
   }
 
-  .navbar-brand:hover{
+  .navbar .navbar-brand:hover{
     color: #fff;
   }
 
@@ -39,32 +39,36 @@
   
   .navbar-links {
     display: flex;
-    gap: 20px;
+    gap: 80px;
   }
   
   .navbar-link {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 400;
     transition: color 0.3s;
   }
   
   .navbar-link:hover {
-    color: #238B57; /* Highlight color on hover */
+    color: #238B57; 
   }
   
   .navbar-button {
-    background-color: #238B57; /* Button color */
+    background-color: #238B57; 
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 50px;
+    font-weight: 700;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgb(170, 196, 175);     
+
   }
   
   .navbar-button:hover {
-    background-color: #e07b00; /* Button hover color */
+    box-shadow: 0 4px 8px rgb(170, 196, 175);     
   }
   
