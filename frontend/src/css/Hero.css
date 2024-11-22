@@ -34,17 +34,19 @@ body {
     color: white;
 }
 
-.hero-content h1{
+.hero-content h1 {
     font-weight: bolder;
-    font-size: 48px;
+    font-size: clamp(24px, 5vw, 48px); /* Minimum: 24px, Preferred: 5vw, Maximum: 48px */
     max-width: 700px;
-}
+  }
+  
 
-.hero-content h6{
+  .hero-content h6 {
     font-weight: 500;
-    font-size: 24px;
+    font-size: clamp(14px, 2.5vw, 24px); /* Minimum: 14px, Preferred: 2.5vw, Maximum: 24px */
     margin-top: 12px;
-}
+  }
+  
 .bet-now{
     background-color: #000; 
     color: white;
