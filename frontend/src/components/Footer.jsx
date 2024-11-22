@@ -14,7 +14,16 @@ const Footer = () => {
             
             </div>
             <div class="grid-item">
-                <div className="site-map"><h4>Quick Access</h4></div>
+                <div className="site-map"><h4>Quick Access</h4>
+                <ul>
+                    <li>Home</li>
+                    <li>Play a Friend</li>
+                    <li>Pro Games</li>
+                    <li>Deposit</li>
+                    <li>Withdraw</li>
+
+                </ul>
+                </div>
             </div>
             <div class="grid-item">Column 3</div>
         </div>
