@@ -19,6 +19,11 @@
     color: #fff;
   }
 
+  .footer-summary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   /* Responsive Design */
   @media screen and (max-width: 768px) {
