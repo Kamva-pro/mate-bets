@@ -6,17 +6,29 @@ function ProGames() {
     return (
         <div className="progames-section">
             <ProCard 
-                playerOne="Player One" 
+                playerOne="Anatoly Karpov" 
                 playerOneImg="../src/assets/kd.jpg" 
-                playerTwo="Player Two" 
+                playerTwo="Gary Kasparov" 
                 playerTwoImg="../src/assets/conor.jpg" 
             />
             <ProCard 
-                playerOne="Alice" 
+                playerOne="Robert Fischer" 
                 playerOneImg="../src/assets/phumile.jpg" 
-                playerTwo="Bob" 
+                playerTwo="Magnus Carlsen" 
                 playerTwoImg="../src/assets/kd2.jpg" 
             />
+               <ProCard 
+                playerOne="Mikhal Tal" 
+                playerOneImg="../src/assets/kd.jpg" 
+                playerTwo="Levy Rozman" 
+                playerTwoImg="../src/assets/phumile.jpg" 
+            />
+            <ProCard 
+                playerOne="Ian Nepo" 
+                playerOneImg="../src/assets/kd.jpg" 
+                playerTwo="Hukaru Nakamura" 
+                playerTwoImg="../src/assets/phumile.jpg" 
+            />   
         </div>
     );
 }

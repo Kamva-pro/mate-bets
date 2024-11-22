@@ -12,14 +12,15 @@ body {
 .progames-section{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     margin-top: 24px;
+    flex-wrap: wrap;
 
 }
 
 
 .progames-card{
-    width: 550px;
+    min-width: 550px;
     padding: 8px;
     margin: 20px 60px;
     background: #2c2c2c !important;
