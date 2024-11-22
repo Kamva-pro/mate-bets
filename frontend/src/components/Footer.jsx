@@ -3,11 +3,14 @@ import '../css/Footer.css';
 
 const Footer = () => {
     return(
-        <div class="grid-container">
-  <div class="grid-item first">Column 1</div>
-  <div class="grid-item">Column 2</div>
-  <div class="grid-item">Column 3</div>
-</div>
+        <div class="footer-container">
+            <div class="grid-item first">
+            <div className="navbar-brand">Mate<span id='bets-text'> Bets</span></div>
+
+            </div>
+            <div class="grid-item">Column 2</div>
+            <div class="grid-item">Column 3</div>
+        </div>
 
     )
 }

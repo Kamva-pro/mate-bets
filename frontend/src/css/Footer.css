@@ -1,5 +1,5 @@
 /* Grid Container */
-.grid-container {
+.footer-container {
     display: grid;
     grid-template-columns: 40% 1fr 1fr; /* 3 Columns: 40%, 30%, 30% */
     gap: 16px; /* Spacing between columns */
@@ -12,10 +12,17 @@
     border: 1px solid #ccc;
     text-align: center;
   }
+
+  .navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+  }
+
   
   /* Responsive Design */
   @media screen and (max-width: 768px) {
-    .grid-container {
+    .footer-container {
       grid-template-columns: 1fr; /* Single column for mobile */
     }
   }
