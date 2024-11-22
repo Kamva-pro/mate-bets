@@ -6,12 +6,12 @@ const ProCard = ({ playerOne, playerOneImg, playerTwo, playerTwoImg }) => {
         <div className="progames-card">
             <div className="player-info">
                 <img className="profile-thumbnail" src={playerOneImg} alt={playerOne} />
-                <p>{playerOne}</p>
+                <p className="playername">{playerOne}</p>
             </div>
             <h3>VS</h3>
             <div className="player-info">
                 <img className="profile-thumbnail" src={playerTwoImg} alt={playerTwo} />
-                <p>{playerTwo}</p>
+                <p className="playername">{playerTwo}</p>
             </div>
         </div>
     );

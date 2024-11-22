@@ -13,9 +13,9 @@ function ProGames() {
             />
             <ProCard 
                 playerOne="Alice" 
-                playerOneImg="../src/assets/alice.jpg" 
+                playerOneImg="../src/assets/phumile.jpg" 
                 playerTwo="Bob" 
-                playerTwoImg="../src/assets/bob.jpg" 
+                playerTwoImg="../src/assets/kd2.jpg" 
             />
         </div>
     );

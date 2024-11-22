@@ -42,12 +42,18 @@ body {
 }
 
 .progames-card:hover{
-    transition: 0.6s;
+    transition: 0.6s 0.1ms;
+    background-color: #202020 !important;
     cursor: pointer;
     transform: scale(1.05);
 }
 .player-info .p{
     margin-left: 12px;
+}
+
+.player-info .playername{
+    text-align: center;
+    margin-top: 12px;
 }
 
 .profile-thumbnail{
