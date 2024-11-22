@@ -28,7 +28,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0 4px 20px rgba(59, 57, 57, 0.5); 
 
 }
 
@@ -39,6 +39,12 @@ body {
 .progames-card .player-info{
     margin-top: 12px;
     font-weight: 500;
+}
+
+.progames-card:hover{
+    transition: 0.6s;
+    cursor: pointer;
+    transform: scale(1.05);
 }
 .player-info .p{
     margin-left: 12px;
