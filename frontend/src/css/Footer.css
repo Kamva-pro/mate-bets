@@ -1,0 +1,22 @@
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: 40% 1fr 1fr; /* 3 Columns: 40%, 30%, 30% */
+    gap: 16px; /* Spacing between columns */
+  }
+  
+  /* Grid Items */
+  .grid-item {
+    background-color: #f0f0f0;
+    padding: 16px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* Single column for mobile */
+    }
+  }
+  
