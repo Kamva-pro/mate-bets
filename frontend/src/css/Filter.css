@@ -1,41 +1,77 @@
-#filter-section{
+#filter-section {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     align-items: start;
-    gap: 24px;
+    gap: 16px; /* Adjusted spacing */
     margin-top: 36px;
-    justify-content: end;
+    justify-content: flex-end; /* Align items to the end for larger screens */
     margin-right: 72px;
 }
 
-#filter-section select{
+#filter-section select {
     background-color: transparent;
-    padding: 20px;
-    width: 200px;
+    padding: 14px; /* Reduced padding for better responsiveness */
+    width: 200px; /* Default width for larger screens */
     color: white;
     border-radius: 12px;
+    border: 1px solid white; /* Optional: Add a border for better visibility */
 }
 
-#filter-section option{
+#filter-section option {
     background-color: #121212;
     color: white;
 }
 
-#filter-button{
+#filter-button {
     background-color: #2ECC71; 
     color: white;
     border: none;
-    padding: 17px 80px;
+    padding: 14px 50px; /* Reduced padding for smaller screens */
     font-weight: 700;
     font-size: 18px;
     border-radius: 12px;
-    transition:0.3s;
+    transition: background-color 0.3s;
 }
 
+#filter-button:hover {
+    background-color: #28A745; /* Darker green for hover effect */
+    cursor: pointer;
+}
 
+/* Medium screens (tablets) */
 @media (max-width: 1000px) {
-    #filter-section select{
-        width: 150px;
+    #filter-section {
+        justify-content: center; /* Center items */
+        margin-right: 0; /* Remove right margin */
+        gap: 12px; /* Adjust spacing for smaller screens */
     }
 
-    
+    #filter-section select {
+        width: 150px; /* Reduce select width */
+        padding: 12px; /* Adjust padding */
+    }
+
+    #filter-button {
+        padding: 12px 40px; /* Adjust button padding */
+    }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 600px) {
+    #filter-section {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        gap: 16px; /* Adjust spacing */
+        margin-right: 0; /* Remove any side margins */
+    }
+
+    #filter-section select {
+        width: 100%; /* Full width */
+        max-width: 250px; /* Limit width */
+    }
+
+    #filter-button {
+        width: 100%; /* Full width */
+        max-width: 250px; /* Limit width */
+    }
 }
