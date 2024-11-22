@@ -15,7 +15,7 @@ body {
     height: 80vh; /* 80% of the viewport height */
     display: flex;
     margin-top: 80px !important;
-    padding-left: 20px;
+    padding-left: 40px;
     padding-top: 80px;
     align-items: center;
     justify-content: start;
@@ -43,12 +43,14 @@ body {
 .hero-content h6{
     font-weight: 500;
     font-size: 24px;
+    margin-top: 12px;
 }
 .bet-now{
     background-color: #000; 
     color: white;
     border: none;
     padding: 10px 50px;
+    margin-top: 12px;
     font-weight: 700;
     font-size: 18px;
     border-radius: 4px;
