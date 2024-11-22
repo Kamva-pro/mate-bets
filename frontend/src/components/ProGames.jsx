@@ -6,16 +6,16 @@ function ProGames() {
     return (
         <div className="progames-section">
             <ProCard 
-                playerOne="Anatoly Karpov" 
+                playerOne="Wesley So" 
                 playerOneImg="../src/assets/avatar2.png" 
-                playerTwo="Gary Kasparov" 
+                playerTwo="Vidit Gujrathi" 
                 playerTwoImg="../src/assets/avatar1.png" 
             />
             <ProCard 
-                playerOne="Robert Fischer" 
-                playerOneImg="../src/assets/phumile.jpg" 
+                playerOne="Ian Nepomniachtchi" 
+                playerOneImg="../src/assets/bear.png" 
                 playerTwo="Magnus Carlsen" 
-                playerTwoImg="../src/assets/kd2.jpg" 
+                playerTwoImg="../src/assets/dog.png" 
             />
                <ProCard 
                 playerOne="Mikhal Tal" 
