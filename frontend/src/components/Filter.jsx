@@ -6,16 +6,14 @@ const FilterGames = () => {
     const [selectedTournament, setSelectedTournament] = useState(""); 
     const [selectedDate, setSelectedDate] = useState(""); 
 
-
-
     const handleFormatChange = (event) => {
         setSelectedFormat(event.target.value); 
     };
     const handleTournamentChange = (event) => {
-        setSelectedTournament(event.target.value); // Update the state when selection changes
+        setSelectedTournament(event.target.value); 
     };
     const handleDateChange = (event) => {
-        setSelectedDate(event.target.value); // Update the state when selection changes
+        setSelectedDate(event.target.value); 
     };
 
     return (
