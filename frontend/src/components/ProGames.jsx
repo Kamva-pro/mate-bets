@@ -7,9 +7,9 @@ function ProGames() {
         <div className="progames-section">
             <ProCard 
                 playerOne="Anatoly Karpov" 
-                playerOneImg="../src/assets/kd.jpg" 
+                playerOneImg="../src/assets/avatar2.png" 
                 playerTwo="Gary Kasparov" 
-                playerTwoImg="../src/assets/conor.jpg" 
+                playerTwoImg="../src/assets/avatar1.png" 
             />
             <ProCard 
                 playerOne="Robert Fischer" 

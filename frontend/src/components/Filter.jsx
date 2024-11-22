@@ -43,7 +43,7 @@ const FilterGames = () => {
                 <option value="" disabled>Tournament</option>
                 <option value="option1">Titled Tuesday</option>
                 <option value="option2">Tata Steel</option>
-                <option value="option3">World Chess Championship 2024</option>
+                <option value="option3">WCC 2024</option>
             </select>
 
             
