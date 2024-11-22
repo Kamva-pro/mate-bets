@@ -7,6 +7,7 @@ import ProCard from './ProCard';
     return(
         <div className="progames-section">
             <ProCard/>
+            <ProCard/>
         </div>
     )
  }
