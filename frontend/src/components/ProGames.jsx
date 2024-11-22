@@ -18,16 +18,16 @@ function ProGames() {
                 playerTwoImg="../src/assets/dog.png" 
             />
                <ProCard 
-                playerOne="Mikhal Tal" 
-                playerOneImg="../src/assets/kd.jpg" 
-                playerTwo="Levy Rozman" 
-                playerTwoImg="../src/assets/phumile.jpg" 
+                playerOne="Ding Liren" 
+                playerOneImg="../src/assets/meerkat.png" 
+                playerTwo="Gukesh Dommaraju" 
+                playerTwoImg="../src/assets/rabbit.png" 
             />
             <ProCard 
                 playerOne="Alireza Firouzja" 
-                playerOneImg="../src/assets/kd.jpg" 
+                playerOneImg="../src/assets/cat.png" 
                 playerTwo="Hikaru Nakamura" 
-                playerTwoImg="../src/assets/phumile.jpg" 
+                playerTwoImg="../src/assets/dinosaur.png" 
             />   
         </div>
     );
