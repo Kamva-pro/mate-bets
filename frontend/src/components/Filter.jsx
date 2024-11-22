@@ -2,10 +2,20 @@ import React, { useState } from "react";
 import '../css/Filter.css';
 
 const FilterGames = () => {
-    const [selectedOption, setSelectedOption] = useState(""); // State to track selected option
+    const [selectedFormat, setSelectedFormat] = useState(""); 
+    const [selectedTournament, setSelectedTournament] = useState(""); 
+    const [selectedDate, setSelectedDate] = useState(""); 
 
-    const handleChange = (event) => {
-        setSelectedOption(event.target.value); // Update the state when selection changes
+
+
+    const handleFormatChange = (event) => {
+        setSelectedFormat(event.target.value); 
+    };
+    const handleTournamentChange = (event) => {
+        setSelectedTournament(event.target.value); // Update the state when selection changes
+    };
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value); // Update the state when selection changes
     };
 
     return (
@@ -13,51 +23,47 @@ const FilterGames = () => {
    <div>
             <select 
                 id="options-dropdown" 
-                value={selectedOption} 
-                onChange={handleChange}
+                value={selectedFormat} 
+                onChange={handleFormatChange}
             >
-                <option value="" disabled>Select an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="" disabled>Format</option>
+                <option value="option1">Rapid</option>
+                <option value="option2">Blitz</option>
+                <option value="option3">Classical</option>
+                <option value="option3">Bullet</option>
+
             </select>
 
-            {selectedOption && (
-                <p>You selected: {selectedOption}</p> // Display selected value
-            )}
+            
         </div>
         <div>
             <select 
                 id="options-dropdown" 
-                value={selectedOption} 
-                onChange={handleChange}
+                value={selectedTournament} 
+                onChange={handleTournamentChange}
             >
-                <option value="" disabled>Select an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="" disabled>Tournament</option>
+                <option value="option1">Titled Tuesday</option>
+                <option value="option2">Tata Steel</option>
+                <option value="option3">World Chess Championship 2024</option>
             </select>
 
-            {selectedOption && (
-                <p>You selected: {selectedOption}</p> // Display selected value
-            )}
+            
         </div>
 
         <div>
             <select 
                 id="options-dropdown" 
-                value={selectedOption} 
-                onChange={handleChange}
+                value={selectedDate} 
+                onChange={handleDateChange}
             >
-                <option value="" disabled>Select an option</option>
+                <option value="" disabled>Date</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
             </select>
 
-            {selectedOption && (
-                <p>You selected: {selectedOption}</p> // Display selected value
-            )}
+            
         </div>
 
         <button>Filter</button>
