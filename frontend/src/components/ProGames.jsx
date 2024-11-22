@@ -5,7 +5,6 @@ import ProCard from "./ProCard";
 function ProGames() {
     return (
         <div className="progames-section">
-            {/* Dynamically specify player information */}
             <ProCard 
                 playerOne="Player One" 
                 playerOneImg="../src/assets/kd.jpg" 
