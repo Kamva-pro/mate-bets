@@ -5,7 +5,7 @@ import React from 'react';
  {
     return(
         <Div classname="progames-section">
-        
+        <Div classname="progames-card"></Div>
 
         </Div>
     )
