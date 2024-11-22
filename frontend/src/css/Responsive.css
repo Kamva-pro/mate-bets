@@ -1,0 +1,18 @@
+@media (max-width: 968px) {
+    .navbar-button {
+        display: none;
+    }
+
+    .navbar .navbar-links{
+        display: none;
+    }
+
+    .navbar #menu{
+        display: block;
+        margin-top: 4px;
+    }
+    .navbar #menu:hover{
+        cursor: pointer;
+        transition: 0.6s;
+    }
+}

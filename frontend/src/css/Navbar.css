@@ -81,3 +81,11 @@
     opacity: 1;
   }
   
+  #menu{
+    display: none;
+  }
+
+  .menu-links{
+    display: flex;
+    flex-direction: column;
+  }

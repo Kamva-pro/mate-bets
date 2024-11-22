@@ -1,13 +1,13 @@
 import React from 'react';
-
+import "../css/ProGames.css";
 
  function ProGames()
  {
     return(
-        <Div classname="progames-section">
-        <Div classname="progames-card"></Div>
-
-        </Div>
+        <div className="progames-section">
+        <div className="progames-card">Card 1</div>
+        <div className="progames-card">Card 2</div>
+        </div>
     )
  }
 

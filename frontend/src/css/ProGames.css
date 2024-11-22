@@ -1,4 +1,4 @@
-*{
+/* *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -7,21 +7,22 @@
 body {
     font-family: 'Montserrat', sans-serif !important;
     background-color: #121212 !important;
-}
+} */
 
 .progames-section{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: start;
 
 }
 
 
-.progames-section .progames-card{
-    width: 50%;
+.progames-card{
+    width: 550px;
     padding: 20px;
-    background-color: #2c2c2c;
+    margin: 20px 60px;
+    background: #2c2c2c !important;
     border-radius: 12px;
-    
+    height: 150px;
+    border: 1px solid transparent;
 }

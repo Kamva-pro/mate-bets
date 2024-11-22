@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Header";
 import HeroSection from "./HeroSection";
+import ProGames from "./ProGames";
 
 export default function Home ()
 {
@@ -8,6 +9,8 @@ export default function Home ()
         <div>
             <Navbar/>
             <HeroSection/>
+            <ProGames/>
+            
         </div>
         
     );
