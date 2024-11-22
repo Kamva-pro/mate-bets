@@ -25,6 +25,9 @@ body {
     border-radius: 12px;
     border: 1px solid transparent;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     
 }
 
