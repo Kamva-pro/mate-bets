@@ -83,7 +83,28 @@
     display: none;
   }
 
-  .menu-links{
+  .menu-links {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 60px; /* Adjust based on your navbar height */
+    right: 20px; /* Align with your design */
+    background-color: #121212;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
   }
+  
+  .menu-links .navbar-link {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .menu-links .navbar-link:hover,
+  .menu-links .navbar-link.active {
+    background-color: #121212;
+  }
+  
