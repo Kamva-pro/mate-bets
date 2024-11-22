@@ -13,7 +13,9 @@ const Footer = () => {
                 </div>
             
             </div>
-            <div class="grid-item">Column 2</div>
+            <div class="grid-item">
+                <div className="site-map"><h4>Quick Access</h4></div>
+            </div>
             <div class="grid-item">Column 3</div>
         </div>
 

@@ -1,16 +1,21 @@
 /* Grid Container */
 .footer-container {
+  margin-top: 24px;
+  background-color: #000;
     display: grid;
+    padding: 12px;
     grid-template-columns: 40% 1fr 1fr; /* 3 Columns: 40%, 30%, 30% */
     gap: 16px; /* Spacing between columns */
   }
   
   /* Grid Items */
   .grid-item {
-    background-color: #f0f0f0;
     padding: 16px;
-    border: 1px solid #ccc;
-    text-align: center;
+  }
+
+  .site-map{
+    margin-top: 16px;
+    color: #fff;
   }
 
   .navbar-brand {
@@ -21,10 +26,16 @@
 
   .footer-summary{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 12px;
+    color: white;
+    margin-left: 48px;
+    text-align: start;
   }
-  
+
+
   /* Responsive Design */
   @media screen and (max-width: 768px) {
     .footer-container {
