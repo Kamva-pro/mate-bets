@@ -24,9 +24,9 @@ function ProGames() {
                 playerTwoImg="../src/assets/phumile.jpg" 
             />
             <ProCard 
-                playerOne="Ian Nepo" 
+                playerOne="Alireza Firouzja" 
                 playerOneImg="../src/assets/kd.jpg" 
-                playerTwo="Hukaru Nakamura" 
+                playerTwo="Hikaru Nakamura" 
                 playerTwoImg="../src/assets/phumile.jpg" 
             />   
         </div>
