@@ -1,9 +1,9 @@
 #filter-section{
     display: flex;
     align-items: start;
-    gap: 12px;
-    margin-top: 12px;
-    justify-content: space-evenly;
+    gap: 48px;
+    margin-top: 36px;
+    justify-content: center;
 }
 
 #filter-section select{
@@ -12,4 +12,24 @@
     width: 200px;
     color: white;
     border-radius: 12px;
+}
+
+#filter-button{
+    background-color: #0a8f4c; 
+    color: white;
+    border: none;
+    padding: 20px 80px;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 12px;
+    transition:0.3s;
+}
+
+
+@media (max-width: 1000px) {
+    #filter-section select{
+        width: 150px;
+    }
+
+    
 }

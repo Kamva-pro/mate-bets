@@ -64,7 +64,8 @@ const FilterGames = () => {
             
         </div>
 
-        <button>Filter</button>
+
+        <button id="filter-button">Filter</button>
         </div>
      
     );
