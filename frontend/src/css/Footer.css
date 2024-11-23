@@ -37,7 +37,7 @@
     color: #fff;
   }
 
-  .grid-item.grid-item.first{
+  .grid-item.grid-item.first .footer-summary p{
     max-width: 400px;
   }
 
@@ -56,6 +56,7 @@
     flex-wrap: wrap;
     justify-content: end;
     align-items: center;
+    margin-top: 16px;
   }
 
   /* Responsive Design */
