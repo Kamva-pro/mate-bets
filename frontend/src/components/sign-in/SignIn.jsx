@@ -124,7 +124,6 @@ export default function SignIn(props) {
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
         <Card variant="outlined">
-          <div className="navbar-brand">Mate<span id="bets-text"> Bets</span></div>
           <Typography
             component="h1"
             variant="h4"
