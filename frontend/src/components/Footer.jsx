@@ -25,17 +25,18 @@ const Footer = () => {
                 </div>
             </div>
             <div class="grid-item">
-                <div className="socials">
-                <h4>Stay in Touch </h4>
-                <div className="social-links">
-                    <img className="social-link" src="../src/assets/facebook.png" alt="" />
-                    <img className="social-link" src="../src/assets/linkedin.png" alt="" />
-                    <img className="social-link"  src="../src/assets/twitter.png" alt="" />
-                    <img className="social-link"  src="../src/assets/twitter.png" alt="" />
-                    <img  src="../src/assets/lichess.png"></img>
-                </div>
-                </div>
-            </div>
+    <div className="socials">
+        <h4>Stay in Touch</h4>
+        <div className="social-links">
+            <img className="social-link" src="../src/assets/facebook.png" alt="Facebook" />
+            <img className="social-link" src="../src/assets/linkedin.png" alt="LinkedIn" />
+            <img className="social-link" src="../src/assets/twitter.png" alt="Twitter" />
+            <img className="social-link" src="../src/assets/twitter.png" alt="Twitter" />
+            <img className="social-link lichess" src="../src/assets/lichess.png" alt="Lichess" />
+        </div>
+    </div>
+</div>
+
         </div>
 
     )
