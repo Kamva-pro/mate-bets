@@ -31,7 +31,7 @@ const Footer = () => {
                     <img className="social-link" src="../src/assets/facebook.svg" alt="" />
                     <img className="social-link"  src="../src/assets/instagram.svg" alt="" />
                     <img className="social-link"  src="../src/assets/twitter.svg" alt="" />
-                    <button>Play on Lichess.org</button>
+                    <button>Play on Lichess</button>
                 </div>
                 </div>
             </div>
