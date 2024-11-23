@@ -28,10 +28,11 @@ const Footer = () => {
                 <div className="socials">
                 <h4>Stay in Touch </h4>
                 <div className="social-links">
-                    <img className="social-link" src="../src/assets/facebook.svg" alt="" />
-                    <img className="social-link"  src="../src/assets/instagram.svg" alt="" />
-                    <img className="social-link"  src="../src/assets/twitter.svg" alt="" />
-                    <button>Play on Lichess</button>
+                    <img className="social-link" src="../src/assets/facebook.png" alt="" />
+                    <img className="social-link" src="../src/assets/linkedin.png" alt="" />
+                    <img className="social-link"  src="../src/assets/twitter.png" alt="" />
+                    <img className="social-link"  src="../src/assets/twitter.png" alt="" />
+                    <img  src="../src/assets/lichess.png"></img>
                 </div>
                 </div>
             </div>
