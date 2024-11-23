@@ -29,6 +29,19 @@ function ProGames() {
                 playerTwo="Hikaru Nakamura" 
                 playerTwoImg="../src/assets/dinosaur.png" 
             />   
+            <ProCard 
+                playerOne="Levy Rozman" 
+                playerOneImg="../src/assets/dog.png" 
+                playerTwo="Pia Cramling" 
+                playerTwoImg="../src/assets/cat.png" 
+            />
+
+            <ProCard 
+                playerOne="Arjun Erigaisi" 
+                playerOneImg="../src/assets/dinosaur.png" 
+                playerTwo="Levon Aronian" 
+                playerTwoImg="../src/assets/meerkat.png" 
+            />
         </div>
     );
 }
