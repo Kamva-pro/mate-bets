@@ -126,7 +126,7 @@ export default function SignIn(props) {
           <Typography
             component="h1"
             variant="h4"
-            sx={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', textAlign: 'center' }}
+            sx={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', textAlign: 'start' }}
           >
             Sign in
           </Typography>
