@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 import "../css/Responsive.css";
-import '../css/Navbar.css';
+import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLoginClick = () => {
+    navigate('/signin'); // Navigate to the Sign-In page
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Mate<span id='bets-text'> Bets</span></div>
+      <div className="navbar-brand">Mate<span id="bets-text"> Bets</span></div>
 
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
@@ -20,7 +26,7 @@ const Navbar = () => {
         <a href="#contact" className="navbar-link">Pro Games</a>
       </div>
 
-      <button onClick={} className="navbar-button">Login</button>
+      <button onClick={handleLoginClick} className="navbar-button">Login</button>
 
       {/* Menu Icon for Mobile */}
       <img
