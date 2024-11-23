@@ -59,8 +59,21 @@
   .socials .social-links{
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: start;
     align-items: center;
+    max-width: 160px;
+  }
+
+  .socials .social-links img{
+    width: 40px;
+  }
+
+  .socials .social-links button{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: white;
+    color: #000;
   }
 
   /* Responsive Design */
