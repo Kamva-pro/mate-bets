@@ -123,8 +123,8 @@ export default function SignUp(props) {
 
   return (
     <AppTheme {...props}>
-      <CssBaseline enableColorScheme />
-      <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+      {/* <CssBaseline enableColorScheme /> */}
+      {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
       <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
           <Typography
