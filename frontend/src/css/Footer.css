@@ -11,6 +11,7 @@
   /* Grid Items */
   .grid-item {
     padding: 16px;
+    padding-left:64px;
 
 
   }
@@ -80,6 +81,12 @@
   @media screen and (max-width: 768px) {
     .footer-container {
       grid-template-columns: 1fr; /* Single column for mobile */
+      gap: 0;
+    }
+
+    .grid-item{
+      padding-left: 8px;
+      
     }
   }
   
