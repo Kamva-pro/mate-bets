@@ -17,10 +17,10 @@ const Footer = () => {
                 <div className="site-map"><h4>Quick Access</h4>
                 <ul>
                     <a href="#"><li>Home</li></a>
-                    <li>Play a Friend</li>
-                    <li>Pro Games</li>
-                    <li>Deposit</li>
-                    <li>Withdraw</li>
+                    <a href=""><li>Play a Friend</li></a>
+                    <a href=""><li>Pro Games</li></a>
+                    <a href=""><li>Deposit</li></a>
+                    <a href=""><li>Withdraw</li></a>
 
                 </ul>
                 </div>
