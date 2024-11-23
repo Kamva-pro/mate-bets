@@ -20,6 +20,17 @@
     color: #fff;
   }
 
+  .site-map ul a{
+    text-decoration: none;
+    color: white;
+
+  }
+
+  .site-map ul a li{
+    list-style: none;
+    text-align: start;
+  }
+
   .grid-item.first .navbar-brand {
     font-size: 28px;
     font-weight: bold;

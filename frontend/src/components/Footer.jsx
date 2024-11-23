@@ -16,7 +16,6 @@ const Footer = () => {
             <div class="grid-item">
                 <div className="site-map"><h4>Quick Access</h4>
                 <ul>
-                    <a href="#"><li>Home</li></a>
                     <a href=""><li>Play a Friend</li></a>
                     <a href=""><li>Pro Games</li></a>
                     <a href=""><li>Deposit</li></a>
