@@ -17,6 +17,8 @@ import ForgotPassword from './ForgotPassword';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
 import AppTheme from '../shared-theme/AppTheme';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
+import { Link as RouterLink } from 'react-router-dom'; // Import React Router's Link
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -213,13 +215,13 @@ export default function SignIn(props) {
               Sign in with Facebook
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
-              <Link
-                href="/material-ui/getting-started/templates/sign-in/"
-                variant="body2"
-              >
-                Sign up
-              </Link>
+  Don&apos;t have an account?{' '}
+  <RouterLink
+    to="/signup" // Use React Router's 'to' prop
+    style={{ textDecoration: 'none', color: 'inherit' }} // Optional styling for consistency
+  >
+    Sign up
+  </RouterLink>
             </Typography>
           </Box>
         </Card>

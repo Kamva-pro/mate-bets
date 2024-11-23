@@ -14,9 +14,9 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from '../shared-theme/AppTheme';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
+import { GoogleIcon, FacebookIcon } from './CustomIcons';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
-import "../../css/Navbar.css";
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -39,12 +39,13 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
-  minHeight: '100%',
+  minHeight: '100vh', // Ensures container spans full screen height
+  position: 'relative',
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
   },
+  overflowX: 'hidden', // Prevents horizontal overflow
   '&::before': {
     content: '""',
     display: 'block',
@@ -54,6 +55,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
     backgroundImage:
       'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
     backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
     ...theme.applyStyles('dark', {
       backgroundImage:
         'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
@@ -114,7 +116,6 @@ export default function SignUp(props) {
     const data = new FormData(event.currentTarget);
     console.log({
       name: data.get('name'),
-      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -126,8 +127,6 @@ export default function SignUp(props) {
       <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
       <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-        <div className="navbar-brand">Mate<span id="bets-text"> Bets</span></div>
-
           <Typography
             component="h1"
             variant="h4"
@@ -166,7 +165,7 @@ export default function SignUp(props) {
                 variant="outlined"
                 error={emailError}
                 helperText={emailErrorMessage}
-                color={passwordError ? 'error' : 'primary'}
+                color={emailError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControl>
@@ -205,7 +204,6 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign up with Google')}
               startIcon={<GoogleIcon />}
             >
               Sign up with Google
@@ -213,18 +211,13 @@ export default function SignUp(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign up with Facebook')}
               startIcon={<FacebookIcon />}
             >
               Sign up with Facebook
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Already have an account?{' '}
-              <Link
-                href="/material-ui/getting-started/templates/sign-in/"
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
-              >
+              <Link href="/material-ui/getting-started/templates/sign-in/">
                 Sign in
               </Link>
             </Typography>
