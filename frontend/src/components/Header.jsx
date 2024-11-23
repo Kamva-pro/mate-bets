@@ -20,7 +20,7 @@ const Navbar = () => {
         <a href="#contact" className="navbar-link">Pro Games</a>
       </div>
 
-      <button className="navbar-button">Login</button>
+      <button onClick={} className="navbar-button">Login</button>
 
       {/* Menu Icon for Mobile */}
       <img
