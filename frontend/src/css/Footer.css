@@ -51,6 +51,12 @@
     text-align: start;
   }
 
+  .socials{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    align-items: center;
+  }
 
   /* Responsive Design */
   @media screen and (max-width: 768px) {

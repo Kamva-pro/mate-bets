@@ -24,7 +24,11 @@ const Footer = () => {
                 </ul>
                 </div>
             </div>
-            <div class="grid-item">Column 3</div>
+            <div class="grid-item">
+                <div className="socials">
+                
+                </div>
+            </div>
         </div>
 
     )
