@@ -27,7 +27,13 @@ const Footer = () => {
             <div class="grid-item">
                 <div className="socials">
                 <h4>Stay in Touch </h4>
-                <div className="social-links"></div>
+                <div className="social-links">
+                    <img src="../src/assets/facebook.svg" alt="" />
+                    <img src="../src/assets/instagram.svg" alt="" />
+                    <img src="../src/assets/twitter.svg" alt="" />
+
+
+                </div>
                 </div>
             </div>
         </div>
