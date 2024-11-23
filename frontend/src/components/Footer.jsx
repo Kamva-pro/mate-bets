@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
             <div class="grid-item">
                 <div className="socials">
-                
+                    div
                 </div>
             </div>
         </div>
