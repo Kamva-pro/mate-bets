@@ -31,7 +31,6 @@ const Footer = () => {
             <img className="social-link" src="../src/assets/facebook.png" alt="Facebook" />
             <img className="social-link" src="../src/assets/linkedin.png" alt="LinkedIn" />
             <img className="social-link" src="../src/assets/twitter.png" alt="Twitter" />
-            <img className="social-link" src="../src/assets/twitter.png" alt="Twitter" />
             <img className="social-link lichess" src="../src/assets/lichess.png" alt="Lichess" />
         </div>
     </div>

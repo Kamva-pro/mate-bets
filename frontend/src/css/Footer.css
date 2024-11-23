@@ -52,64 +52,40 @@
     text-align: start;
   }
 
-  .socials {
-    text-align: center;
-    margin-top: 20px;
-}
+  .socials{
+    margin-top: 16px;
+    color: white;
+  }
 
-.social-links {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 16px; /* Spacing between items */
-    justify-items: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-}
+  .socials .social-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: start;
+    align-items: center;
+    max-width: 200px;
 
-.social-link {
-    width: 60px; /* Default size for social links */
-    height: 60px;
-    transition: transform 0.3s ease; /* Smooth scaling effect */
-}
+  }
 
-.social-link:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
-    cursor: pointer;
-}
+  .socials .social-links img{
+    width: 40px;
+  }
 
-.social-link.lichess {
-    grid-column: span 2; /* Make it span across 2 columns */
-    width: 100px; /* Larger size for the Lichess link */
-    height: auto; /* Maintain aspect ratio */
-}
+  .socials .social-links button{
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: white;
+    color: #000;
 
-/* Medium screens (tablets) */
-@media (max-width: 768px) {
-    .social-link {
-        width: 50px; /* Adjust size for smaller screens */
-        height: 50px;
-    }
+  }
 
-    .social-link.lichess {
-        width: 80px; /* Adjust Lichess size */
-    }
-}
+  .social-links .social-link{
+    border-radius: 12px;
+  }
 
-/* Small screens (mobile) */
-@media (max-width: 480px) {
-    .social-links {
-        grid-template-columns: repeat(2, 1fr); /* Maintain 2 columns */
-        gap: 12px; /* Adjust spacing for mobile */
-    }
-
-    .social-link {
-        width: 40px; /* Smaller size for social links */
-        height: 40px;
-    }
-
-    .social-link.lichess {
-        width: 100px; /* Maintain size for the Lichess link */
-    }
-}
+  .socials .social-links .social-link.lichess{
+    width: 160px;
+  }
 
   /* Responsive Design */
   @media screen and (max-width: 768px) {
