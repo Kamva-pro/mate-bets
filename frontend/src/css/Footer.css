@@ -11,6 +11,8 @@
   /* Grid Items */
   .grid-item {
     padding: 16px;
+
+
   }
 
   .site-map{
@@ -18,10 +20,14 @@
     color: #fff;
   }
 
-  .navbar-brand {
+  .grid-item.first .navbar-brand {
     font-size: 28px;
     font-weight: bold;
     color: #fff;
+  }
+
+  .grid-item.grid-item.first{
+    max-width: 400px;
   }
 
   .footer-summary{
