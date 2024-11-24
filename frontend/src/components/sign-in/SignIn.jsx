@@ -17,8 +17,7 @@ import ForgotPassword from './ForgotPassword';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
 import AppTheme from '../shared-theme/AppTheme';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
-import { Link as RouterLink } from 'react-router-dom'; // Import React Router's Link
-
+import { Link as RouterLink } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -118,11 +117,8 @@ export default function SignIn(props) {
 
   return (
     <AppTheme {...props}>
-      {/* <CssBaseline enableColorScheme /> */}
       <SignInContainer>
-        {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
         <Card variant="outlined">
-          {/* <div className="navbar-brand">Mate<span id="bets-text"> Bets</span></div> */}
           <Typography
             component="h1"
             variant="h4"
@@ -215,13 +211,13 @@ export default function SignIn(props) {
               Sign in with Facebook
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-  Don&apos;t have an account?{' '}
-  <RouterLink
-    to="/signup" // Use React Router's 'to' prop
-    style={{ textDecoration: 'none', color: 'inherit' }} // Optional styling for consistency
-  >
-    Sign up
-  </RouterLink>
+              Don&apos;t have an account?{' '}
+              <RouterLink
+                to="/signup"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                Sign up
+              </RouterLink>
             </Typography>
           </Box>
         </Card>

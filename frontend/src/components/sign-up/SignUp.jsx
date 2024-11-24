@@ -17,7 +17,9 @@ import AppTheme from '../shared-theme/AppTheme';
 import { GoogleIcon, FacebookIcon } from './CustomIcons';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
 import { Link as RouterLink } from 'react-router-dom';
-
+import  supabase  from '../../../supabase-client';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -42,11 +44,6 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
   minHeight: '100vh', // Ensures container spans full screen height
   position: 'relative',
   padding: theme.spacing(2),
-  // backgroundColor: '#121212', // optionally set the bg to match home page
-
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-  },
   overflowX: 'hidden', // Prevents horizontal overflow
   '&::before': {
     content: '""',
@@ -72,6 +69,9 @@ export default function SignUp(props) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false); // Track loading state
+  const [openSnackbar, setOpenSnackbar] = React.useState(false); // Snackbar state for success message
+  const [snackbarMessage, setSnackbarMessage] = React.useState(''); // Message for snackbar
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -110,23 +110,49 @@ export default function SignUp(props) {
     return isValid;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
     if (nameError || emailError || passwordError) {
-      event.preventDefault();
-      return;
+      return; // If there are errors, don't submit
     }
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get('name'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const name = data.get('name');
+    const email = data.get('email');
+    const password = data.get('password');
+
+    setIsLoading(true); // Start loading state
+
+    try {
+      // Create user in Supabase
+      const { user, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        throw error; // If there's an error, throw it to be caught
+      }
+
+      console.log('User created:', user);
+      setSnackbarMessage('User successfully created!');
+      setOpenSnackbar(true); // Show success snackbar
+    } catch (error) {
+      console.error('Error during sign up:', error.message);
+      setSnackbarMessage('Error: ' + error.message);
+      setOpenSnackbar(true); // Show error snackbar
+    } finally {
+      setIsLoading(false); // Stop loading state
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false); // Close snackbar after it's shown
   };
 
   return (
     <AppTheme {...props}>
-      {/* <CssBaseline enableColorScheme /> */}
-      {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
       <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
           <Typography
@@ -194,9 +220,9 @@ export default function SignUp(props) {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
+              disabled={isLoading} // Disable the button while loading
             >
-              Sign up
+              {isLoading ? 'Signing up...' : 'Sign up'}
             </Button>
           </Box>
           <Divider>
@@ -207,24 +233,48 @@ export default function SignUp(props) {
               fullWidth
               variant="outlined"
               startIcon={<GoogleIcon />}
+              sx={{ textTransform: 'capitalize' }}
             >
-              Sign up with Google
+              Google
             </Button>
             <Button
               fullWidth
               variant="outlined"
               startIcon={<FacebookIcon />}
+              sx={{ textTransform: 'capitalize' }}
             >
-              Sign up with Facebook
+              Facebook
             </Button>
-            <Typography sx={{ textAlign: 'center' }}>
-              Already have an account?{' '}
-              <Link component={RouterLink} to="/signin" variant="body2">
-                Sign in
-              </Link>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="body2" color="text.secondary">
+              Already have an account?
             </Typography>
+            <Link
+              component={RouterLink}
+              to="/login"
+              variant="body2"
+              sx={{ textDecoration: 'none', color: 'text.primary' }}
+            >
+              Login
+            </Link>
           </Box>
         </Card>
+
+        {/* Snackbar for success/error message */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity={snackbarMessage.includes('Error') ? 'error' : 'success'}
+            sx={{ width: '100%' }}
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </SignUpContainer>
     </AppTheme>
   );
