@@ -42,6 +42,8 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
   minHeight: '100vh', // Ensures container spans full screen height
   position: 'relative',
   padding: theme.spacing(2),
+  // backgroundColor: '#121212', // optionally set the bg to match home page
+
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
   },
