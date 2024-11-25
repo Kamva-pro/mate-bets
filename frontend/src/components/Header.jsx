@@ -44,6 +44,9 @@ const Navbar = () => {
           <a href="#about" className="navbar-link">Play a Friend</a>
           <a href="#contact" className="navbar-link">Pro Games</a>
         </div>
+
+
+        
       )}
     </nav>
   );
