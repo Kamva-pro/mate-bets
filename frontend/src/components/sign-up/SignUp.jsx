@@ -16,8 +16,8 @@ import { styled } from '@mui/material/styles';
 import AppTheme from '../shared-theme/AppTheme';
 import { GoogleIcon, FacebookIcon } from './CustomIcons';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
-import { Link as RouterLink } from 'react-router-dom';
-import  supabase  from '../../../supabase-client';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import supabase from '../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
@@ -72,6 +72,11 @@ export default function SignUp(props) {
   const [isLoading, setIsLoading] = React.useState(false); // Track loading state
   const [openSnackbar, setOpenSnackbar] = React.useState(false); // Snackbar state for success message
   const [snackbarMessage, setSnackbarMessage] = React.useState(''); // Message for snackbar
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleLogin = () => {
+    navigate('/signin'); // Navigate to the Sign-In page
+  };
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -109,44 +114,79 @@ export default function SignUp(props) {
 
     return isValid;
   };
-
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
-
+    event.preventDefault();
+  
     if (nameError || emailError || passwordError) {
       return; // If there are errors, don't submit
     }
-
+  
     const data = new FormData(event.currentTarget);
     const name = data.get('name');
     const email = data.get('email');
     const password = data.get('password');
-
+  
     setIsLoading(true); // Start loading state
-
+  
     try {
-      // Create user in Supabase
-      const { user, error } = await supabase.auth.signUp({
+      // Step 1: Create user in Supabase Authentication
+      const { user, error: authError } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
-
-      if (error) {
-        throw error; // If there's an error, throw it to be caught
+  
+      if (authError) {
+        throw authError;
       }
-
-      console.log('User created:', user);
-      setSnackbarMessage('User successfully created!');
-      setOpenSnackbar(true); // Show success snackbar
+  
+      console.log('Supabase Auth User:', user);
+  
+      // Step 2: Check if the email is confirmed
+      if (!user.email_confirmed_at) {
+        setSnackbarMessage('Please check your email to verify your account!');
+        setOpenSnackbar(true); // Show email verification message
+  
+        setTimeout(() => {
+          navigate('/signin'); // Redirect to sign-in page after showing the message
+        }, 4000);
+        return;
+      }
+  
+      // Step 3: Once the email is confirmed, insert the user profile data
+      const { data: userData, error: insertError } = await supabase
+        .from('user_profiles')
+        .upsert([
+          {
+            id: user.id,
+            user_balance: 0,
+            lichess_username: '',
+          },
+        ]);
+  
+      if (insertError) {
+        throw insertError;
+      }
+  
+      console.log('User profile inserted successfully:', userData);
+  
+      setSnackbarMessage('Account created successfully!');
+      setOpenSnackbar(true);
+  
+      setTimeout(() => {
+        navigate('/signin'); // Redirect to sign-in page after success
+      }, 4000);
+  
     } catch (error) {
       console.error('Error during sign up:', error.message);
       setSnackbarMessage('Error: ' + error.message);
-      setOpenSnackbar(true); // Show error snackbar
+      setOpenSnackbar(true); // Show error message
     } finally {
       setIsLoading(false); // Stop loading state
     }
   };
-
+  
+  
+  
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false); // Close snackbar after it's shown
   };
@@ -213,69 +253,58 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive updates via email."
+              control={<Checkbox />}
+              label="Show password"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              disabled={isLoading} // Disable the button while loading
+              disabled={isLoading}
+              sx={{ padding: '0.9rem', fontWeight: 600 }}
             >
-              {isLoading ? 'Signing up...' : 'Sign up'}
+              {isLoading ? 'Signing up...' : 'Sign Up'}
             </Button>
-          </Box>
-          <Divider>
-            <Typography sx={{ color: 'text.secondary' }}>or</Typography>
-          </Divider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              startIcon={<GoogleIcon />}
-              sx={{ textTransform: 'capitalize' }}
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              gap={1}
+              mt={1}
             >
-              Google
-            </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              startIcon={<FacebookIcon />}
-              sx={{ textTransform: 'capitalize' }}
-            >
-              Facebook
-            </Button>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography variant="body2" color="text.secondary">
-              Already have an account?
-            </Typography>
-            <Link
-              component={RouterLink}
-              to="/login"
-              variant="body2"
-              sx={{ textDecoration: 'none', color: 'text.primary' }}
-            >
-              Login
-            </Link>
+              <Typography
+                variant="subtitle2"
+                fontWeight={300}
+                color="text.secondary"
+              >
+                Already have an account?
+              </Typography>
+              <Link
+                component={RouterLink}
+                variant="button"
+                color="primary"
+                to="/signin"
+              >
+                Sign In
+              </Link>
+            </Stack>
           </Box>
         </Card>
-
-        {/* Snackbar for success/error message */}
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-        >
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity={snackbarMessage.includes('Error') ? 'error' : 'success'}
-            sx={{ width: '100%' }}
-          >
-            {snackbarMessage}
-          </Alert>
-        </Snackbar>
       </SignUpContainer>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarMessage.includes('Error') ? 'error' : 'success'}
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </AppTheme>
   );
 }
