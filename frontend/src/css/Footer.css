@@ -92,7 +92,8 @@
   @media screen and (max-width: 768px) {
     .footer-container {
       grid-template-columns: 1fr; /* Single column for mobile */
-      gap: 0;
+      gap: 0 !important;
+      margin: 0;
     }
 
     .grid-item.first{
