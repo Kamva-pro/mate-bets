@@ -1,12 +1,4 @@
-#progamespage{
-    margin-top: 136px;
-}
 
-#progamespage h4{
-    text-align: center;
-    font-weight: 700;
-    color: white;
-}
 .progames-section {
     display: flex;
     align-items: center;

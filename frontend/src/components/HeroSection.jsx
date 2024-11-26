@@ -1,5 +1,6 @@
 import React from 'react';
 import "../css/Hero.css";
+import { Link } from 'react-router-dom';
 
  function HeroSection() {
   return (
@@ -8,7 +9,7 @@ import "../css/Hero.css";
         <div className='hero-content'>
         <h1>Put Your Money Where Your Moves Are!</h1>
         <h6>Play against your friends and win big!</h6>
-        <button className='bet-now'>Bet Now</button>
+        <Link  type='button' to="/playfriend" className='bet-now'>Bet Now</Link>
       </div></div>
       
     </div>
