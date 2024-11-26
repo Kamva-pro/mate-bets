@@ -1,5 +1,6 @@
 import React from "react";
 import '../css/Footer.css';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return(
@@ -16,11 +17,10 @@ const Footer = () => {
             <div class="grid-item">
                 <div className="site-map"><h4>Quick Access</h4>
                 <ul>
-                    <a href=""><li>Play a Friend</li></a>
-                    <a href=""><li>Pro Games</li></a>
-                    <a href=""><li>Deposit</li></a>
-                    <a href=""><li>Withdraw</li></a>
-
+                    <Link to="/playfriend"><li>Play a Friend</li></Link>
+                    <Link to="/progames"><li>Pro Games</li></Link>
+                    <Link to="/deposit"><li>Deposit</li></Link>
+                    <Link to="/withdraw"><li>Withdraw</li></Link>
                 </ul>
                 </div>
             </div>

@@ -9,6 +9,8 @@ const PlayFriend = () => {
     return(
     <div>
         <Navbar/>
+        <div id="playfriend-form">
+        </div>
     </div>
     )
 }
