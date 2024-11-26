@@ -40,9 +40,9 @@ const Navbar = () => {
       {/* Mobile Menu Links */}
       {isMenuOpen && (
         <div className="menu-links">
-          <a href="#home" className="navbar-link active">Home</a>
-          <a href="#about" className="navbar-link">Play a Friend</a>
-          <a href="#contact" className="navbar-link">Pro Games</a>
+          <Link to="/" className="navbar-link active">Home</Link>
+          <Link to="/playfriend" className="navbar-link">Play a Friend</Link>
+          <Link to="/progames" className="navbar-link">Pro Games</Link>
 
 
         </div>
