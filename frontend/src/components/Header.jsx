@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
@@ -22,7 +22,7 @@ const Navbar = () => {
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
         <a href="#home" className="navbar-link active">Home</a>
-        <a href="#about" className="navbar-link">Play a Friend</a>
+        <Link component="button" to="/playfriend" className="navbar-link">Play a Friend</Link>
         <a href="#contact" className="navbar-link">Pro Games</a>
       </div>
 

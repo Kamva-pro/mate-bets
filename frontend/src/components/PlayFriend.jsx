@@ -1,8 +1,12 @@
 import React from "react";
-
+import "../css/PlayFriend.css";
 
 const PlayFriend = () => {
-    <div id="playfriend-main">
+    return(
 
-    </div>
+        <h1 color="white">Play Friend</h1>
+
+    )
 }
+
+export default PlayFriend;
