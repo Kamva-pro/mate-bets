@@ -18,8 +18,9 @@
 
   .site-map{
     margin-top: 16px;
-    color: #fff;
+    color: #fff;   
   }
+
 
   .site-map ul a{
     text-decoration: none;
@@ -29,7 +30,7 @@
 
   .site-map ul a li{
     list-style: none;
-    text-align: start;
+    margin-left: -28px;
   }
 
   .grid-item.first .navbar-brand {
@@ -94,9 +95,13 @@
       gap: 0;
     }
 
-    .grid-item{
+    .grid-item.first{
       padding-left: 8px;
       
+    }
+
+    .grid-item{
+      padding-left: 18px;
     }
   }
   
