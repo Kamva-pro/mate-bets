@@ -21,7 +21,7 @@ const Navbar = () => {
 
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
-        <a id='home' href="#home" className="navbar-link">Home</a>
+        <Link id='home' component="home" to="/" className="navbar-link">Home</Link>
         <Link id='playfriend' component="button" to="/playfriend" className="navbar-link">Play a Friend</Link>
         <Link id='progames' component="button" to="/progames" className="navbar-link">Pro Games</Link>
       </div>
