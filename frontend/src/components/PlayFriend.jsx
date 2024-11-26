@@ -1,11 +1,13 @@
 import React from "react";
 import "../css/PlayFriend.css";
+import Navbar from "./Header";
+
 
 const PlayFriend = () => {
     return(
-
-        <h1 color="white">Play Friend</h1>
-
+    <div>
+        <Navbar/>
+    </div>
     )
 }
 

@@ -21,9 +21,9 @@ const Navbar = () => {
 
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
-        <a href="#home" className="navbar-link active">Home</a>
-        <Link component="button" to="/playfriend" className="navbar-link">Play a Friend</Link>
-        <a href="#contact" className="navbar-link">Pro Games</a>
+        <a id='home' href="#home" className="navbar-link">Home</a>
+        <Link id='playfriend' component="button" to="/playfriend" className="navbar-link">Play a Friend</Link>
+        <Link id='progames' component="button" to="/progames" className="navbar-link">Pro Games</Link>
       </div>
 
       <button onClick={handleLoginClick} className="navbar-button">Login</button>
