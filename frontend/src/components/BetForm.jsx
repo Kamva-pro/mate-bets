@@ -197,6 +197,27 @@ export default function BetForm(props) {
               </FormControl>
             )}
 
+            {/* Match Type */}
+            <FormControl>
+              <FormLabel htmlFor="gameseries">Chess Website</FormLabel>
+              <TextField
+                id="gameseries"
+                select
+                value={gameSeries}
+                onChange={(e) => setGameSeries(e.target.value)}
+                SelectProps={{ native: true }}
+                required
+                fullWidth
+                variant="outlined"
+              >
+                <option value="" disabled>Game Series</option>
+                <option value="one_game">One Game</option>
+                <option value="best_of_three">Best of Three</option>
+                <option value="best_of_five">Best of Five</option>
+
+              </TextField>
+            </FormControl>
+           
             {/* Stake */}
             <FormControl>
               <FormLabel htmlFor="stake">Stake</FormLabel>
