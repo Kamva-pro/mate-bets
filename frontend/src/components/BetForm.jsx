@@ -83,6 +83,7 @@ const BetContainer = styled(Stack)(({ theme }) => ({
 export default function BetForm(props) {
   const [gameFormat, setGameFormat] = useState('');
   const [chessWebsite, setChessWebsite] = useState('');
+  const [gameSeries, setGameSeries] = useState('');
   const [chessUsername, setChessUsername] = useState('');
   const [opponentUsername, setOpponentUsername] = useState('');
   const [stake, setStake] = useState('');
@@ -159,6 +160,27 @@ export default function BetForm(props) {
               </TextField>
             </FormControl>
 
+            {/* Match Type */}
+            <FormControl>
+              <FormLabel htmlFor="gameseries">Game Series</FormLabel>
+              <TextField
+                id="gameseries"
+                select
+                value={gameSeries}
+                onChange={(e) => setGameSeries(e.target.value)}
+                SelectProps={{ native: true }}
+                required
+                fullWidth
+                variant="outlined"
+              >
+                <option value="" disabled>Game Series</option>
+                <option value="one_game">One Game</option>
+                <option value="best_of_three">Best of Three</option>
+                <option value="best_of_five">Best of Five</option>
+
+              </TextField>
+            </FormControl>
+
             {/* Chess Website */}
             <FormControl>
               <FormLabel htmlFor="chessWebsite">Chess Website</FormLabel>
@@ -197,26 +219,7 @@ export default function BetForm(props) {
               </FormControl>
             )}
 
-            {/* Match Type */}
-            <FormControl>
-              <FormLabel htmlFor="gameseries">Chess Website</FormLabel>
-              <TextField
-                id="gameseries"
-                select
-                value={gameSeries}
-                onChange={(e) => setGameSeries(e.target.value)}
-                SelectProps={{ native: true }}
-                required
-                fullWidth
-                variant="outlined"
-              >
-                <option value="" disabled>Game Series</option>
-                <option value="one_game">One Game</option>
-                <option value="best_of_three">Best of Three</option>
-                <option value="best_of_five">Best of Five</option>
-
-              </TextField>
-            </FormControl>
+            
            
             {/* Stake */}
             <FormControl>
