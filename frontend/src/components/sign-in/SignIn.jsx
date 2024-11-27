@@ -122,6 +122,8 @@ const handleSubmit = async (event) => {
   } catch (error) {
     // Handle login error
     console.error('Error during login:', error.message);
+    setAlertMessage('Something went wrong: ' + error.message);
+    setAlertSeverity('error');
     // Display error to the user (e.g., show an error message in the UI)
     alert('Login failed: ' + error.message);
   } finally {
