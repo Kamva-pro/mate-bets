@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa'; // For the user icon
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate(); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual authentication logic
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLoginClick = () => {
-    navigate('/signin'); 
+  const handleButtonClick = () => {
+    if (isLoggedIn) {
+      navigate('/deposit');
+    } else {
+      navigate('/signin');
+    }
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile'); // Navigate to the profile page
   };
 
   return (
@@ -26,7 +36,18 @@ const Navbar = () => {
         <Link id='progames' component="button" to="/progames" className="navbar-link">Pro Games</Link>
       </div>
 
-      <button onClick={handleLoginClick} className="navbar-button">Login</button>
+      <div className="navbar-actions">
+        {isLoggedIn && (
+          <FaUserCircle 
+            onClick={handleProfileClick} 
+            className="profile-icon" 
+            style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
+          />
+        )}
+        <button onClick={handleButtonClick} className="navbar-button">
+          {isLoggedIn ? 'Deposit' : 'Login'}
+        </button>
+      </div>
 
       {/* Menu Icon for Mobile */}
       <img
@@ -43,14 +64,8 @@ const Navbar = () => {
           <Link to="/" className="navbar-link active">Home</Link>
           <Link to="/playfriend" className="navbar-link">Play a Friend</Link>
           <Link to="/progames" className="navbar-link">Pro Games</Link>
-
-
         </div>
-
-
-        
       )}
-
     </nav>
   );
 };
