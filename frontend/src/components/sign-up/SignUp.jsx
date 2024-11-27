@@ -20,6 +20,8 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import supabase from '../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { auth } from './firebase'; 
+import firebase from 'firebase/app';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -114,9 +116,12 @@ export default function SignUp(props) {
 
     return isValid;
   };
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
   
+    // Check for errors before submitting
     if (nameError || emailError || passwordError) {
       return; // If there are errors, don't submit
     }
@@ -126,65 +131,47 @@ export default function SignUp(props) {
     const email = data.get('email');
     const password = data.get('password');
   
-    setIsLoading(true); // Start loading state
+    setIsLoading(true);  // Show loading indicator
   
     try {
-      // Step 1: Create user in Supabase Authentication
-      const { user, error: authError } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
+      // Register the user with Firebase Authentication
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      console.log('User object:', user);
   
-      if (authError) {
-        throw authError;
+      if (!user) {
+        throw new Error('User registration failed');
       }
   
-      console.log('Supabase Auth User:', user);
+      // After successful registration, use Firebase user ID (UID)
+      const firebaseUserId = user.uid;  // Get the Firebase user ID
   
-      // Step 2: Check if the email is confirmed
-      if (!user.email_confirmed_at) {
-        setSnackbarMessage('Please check your email to verify your account!');
-        setOpenSnackbar(true); // Show email verification message
-  
-        setTimeout(() => {
-          navigate('/signin'); // Redirect to sign-in page after showing the message
-        }, 4000);
-        return;
-      }
-  
-      // Step 3: Once the email is confirmed, insert the user profile data
+      // Add the user to the "users" table in your Supabase database (or whichever database you're using)
       const { data: userData, error: insertError } = await supabase
-        .from('user_profiles')
-        .upsert([
+        .from('users')
+        .insert([
           {
-            id: user.id,
-            user_balance: 0,
-            lichess_username: '',
+            id: firebaseUserId,  // Use the Firebase user ID as the UUID
+            username: name,
+            lichess_username: '',  // Left blank
+            chess_com_username: '',  // Left blank
+            balance: 0,  // Set balance to 0 initially
           },
         ]);
   
       if (insertError) {
-        throw insertError;
+        throw insertError;  // Handle any error from inserting into the database
       }
   
-      console.log('User profile inserted successfully:', userData);
-  
-      setSnackbarMessage('Account created successfully!');
-      setOpenSnackbar(true);
-  
-      setTimeout(() => {
-        navigate('/signin'); // Redirect to sign-in page after success
-      }, 4000);
+      // Success: Handle user registration success, show a success message, etc.
+      console.log('User registered and added to the database!', userData);
   
     } catch (error) {
-      console.error('Error during sign up:', error.message);
-      setSnackbarMessage('Error: ' + error.message);
-      setOpenSnackbar(true); // Show error message
+      console.error('Error during registration or login:', error.message);
+      // Handle any error that occurred during registration or database insertion
     } finally {
-      setIsLoading(false); // Stop loading state
+      setIsLoading(false);  // Hide loading indicator
     }
   };
-  
   
   
   const handleCloseSnackbar = () => {
