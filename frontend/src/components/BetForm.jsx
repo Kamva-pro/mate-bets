@@ -261,7 +261,7 @@ export default function BetForm(props) {
                   type="text"
                   value={chessUsername}
                   onChange={(e) => setChessUsername(e.target.value)}
-                  placeholder={`Enter your ${chessWebsite} username`}
+                  placeholder={`Enter your username`}
                   required
                   fullWidth
                   variant="outlined"
@@ -276,8 +276,8 @@ export default function BetForm(props) {
                   id="oppChessUsername"
                   type="text"
                   value={opp_chessUsername}
-                  onChange={(e) => setChessUsername(e.target.value)}
-                  placeholder={`Enter your Opponents Lichess username`}
+                  onChange={(e) => setOppChessUsername(e.target.value)}
+                  placeholder={`Enter your opponents username`}
                   required
                   fullWidth
                   variant="outlined"
@@ -298,14 +298,14 @@ export default function BetForm(props) {
                 required
                 fullWidth
                 variant="outlined"
-                // inputProps={{
-                //   min: 0,
-                //   step: 0.01,
-                // }}
+                inputProps={{
+                  min: 0,
+                  step: 0.01,
+                }}
               />
             </FormControl>
 
-            Error Message
+            
             {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
 
             {/* Success Message

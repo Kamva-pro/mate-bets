@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Mate<span id="bets-text"> Bets</span></div>
+      <Link to={'/'} className="navbar-brand">Mate<span id="bets-text"> Bets</span></Link>
 
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
