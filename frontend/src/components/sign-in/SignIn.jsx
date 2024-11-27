@@ -73,6 +73,8 @@ export default function SignIn(props) {
   const [open, setOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
+  const navigate = useNavigate();
+
 
   const [isLoading, setIsLoading] = React.useState(false); // Track loading state
 
@@ -112,6 +114,7 @@ const handleSubmit = async (event) => {
     console.log('Logged in user:', user);
     setAlertMessage('Sign-in successful!');
     setAlertSeverity('success');
+    navigate('/');
 
     // Handle successful login (e.g., redirect to a different page or update UI)
     // Example: Redirect user to dashboard or home page
