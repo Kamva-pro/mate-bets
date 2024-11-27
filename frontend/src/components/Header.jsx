@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   const handleProfileClick = () => {
-    navigate('/profile'); // Navigate to the profile page
+    navigate('/dashboard'); // Navigate to the profile page
   };
 
   return (

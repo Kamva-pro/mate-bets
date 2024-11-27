@@ -21,6 +21,7 @@
     "@mui/x-date-pickers": "^7.22.3",
     "@mui/x-tree-view": "^7.22.1",
     "@supabase/supabase-js": "^2.46.1",
+    "@toolpad/core": "^0.10.0",
     "antd": "^5.22.1",
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.13",

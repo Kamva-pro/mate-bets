@@ -7,7 +7,7 @@ import PlayFriend from './components/PlayFriend';
 
 import Home from './components/HomePage'; 
 import ProGamesPage from './components/ProGamesPage';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './components//Dashboard';
 
 function App() {
     return (
