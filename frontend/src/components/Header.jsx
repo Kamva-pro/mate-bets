@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa'; // For the user icon
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Firebase auth
+import { FaUserCircle } from 'react-icons/fa'; 
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null); // Store the user object if logged in
+  const [user, setUser] = useState(null); 
   const navigate = useNavigate();
   const auth = getAuth();
 

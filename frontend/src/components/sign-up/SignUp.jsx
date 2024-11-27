@@ -151,11 +151,11 @@ export default function SignUp(props) {
         .from('users')
         .insert([
           {
-            id: userId,  // Use the Firebase UID (a string)
+            id: userId,  
             username: name,
-            lichess_username: '',  // Left blank
-            chess_com_username: '',  // Left blank
-            balance: 0,  // Set balance to 0 initially
+            lichess_username: '',  
+            chess_com_username: '',  
+            balance: 0,  
           },
         ]);
   

@@ -16,6 +16,10 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
+import supabase from '../../../supabase-client';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
+
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -85,26 +89,75 @@ export default function BetForm(props) {
   const [chessWebsite, setChessWebsite] = useState('');
   const [gameSeries, setGameSeries] = useState('');
   const [chessUsername, setChessUsername] = useState('');
-  const [opponentUsername, setOpponentUsername] = useState('');
+  const [opp_chessUsername, setOppChessUsername] = useState('');
+  const [opponentEmail, setOpponentEmail] = useState('');
   const [stake, setStake] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
+  const [user, setUser] = useState(null); 
+  const auth = getAuth();
+  const [alertMessage, setAlertMessage] = React.useState('');
+  const [alertSeverity, setAlertSeverity] = React.useState('');
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Cleanup the listener on component unmount
+    return () => unsubscribe();
+  }, [auth]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!opponentUsername || !gameFormat || !chessWebsite || !chessUsername || !stake) {
+    if (!opponentEmail || !gameFormat || !chessWebsite || !chessUsername || !stake) {
       setError('Please fill out all fields.');
       return;
     }
 
     setError('');
+
+      const {data: betData, error: betError} = await supabase 
+      .from("p2p_bets")
+      .insert([
+        {
+          current_userID: user.uid,
+          opponent_userID: opponentEmail, //{use this value to obtain their userID}
+          lichess_username: chessUsername,
+          opp_lichess_username: opp_chessUsername,
+          match_format: gameFormat,
+          match_type: gameSeries,
+          bet_amount: stake,
+          status: "pending",
+          result: "in progress"
+        }
+      ]);
+
+      if(betError)
+      {
+        setAlertMessage('Error placing bet:', betError);
+        setAlertSeverity('error');
+      }
+
+      setAlertMessage('Bet has been successfully initiated');
+      setAlertSeverity('success');
+    }
+
+
     setSuccessMessage('Bet has been placed successfully!');
+
   };
 
   return (
     <AppTheme {...props}>
       <BetContainer>
+      {alertMessage && (
+        <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
+          {alertMessage}
+        </Alert>
+      )}
         <Card variant="outlined">
           <Typography
             component="h1"
@@ -125,14 +178,14 @@ export default function BetForm(props) {
           >
             {/* Opponent Username */}
             <FormControl>
-              <FormLabel htmlFor="opponentUsername">Opponent's Username</FormLabel>
+              <FormLabel htmlFor="opponentEmail">Opponent's Email</FormLabel>
               <TextField
-                id="opponentUsername"
-                type="text"
-                name="opponentUsername"
-                value={opponentUsername}
-                onChange={(e) => setOpponentUsername(e.target.value)}
-                placeholder="Enter opponent's username"
+                id="opponentEmail"
+                type="email"
+                name="opponentEmail"
+                value={opponentEmail}
+                onChange={(e) => setOpponentEmail(e.target.value)}
+                placeholder="Enter opponent's email"
                 required
                 fullWidth
                 variant="outlined"
@@ -182,7 +235,7 @@ export default function BetForm(props) {
             </FormControl>
 
             {/* Chess Website */}
-            <FormControl>
+            {/* <FormControl>
               <FormLabel htmlFor="chessWebsite">Chess Website</FormLabel>
               <TextField
                 id="chessWebsite"
@@ -198,13 +251,13 @@ export default function BetForm(props) {
                 <option value="chess.com">Chess.com</option>
                 <option value="lichess.org">Lichess.org</option>
               </TextField>
-            </FormControl>
+            </FormControl> */}
 
             {/* Chess Username */}
             {chessWebsite && (
               <FormControl>
                 <FormLabel htmlFor="chessUsername">
-                  {chessWebsite === 'chess.com' ? 'Chess.com Username' : 'Lichess.org Username'}
+                  Lichess Username
                 </FormLabel>
                 <TextField
                   id="chessUsername"
@@ -259,4 +312,3 @@ export default function BetForm(props) {
       </BetContainer>
     </AppTheme>
   );
-}

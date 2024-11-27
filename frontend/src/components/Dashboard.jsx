@@ -9,6 +9,7 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
+import Navbar from './Header'; // Your custom Navbar component
 
 const NAVIGATION = [
   {
@@ -106,7 +107,8 @@ export default function DashboardLayoutBasic(props) {
       theme={demoTheme}
       window={demoWindow}
     >
-      <DashboardLayout>
+      {/* Use your Navbar as the header */}
+      <DashboardLayout header={<Navbar />}>
         <PageContainer>
           <Grid container spacing={1}>
             <Grid size={5} />
