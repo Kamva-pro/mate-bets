@@ -17,8 +17,8 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path='/playfriend' element={<PlayFriend />} />
-                <Route path='progames' element={<ProGamesPage/>} />
-                <Route path='profile' element={<Dashboard/>}/>
+                <Route path='/progames' element={<ProGamesPage/>} />
+                <Route path='/dashboard' element={<Dashboard/>}/>
             </Routes>
         </Router>
     );
