@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {React, useEffect} from 'react';
 import { extendTheme, styled } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -108,13 +108,14 @@ export default function DashboardLayoutBasic(props) {
   return (
     <AppProvider
       navigation={NAVIGATION}
+      // header={<Navbar/>} 
       router={router}
       theme={demoTheme}
       window={demoWindow}
     >
       {/* Use your Navbar as the header */}
-      <DashboardLayout header={<Navbar />}>
-        <PageContainer>
+      <DashboardLayout >
+        <PageContainer >
           <Grid container spacing={1}>
             <Grid size={5} />
             <Grid size={12}>

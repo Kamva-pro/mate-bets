@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -90,7 +90,7 @@ export default function BetForm(props) {
   const [gameSeries, setGameSeries] = useState('');
   const [chessUsername, setChessUsername] = useState('');
   const [opp_chessUsername, setOppChessUsername] = useState('');
-  const opponentEmail= useState('');
+  const [opponentEmail, setOpponentEmail]= useState('');
   const [stake] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null); 
@@ -251,7 +251,7 @@ export default function BetForm(props) {
             </FormControl> */}
 
             {/* Chess Username */}
-            {chessWebsite && (
+            
               <FormControl>
                 <FormLabel htmlFor="chessUsername">
                   Lichess Username
@@ -267,7 +267,22 @@ export default function BetForm(props) {
                   variant="outlined"
                 />
               </FormControl>
-            )}
+            
+              <FormControl>
+                <FormLabel htmlFor="oppChessUsername">
+                  Opponent Lichess Username
+                </FormLabel>
+                <TextField
+                  id="oppChessUsername"
+                  type="text"
+                  value={opp_chessUsername}
+                  onChange={(e) => setChessUsername(e.target.value)}
+                  placeholder={`Enter your Opponents Lichess username`}
+                  required
+                  fullWidth
+                  variant="outlined"
+                />
+              </FormControl>
 
             
            
@@ -283,18 +298,18 @@ export default function BetForm(props) {
                 required
                 fullWidth
                 variant="outlined"
-                inputProps={{
-                  min: 0,
-                  step: 0.01,
-                }}
+                // inputProps={{
+                //   min: 0,
+                //   step: 0.01,
+                // }}
               />
             </FormControl>
 
-            {/* Error Message */}
+            Error Message
             {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
 
-            {/* Success Message */}
-            {successMessage && <Typography sx={{ color: 'green' }}>{successMessage}</Typography>}
+            {/* Success Message
+            {successMessage && <Typography sx={{ color: 'green' }}>{successMessage}</Typography>} */}
 
             {/* Submit Button */}
             <Button
