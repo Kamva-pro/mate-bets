@@ -16,7 +16,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
-import supabase from '../../../supabase-client';
+import supabase from '../../supabase-client';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 
 
@@ -90,9 +90,8 @@ export default function BetForm(props) {
   const [gameSeries, setGameSeries] = useState('');
   const [chessUsername, setChessUsername] = useState('');
   const [opp_chessUsername, setOppChessUsername] = useState('');
-  const [opponentEmail, setOpponentEmail] = useState('');
-  const [stake, setStake] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const opponentEmail= useState('');
+  const [stake] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null); 
   const auth = getAuth();
@@ -139,16 +138,14 @@ export default function BetForm(props) {
       {
         setAlertMessage('Error placing bet:', betError);
         setAlertSeverity('error');
+        
       }
 
       setAlertMessage('Bet has been successfully initiated');
       setAlertSeverity('success');
     }
 
-
-    setSuccessMessage('Bet has been placed successfully!');
-
-  };
+  
 
   return (
     <AppTheme {...props}>
@@ -302,6 +299,7 @@ export default function BetForm(props) {
             {/* Submit Button */}
             <Button
               type="submit"
+              onSubmit={handleSubmit()}
               fullWidth
               variant="contained"
             >
@@ -312,3 +310,5 @@ export default function BetForm(props) {
       </BetContainer>
     </AppTheme>
   );
+
+}

@@ -14,16 +14,21 @@ import Navbar from './Header'; // Your custom Navbar component
 const NAVIGATION = [
   {
     kind: 'header',
-    title: 'Main items',
+    title: 'Account',
   },
   {
-    segment: 'dashboard',
-    title: 'Dashboard',
+    segment: 'Profile',
+    title: 'Profile',
     icon: <DashboardIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
+    segment: 'Deposit',
+    title: 'Deposit',
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: 'Withdraw',
+    title: 'Withdraw',
     icon: <ShoppingCartIcon />,
   },
   {
@@ -31,28 +36,28 @@ const NAVIGATION = [
   },
   {
     kind: 'header',
-    title: 'Analytics',
+    title: 'Bets',
   },
   {
-    segment: 'reports',
-    title: 'Reports',
+    segment: 'my bets',
+    title: 'My Bets',
     icon: <BarChartIcon />,
     children: [
       {
-        segment: 'sales',
-        title: 'Sales',
+        segment: 'active bets',
+        title: 'Active Bets',
         icon: <DescriptionIcon />,
       },
       {
-        segment: 'traffic',
-        title: 'Traffic',
+        segment: 'past bets',
+        title: 'Past Bets',
         icon: <DescriptionIcon />,
       },
     ],
   },
   {
-    segment: 'integrations',
-    title: 'Integrations',
+    segment: 'settings',
+    title: 'Settings',
     icon: <LayersIcon />,
   },
 ];
