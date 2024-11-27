@@ -162,6 +162,9 @@ export default function SignUp(props) {
       }
   
       // Success: Handle user registration success, show a success message, etc.
+      <Alert variant="outlined" severity="success">
+      This is an outlined success Alert.
+      </Alert>
       console.log('User registered and added to the database!', userData);
   
     } catch (error) {

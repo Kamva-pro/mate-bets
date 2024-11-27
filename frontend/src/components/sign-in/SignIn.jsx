@@ -18,6 +18,10 @@ import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
 import AppTheme from '../shared-theme/AppTheme';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
 import { Link as RouterLink } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import { auth } from '../../../firebase'; 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";  
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -67,6 +71,11 @@ export default function SignIn(props) {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState('');
+  const [alertSeverity, setAlertSeverity] = React.useState('');
+
+  const [isLoading, setIsLoading] = React.useState(false); // Track loading state
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -76,17 +85,50 @@ export default function SignIn(props) {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+const handleSubmit = async (event) => {
+  event.preventDefault();  // Prevent form submission
+
+  // Check for validation errors before proceeding
+  if (emailError || passwordError) {
+    return; // If there are errors, don't proceed
+  }
+
+  const data = new FormData(event.currentTarget);
+  const email = data.get('email');
+  const password = data.get('password');
+
+  // Show loading state
+  setIsLoading(true);
+
+  try {
+    // Initialize Firebase Auth
+    const auth = getAuth();
+
+    // Attempt to sign in the user with Firebase Authentication
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+    const user = userCredential.user;  // Firebase user object
+    console.log('Logged in user:', user);
+    setAlertMessage('Sign-in successful!');
+    setAlertSeverity('success');
+
+    // Handle successful login (e.g., redirect to a different page or update UI)
+    // Example: Redirect user to dashboard or home page
+    // history.push('/dashboard');
+
+    // You can also store user data in state or session for use across the app
+
+  } catch (error) {
+    // Handle login error
+    console.error('Error during login:', error.message);
+    // Display error to the user (e.g., show an error message in the UI)
+    alert('Login failed: ' + error.message);
+  } finally {
+    // Hide loading state
+    setIsLoading(false);
+  }
+};
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -116,8 +158,14 @@ export default function SignIn(props) {
   };
 
   return (
+    
     <AppTheme {...props}>
       <SignInContainer>
+      {alertMessage && (
+        <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
+          {alertMessage}
+        </Alert>
+      )}
         <Card variant="outlined">
           <Typography
             component="h1"
