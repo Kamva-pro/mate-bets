@@ -7,6 +7,7 @@ import PlayFriend from './components/PlayFriend';
 
 import Home from './components/HomePage'; 
 import ProGamesPage from './components/ProGamesPage';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path='/playfriend' element={<PlayFriend />} />
                 <Route path='progames' element={<ProGamesPage/>} />
+                <Route path='profile' element={<Dashboard/>}/>
             </Routes>
         </Router>
     );
