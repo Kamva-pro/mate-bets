@@ -21,7 +21,7 @@ import supabase from '../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { auth } from '../../../firebase'; 
-import firebase from 'firebase/app';
+import { createUserWithEmailAndPassword } from "firebase/auth";  
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -118,6 +118,7 @@ export default function SignUp(props) {
   };
 
   
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -134,23 +135,21 @@ export default function SignUp(props) {
     setIsLoading(true);  // Show loading indicator
   
     try {
-      // Register the user with Firebase Authentication
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      console.log('User object:', user);
+      // Register the user with Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const firebaseUser = userCredential.user;  // Firebase user object
   
-      if (!user) {
-        throw new Error('User registration failed');
-      }
+      console.log('User object:', firebaseUser);
+      
+      // Now you have the Firebase user UID (string) and you can use that directly in the database
+      const userId = firebaseUser.uid;  // Use Firebase's UID, it's a string, not a UUID
   
-      // After successful registration, use Firebase user ID (UID)
-      const firebaseUserId = user.uid;  // Get the Firebase user ID
-  
-      // Add the user to the "users" table in your Supabase database (or whichever database you're using)
+      // Add the user to the database using the Firebase UID as the user ID
       const { data: userData, error: insertError } = await supabase
         .from('users')
         .insert([
           {
-            id: firebaseUserId,  // Use the Firebase user ID as the UUID
+            id: userId,  // Use the Firebase UID (a string)
             username: name,
             lichess_username: '',  // Left blank
             chess_com_username: '',  // Left blank
@@ -173,6 +172,7 @@ export default function SignUp(props) {
     }
   };
   
+
   
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false); // Close snackbar after it's shown
