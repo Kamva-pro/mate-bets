@@ -108,3 +108,18 @@
     background-color: #121212;
   }
   
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-icon {
+    color: #555;
+    transition: color 0.3s;
+  }
+  
+  .profile-icon:hover {
+    color: #000;
+  }
+  

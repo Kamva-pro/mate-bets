@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa'; // For the user icon
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Firebase auth
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual authentication logic
+  const [user, setUser] = useState(null); // Store the user object if logged in
   const navigate = useNavigate();
+  const auth = getAuth();
+
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Cleanup the listener on component unmount
+    return () => unsubscribe();
+  }, [auth]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleButtonClick = () => {
-    if (isLoggedIn) {
+    if (user) {
       navigate('/deposit');
     } else {
       navigate('/signin');
@@ -37,7 +49,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-actions">
-        {isLoggedIn && (
+        {user && (
           <FaUserCircle 
             onClick={handleProfileClick} 
             className="profile-icon" 
@@ -45,7 +57,7 @@ const Navbar = () => {
           />
         )}
         <button onClick={handleButtonClick} className="navbar-button">
-          {isLoggedIn ? 'Deposit' : 'Login'}
+          {user ? 'Deposit' : 'Login'}
         </button>
       </div>
 
