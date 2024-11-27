@@ -20,7 +20,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import supabase from '../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { auth } from './firebase'; 
+import { auth } from '../../../firebase'; 
 import firebase from 'firebase/app';
 
 const Card = styled(MuiCard)(({ theme }) => ({
