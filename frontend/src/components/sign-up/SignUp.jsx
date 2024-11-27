@@ -74,6 +74,8 @@ export default function SignUp(props) {
   const [isLoading, setIsLoading] = React.useState(false); // Track loading state
   const [openSnackbar, setOpenSnackbar] = React.useState(false); // Snackbar state for success message
   const [snackbarMessage, setSnackbarMessage] = React.useState(''); // Message for snackbar
+  const [alertMessage, setAlertMessage] = React.useState('');
+  const [alertSeverity, setAlertSeverity] = React.useState('');
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLogin = () => {
@@ -162,13 +164,14 @@ export default function SignUp(props) {
       }
   
       // Success: Handle user registration success, show a success message, etc.
-      <Alert variant="outlined" severity="success">
-      This is an outlined success Alert.
-      </Alert>
+      setAlertMessage('Sign Up successful!');
+      setAlertSeverity('success');
       console.log('User registered and added to the database!', userData);
   
     } catch (error) {
       console.error('Error during registration or login:', error.message);
+      setAlertMessage('Something went wrong: ' + error.message);
+      setAlertSeverity('error');
       // Handle any error that occurred during registration or database insertion
     } finally {
       setIsLoading(false);  // Hide loading indicator
@@ -184,6 +187,11 @@ export default function SignUp(props) {
   return (
     <AppTheme {...props}>
       <SignUpContainer direction="column" justifyContent="space-between">
+      {alertMessage && (
+        <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
+          {alertMessage}
+        </Alert>
+      )}
         <Card variant="outlined">
           <Typography
             component="h1"
