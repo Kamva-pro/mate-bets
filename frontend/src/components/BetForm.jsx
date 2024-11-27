@@ -1,119 +1,160 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Divider from '@mui/material/Divider';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import MuiCard from '@mui/material/Card';
+import { styled } from '@mui/material/styles';
+import AppTheme from './shared-theme/AppTheme';
+import { Link as RouterLink } from 'react-router-dom';
 
-const BetForm = () => {
-  const [gameFormat, setGameFormat] = useState('');
-  const [chessWebsite, setChessWebsite] = useState('');
-  const [chessUsername, setChessUsername] = useState('');
-  const [opponentUsername, setOpponentUsername] = useState('');
-  const [stake, setStake] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [error, setError] = useState('');
+const Card = styled(MuiCard)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignSelf: 'center',
+  width: '100%',
+  padding: theme.spacing(3),
+  gap: theme.spacing(1.5),
+  margin: 'auto',
+  maxWidth: '100%',
+  [theme.breakpoints.up('sm')]: {
+    maxWidth: '450px',
+    padding: theme.spacing(4),
+    gap: theme.spacing(2),
+  },
+  boxShadow:
+    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
+  ...theme.applyStyles('dark', {
+    boxShadow:
+      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
+  }),
+}));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const BetContainer = styled(Stack)(({ theme }) => ({
+  minHeight: '100vh',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4),
+  },
+  backgroundColor: '#121212', // Set the base background color
+  backgroundImage: `
+    linear-gradient(
+      rgba(18, 18, 18, 0.8), 
+      rgba(18, 18, 18, 0.8)
+    ), 
+    radial-gradient(
+      ellipse at center, 
+      hsl(210, 100%, 97%), 
+      hsl(0, 0%, 100%)
+    )`, // Blend the gradient with transparency
+  backgroundBlendMode: 'overlay', // Ensure background colors mix
+  backgroundSize: 'cover',
+  backgroundAttachment: 'fixed',
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#121212',
+    backgroundImage: `
+      linear-gradient(
+        rgba(18, 18, 18, 0.8), 
+        rgba(18, 18, 18, 0.8)
+      ), 
+      radial-gradient(
+        ellipse at center, 
+        hsla(210, 100%, 16%, 0.5), 
+        hsl(220, 30%, 5%)
+      )`,
+    backgroundBlendMode: 'overlay',
+  }),
+}));
 
-    if (!opponentUsername || !gameFormat || !chessWebsite || !chessUsername || !stake) {
-      setError('Please fill out all fields.');
-      return;
-    }
+export default function BetForm(props) {
 
-    setError('');
-    // Simulate placing a bet (replace with actual API call if necessary)
-    setSuccessMessage('Bet has been placed successfully!');
+  const handleClose = () => {
+    setOpen(false);
   };
 
+
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <h2>Place Your Bet</h2>
-      
-      {/* Opponent Username */}
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor="opponentUsername">Opponent's Username</label>
-        <input
-          type="text"
-          id="opponentUsername"
-          value={opponentUsername}
-          onChange={(e) => setOpponentUsername(e.target.value)}
-          placeholder="Enter opponent's username"
-          required
-        />
-      </div>
-
-      {/* Game Format */}
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor="gameFormat">Game Format</label>
-        <select
-          id="gameFormat"
-          value={gameFormat}
-          onChange={(e) => setGameFormat(e.target.value)}
-          required
-        >
-          <option value="" disabled>Select a format</option>
-          <option value="blitz">Blitz</option>
-          <option value="rapid">Rapid</option>
-          <option value="bullet">Bullet</option>
-        </select>
-      </div>
-
-      {/* Chess Website */}
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor="chessWebsite">Chess Website</label>
-        <select
-          id="chessWebsite"
-          value={chessWebsite}
-          onChange={(e) => setChessWebsite(e.target.value)}
-          required
-        >
-          <option value="" disabled>Select a website</option>
-          <option value="chess.com">Chess.com</option>
-          <option value="lichess.org">Lichess.org</option>
-        </select>
-      </div>
-
-      {/* Chess Username */}
-      {chessWebsite && (
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="chessUsername">
-            {chessWebsite === 'chess.com'
-              ? 'Chess.com Username'
-              : 'Lichess.org Username'}
-          </label>
-          <input
-            type="text"
-            id="chessUsername"
-            value={chessUsername}
-            onChange={(e) => setChessUsername(e.target.value)}
-            placeholder={`Enter your ${chessWebsite} username`}
-            required
-          />
-        </div>
-      )}
-
-      {/* Stake */}
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor="stake">Stake</label>
-        <input
-          type="number"
-          id="stake"
-          value={stake}
-          onChange={(e) => setStake(e.target.value)}
-          placeholder="Enter the stake amount"
-          min="0"
-          step="0.01"
-          required
-        />
-      </div>
-
-      {/* Error Message */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {/* Success Message */}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-
-      {/* Submit Button */}
-      <button type="submit">Place Bet</button>
-    </form>
+    <AppTheme {...props}>
+      <BetContainer>
+        <Card variant="outlined">
+          <Typography
+            component="h1"
+            variant="h4"
+            sx={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', textAlign: 'start' }}
+          >
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr',
+              gap: 2,
+            }}
+          >
+            <FormControl>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <TextField
+                // error={emailError}
+                // helperText={emailErrorMessage}
+                id="email"
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                autoComplete="email"
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                color={'primary'}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <TextField
+                // error={passwordError}
+                // helperText={passwordErrorMessage}
+                name="password"
+                placeholder="••••••"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                required
+                fullWidth
+                variant="outlined"
+                color={'primary'}
+              />
+            </FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              // onClick={validateInputs}
+            >
+              Sign in
+            </Button>
+           
+          </Box>
+        
+        </Card>
+      </BetContainer>
+    </AppTheme>
   );
-};
-
-export default BetForm;
+}

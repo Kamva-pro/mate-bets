@@ -1,6 +1,7 @@
 import {React, useState} from "react";
 import "../css/PlayFriend.css";
 import Navbar from "./Header";
+import BetForm from "./BetForm";
 
 
 const PlayFriend = () => {
@@ -9,8 +10,8 @@ const PlayFriend = () => {
     return(
     <div>
         <Navbar/>
-        <div id="playfriend-form">
-        </div>
+        <BetForm/>
+        
     </div>
     )
 }
