@@ -153,8 +153,8 @@ export default function SignUp(props) {
           {
             id: userId,  
             username: name,
+            email: email,
             lichess_username: '',  
-            chess_com_username: '',  
             balance: 0,  
           },
         ]);
@@ -166,6 +166,7 @@ export default function SignUp(props) {
       // Success: Handle user registration success, show a success message, etc.
       setAlertMessage('Sign Up successful!');
       setAlertSeverity('success');
+      handleLogin();
       console.log('User registered and added to the database!', userData);
   
     } catch (error) {

@@ -17,6 +17,8 @@ import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
 import supabase from '../../supabase-client';
+import Alert from '@mui/material/Alert';
+
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 
 
@@ -91,7 +93,8 @@ export default function BetForm(props) {
   const [chessUsername, setChessUsername] = useState('');
   const [opp_chessUsername, setOppChessUsername] = useState('');
   const [opponentEmail, setOpponentEmail]= useState('');
-  const [stake] = useState('');
+  const [oppUserId, setOppUserId] = useState('');
+  const [stake, setStake] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null); 
   const auth = getAuth();
@@ -111,28 +114,45 @@ export default function BetForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!opponentEmail || !gameFormat || !chessWebsite || !chessUsername || !stake) {
+    if (!opponentEmail || !gameFormat || !chessUsername || !stake) {
       setError('Please fill out all fields.');
       return;
     }
 
-    setError('');
+    setError('');      
 
-      const {data: betData, error: betError} = await supabase 
-      .from("p2p_bets")
-      .insert([
-        {
-          current_userID: user.uid,
-          opponent_userID: opponentEmail, //{use this value to obtain their userID}
-          lichess_username: chessUsername,
-          opp_lichess_username: opp_chessUsername,
-          match_format: gameFormat,
-          match_type: gameSeries,
-          bet_amount: stake,
-          status: "pending",
-          result: "in progress"
-        }
-      ]);
+
+    const { data: userData, error: userError } = await supabase
+    .from('users')
+    .select('id')
+    .eq('email', opponentEmail)
+    .single();
+
+    if (userError) {
+      console.error('Error fetching opponent userID:', userError);
+      setAlertMessage('Error placing bet:', userError);
+      setAlertSeverity('error');
+    } else {
+      setOppUserId(userData.id);
+    }
+
+
+    const { data: betData, error: betError } = await supabase
+    .from("p2p_bets")
+    .insert([
+      {
+        current_userID: user.uid,
+        opponent_userID: oppUserId,
+        lichess_username: chessUsername,
+        opp_lichess_username: opp_chessUsername,
+        match_format: gameFormat,
+        match_type: gameSeries,
+        bet_amount: stake,
+        status: "pending",
+        result: "in progress",
+      },
+    ]);
+  
 
       if(betError)
       {
@@ -143,6 +163,7 @@ export default function BetForm(props) {
 
       setAlertMessage('Bet has been successfully initiated');
       setAlertSeverity('success');
+      console.log(betData)
     }
 
   
@@ -314,7 +335,6 @@ export default function BetForm(props) {
             {/* Submit Button */}
             <Button
               type="submit"
-              onSubmit={handleSubmit()}
               fullWidth
               variant="contained"
             >
