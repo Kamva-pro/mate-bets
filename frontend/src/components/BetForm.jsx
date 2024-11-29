@@ -157,6 +157,7 @@ if (!balance_check || balance_check.balance < stake) {
     .from("p2p_bets")
     .insert([
       {
+        id: user.uid + oppUserId,
         current_userid: user.uid,
         opponent_userid: oppUserId,
         opp_email: opponentEmail,
