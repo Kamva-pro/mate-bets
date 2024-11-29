@@ -21,7 +21,7 @@ import supabase from '../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { auth } from '../../../firebase'; 
-import { createUserWithEmailAndPassword } from "firebase/auth";  
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";  
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -164,7 +164,16 @@ export default function SignUp(props) {
       if (insertError) {
         throw insertError;  // Handle any error from inserting into the database
       }
-  
+
+      await updateProfile(firebaseUser, {
+        displayName: name, // Replace `name` with the user's display name
+      })
+        .then(() => {
+          console.log("Display name updated successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating display name:", error);
+        });  
       // Success: Handle user registration success, show a success message, etc.
       setAlertMessage('Sign Up successful!');
       setAlertSeverity('success');

@@ -49,16 +49,21 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-actions">
-        {user && (
-          <FaUserCircle 
-            onClick={handleProfileClick} 
-            className="profile-icon" 
-            style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
-          />
-        )}
-        <button onClick={handleButtonClick} className="navbar-button">
-          {user ? 'Deposit' : 'Login'}
-        </button>
+      {user ? (
+  <div className="navbar-user-info" onClick={handleProfileClick} style={{ cursor: 'pointer' }}>
+    <FaUserCircle 
+      className="profile-icon" 
+      style={{ fontSize: '24px', marginRight: '10px' }} 
+    />
+    <span className="display-name">{user.displayName}</span>
+  </div>
+) : (
+  <button onClick={handleButtonClick} className="navbar-button">
+    Login
+  </button>
+)}
+
+       
       </div>
 
       {/* Menu Icon for Mobile */}
