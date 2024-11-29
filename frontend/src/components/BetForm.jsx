@@ -70,12 +70,10 @@ const BetContainer = styled(Stack)(({ theme }) => ({
 
 export default function BetForm(props) {
   const [gameFormat, setGameFormat] = useState('');
-  const [chessWebsite, setChessWebsite] = useState('');
   const [gameSeries, setGameSeries] = useState('');
   const [chessUsername, setChessUsername] = useState('');
   const [opp_chessUsername, setOppChessUsername] = useState('');
   const [opponentEmail, setOpponentEmail]= useState('');
-  let oppUserId = "";
   const [stake, setStake] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null); 
@@ -104,22 +102,25 @@ export default function BetForm(props) {
     setError('');      
 
 
-    // const { data: userData, error: userError } = await supabase
-    // .from('users')
-    // .select('id')
-    // .eq('email', opponentEmail)
-    // .single();
+    const { data: userData, error: userError } = await supabase
+    .from('users')
+    .select('id')
+    .eq('email', opponentEmail)
+    .single();
 
-    // if (userError) {
-    //   console.error('Error fetching opponent userID:', userError);
-    //   setAlertMessage('Error placing bet:', userError);
-    //   setAlertSeverity('error');
-    // } 
+    if (userError) {
+      console.error('Error fetching opponent userID:', userError);
+      setAlertMessage('Error placing bet:', userError);
+      setAlertSeverity('error');
+    } 
+
+    const oppUserId = userData.id;
 
     // oppUserId = userData.id
 
     console.log("current UserID: ", user.uid);
-    console.log('opp userID: ', "oppUserId");
+    console.log('opp userID: ', oppUserId);
+    console.log("opp email", opponentEmail);
     console.log('Lichess username: ', chessUsername);
     console.log('opp lichess username: ', opp_chessUsername);
     console.log('Game format: ', gameFormat);
@@ -127,15 +128,38 @@ export default function BetForm(props) {
     console.log('Bet Amount: ', stake);
 
 
+    const { data: balance_check, error: balance_error } = await supabase
+  .from("users")
+  .select("balance")
+  .eq("id", user.uid)
+  .single();
 
-    
+if (balance_error) {
+  console.error(balance_error);
+  setAlertMessage("An error occurred while checking your balance.");
+  setAlertSeverity("error");
+  setTimeout(() => {
+    setAlertMessage("");
+  }, 3000);
+  return; // Exit early to prevent further execution
+}
+
+if (!balance_check || balance_check.balance < stake) {
+  setAlertMessage("You have insufficient funds to place this bet.");
+  setAlertSeverity("error");
+  setTimeout(() => {
+    setAlertMessage("");
+  }, 3000);
+  return; // Prevent further execution
+}
 
     const { data: betData, error: betError } = await supabase
     .from("p2p_bets")
     .insert([
       {
         current_userid: user.uid,
-        opponent_userid: "oppUserId",
+        opponent_userid: oppUserId,
+        opp_email: opponentEmail,
         lichess_username: chessUsername,
         opp_lichess_username: opp_chessUsername,
         match_format: gameFormat,
@@ -151,11 +175,17 @@ export default function BetForm(props) {
       {
         setAlertMessage('Error placing bet:', betError);
         setAlertSeverity('error');
+        setTimeout(() => {
+          setAlertMessage("");
+        }, 3000);
         
       }
 
       setAlertMessage('Bet has been successfully initiated');
       setAlertSeverity('success');
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
       console.log(betData)
     }
 
