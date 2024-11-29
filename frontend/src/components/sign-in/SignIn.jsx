@@ -115,7 +115,10 @@ const handleSubmit = async (event) => {
     console.log('Logged in user:', user);
     setAlertMessage('Sign-in successful!');
     setAlertSeverity('success');
-    navigate('/');
+    setTimeout(() => {
+      setAlertMessage("");
+      navigate('/');
+    }, 3000);
 
     // Handle successful login (e.g., redirect to a different page or update UI)
     // Example: Redirect user to dashboard or home page
@@ -129,7 +132,9 @@ const handleSubmit = async (event) => {
     setAlertMessage('Something went wrong: ' + error.message);
     setAlertSeverity('error');
     // Display error to the user (e.g., show an error message in the UI)
-    alert('Login failed: ' + error.message);
+    setTimeout(() => {
+      setAlertMessage("");
+    }, 3000);
   } finally {
     // Hide loading state
     setIsLoading(false);

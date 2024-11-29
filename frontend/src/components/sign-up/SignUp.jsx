@@ -177,13 +177,19 @@ export default function SignUp(props) {
       // Success: Handle user registration success, show a success message, etc.
       setAlertMessage('Sign Up successful!');
       setAlertSeverity('success');
-      handleLogin();
+      setTimeout(() => {
+        setAlertMessage("");
+        handleLogin();
+      }, 3000);
       console.log('User registered and added to the database!', userData);
   
     } catch (error) {
       console.error('Error during registration or login:', error.message);
       setAlertMessage('Something went wrong: ' + error.message);
       setAlertSeverity('error');
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
       // Handle any error that occurred during registration or database insertion
     } finally {
       setIsLoading(false);  // Hide loading indicator
