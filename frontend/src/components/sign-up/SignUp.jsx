@@ -81,7 +81,7 @@ export default function SignUp(props) {
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLogin = () => {
-    navigate('/signin'); // Navigate to the Sign-In page
+    navigate('/'); // Navigate to the Sign-In page
   };
 
   const validateInputs = () => {
@@ -220,7 +220,7 @@ export default function SignUp(props) {
             sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="name">Full name</FormLabel>
+              <FormLabel htmlFor="name">Username</FormLabel>
               <TextField
                 autoComplete="name"
                 name="name"

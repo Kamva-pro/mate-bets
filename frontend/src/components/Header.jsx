@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa'; 
+import { FaUserCircle, FaBell } from 'react-icons/fa'; 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 import "../css/Responsive.css";
 import "../css/Navbar.css";
@@ -25,16 +25,16 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleButtonClick = () => {
-    if (user) {
-      navigate('/deposit');
-    } else {
-      navigate('/signin');
-    }
+  const handleDepositClick = () => {
+    navigate('/deposit');
   };
 
   const handleProfileClick = () => {
     navigate('/dashboard'); // Navigate to the profile page
+  };
+
+  const handleButtonClick = () => {
+    navigate('/signin');
   };
 
   return (
@@ -43,27 +43,41 @@ const Navbar = () => {
 
       {/* Desktop Navbar Links */}
       <div className="navbar-links">
-        <Link id='home' component="home" to="/" className="navbar-link">Home</Link>
-        <Link id='playfriend' component="button" to="/playfriend" className="navbar-link">Play a Friend</Link>
-        <Link id='progames' component="button" to="/progames" className="navbar-link">Pro Games</Link>
+        <Link id='home' to="/" className="navbar-link">Home</Link>
+        <Link id='playfriend' to="/playfriend" className="navbar-link">Play a Friend</Link>
+        <Link id='progames' to="/progames" className="navbar-link">Pro Games</Link>
       </div>
 
+      {/* User Section */}
       <div className="navbar-actions">
-      {user ? (
-  <div className="navbar-user-info" onClick={handleProfileClick} style={{ cursor: 'pointer' }}>
-    <FaUserCircle 
-      className="profile-icon" 
-      style={{ fontSize: '24px', marginRight: '10px' }} 
-    />
-    <span className="display-name">{user.displayName}</span>
-  </div>
-) : (
-  <button onClick={handleButtonClick} className="navbar-button">
-    Login
-  </button>
-)}
-
-       
+        {user ? (
+          <div className="navbar-user-info">
+            <FaBell
+              className="notification-icon"
+              style={{ cursor: 'pointer', fontSize: '20px', marginRight: '10px' }}
+            />
+            <FaUserCircle 
+              className="profile-icon" 
+              onClick={handleProfileClick}
+              style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
+            />
+            <span className="display-name">{user.displayName}</span>
+            <button
+              onClick={handleDepositClick}
+              className="navbar-button"
+              style={{
+                marginLeft: '24px',
+                
+              }}
+            >
+              Deposit
+            </button>
+          </div>
+        ) : (
+          <button onClick={handleButtonClick} className="navbar-button">
+            Login
+          </button>
+        )}
       </div>
 
       {/* Menu Icon for Mobile */}

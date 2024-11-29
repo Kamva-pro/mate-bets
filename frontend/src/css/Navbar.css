@@ -115,7 +115,7 @@
   }
   
   .profile-icon {
-    color: #555;
+    color: #ffffff;
     transition: color 0.3s;
   }
   
@@ -123,3 +123,7 @@
     color: #0a8f4c;
   }
   
+
+  .display-name{
+    font-weight: 700;
+  }
