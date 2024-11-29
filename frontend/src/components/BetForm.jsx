@@ -17,11 +17,10 @@ import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
 import supabase from '../../supabase-client';
+import ColorModeSelect from './shared-theme/ColorModeSelect';
 import Alert from '@mui/material/Alert';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
-
-
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -56,7 +55,6 @@ const BetContainer = styled(Stack)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
   },
-  backgroundColor: '#121212', 
   backgroundImage: `
     linear-gradient(
       rgba(18, 18, 18, 0.8), 
@@ -93,7 +91,7 @@ export default function BetForm(props) {
   const [chessUsername, setChessUsername] = useState('');
   const [opp_chessUsername, setOppChessUsername] = useState('');
   const [opponentEmail, setOpponentEmail]= useState('');
-  const [oppUserId, setOppUserId] = useState('');
+  let oppUserId = "";
   const [stake, setStake] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null); 
@@ -122,27 +120,38 @@ export default function BetForm(props) {
     setError('');      
 
 
-    const { data: userData, error: userError } = await supabase
-    .from('users')
-    .select('id')
-    .eq('email', opponentEmail)
-    .single();
+    // const { data: userData, error: userError } = await supabase
+    // .from('users')
+    // .select('id')
+    // .eq('email', opponentEmail)
+    // .single();
 
-    if (userError) {
-      console.error('Error fetching opponent userID:', userError);
-      setAlertMessage('Error placing bet:', userError);
-      setAlertSeverity('error');
-    } else {
-      setOppUserId(userData.id);
-    }
+    // if (userError) {
+    //   console.error('Error fetching opponent userID:', userError);
+    //   setAlertMessage('Error placing bet:', userError);
+    //   setAlertSeverity('error');
+    // } 
 
+    // oppUserId = userData.id
+
+    console.log("current UserID: ", user.uid);
+    console.log('opp userID: ', "oppUserId");
+    console.log('Lichess username: ', chessUsername);
+    console.log('opp lichess username: ', opp_chessUsername);
+    console.log('Game format: ', gameFormat);
+    console.log('Game Series: ', gameSeries);
+    console.log('Bet Amount: ', stake);
+
+
+
+    
 
     const { data: betData, error: betError } = await supabase
     .from("p2p_bets")
     .insert([
       {
-        current_userID: user.uid,
-        opponent_userID: oppUserId,
+        current_userid: user.uid,
+        opponent_userid: "oppUserId",
         lichess_username: chessUsername,
         opp_lichess_username: opp_chessUsername,
         match_format: gameFormat,
@@ -170,7 +179,9 @@ export default function BetForm(props) {
 
   return (
     <AppTheme {...props}>
+            <CssBaseline enableColorScheme />
       <BetContainer>
+      <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
       {alertMessage && (
         <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
           {alertMessage}
