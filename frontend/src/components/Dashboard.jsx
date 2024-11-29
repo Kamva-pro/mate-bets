@@ -119,12 +119,7 @@ export default function DashboardLayoutBasic(props) {
       title: 'Settings',
       icon: <LayersIcon />,
     },
-    {
-      title: 'Logout',
-      icon: <LayersIcon />,
-      onClick: handleLogout, // Attach the logout handler here
-      actionOnly: true, // Custom property to distinguish action-only items
-    },
+    
   ];
 
   const handleNavigationClick = (navItem) => {
@@ -148,43 +143,107 @@ export default function DashboardLayoutBasic(props) {
     >
       {/* Use your Navbar as the header */}
       <DashboardLayout>
-        <PageContainer>
-          <Grid container spacing={1}>
-            <Grid size={5} />
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid size={4}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={8}>
-              <Skeleton height={100} />
-            </Grid>
+      <PageContainer>
+  {router.pathname === '/Profile' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Profile Screen
+    </div>
+  )}
+  {router.pathname === '/Deposit' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Deposit Screen
+    </div>
+  )}
+  {router.pathname === '/Withdraw' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Withdraw Screen
+    </div>
+  )}
+  {router.pathname === '/my bets' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the My Bets Screen
+    </div>
+  )}
+  {router.pathname === '/active bets' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Active Bets Screen
+    </div>
+  )}
+  {router.pathname === '/past bets' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Past Bets Screen
+    </div>
+  )}
+  {router.pathname === '/settings' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      This is the Settings Screen
+    </div>
+  )}
+</PageContainer>
 
-            <Grid size={12}>
-              <Skeleton height={150} />
-            </Grid>
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-          </Grid>
-        </PageContainer>
       </DashboardLayout>
     </AppProvider>
   );
