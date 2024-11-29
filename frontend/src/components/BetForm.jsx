@@ -180,6 +180,14 @@ if (!balance_check || balance_check.balance < stake) {
         }, 3000);
         
       }
+      const new_balance = balance_check.balance - stake;
+
+
+      const { data: betMade, error: errorBet } = await supabase
+      .from("users")
+      .update({ balance: new_balance })
+      .eq("id", user.uid); // Ensure you filter by the correct user ID
+    
 
       setAlertMessage('Bet has been successfully initiated');
       setAlertSeverity('success');
