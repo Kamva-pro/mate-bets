@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { extendTheme, styled } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -11,6 +11,12 @@ import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
 import Navbar from './Header'; // Your custom Navbar component
 import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import Dialog from '@mui/material/Dialog'; // Add Dialog import
+import DialogActions from '@mui/material/DialogActions'; // Add DialogActions import
+import DialogContent from '@mui/material/DialogContent'; // Add DialogContent import
+import DialogTitle from '@mui/material/DialogTitle'; // Add DialogTitle import
+import Button from '@mui/material/Button'; // Add Button import
 
 const demoTheme = extendTheme({
   colorSchemes: { light: true, dark: true },
@@ -53,21 +59,38 @@ export default function DashboardLayoutBasic(props) {
   const router = useDemoRouter('/dashboard');
   const demoWindow = window ? window() : undefined;
 
-  // Logout Handler
-  const handleLogout = () => {
-    const confirmLogout = window.confirm('Are you sure you want to log out?');
-    if (confirmLogout) {
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          console.log('User logged out successfully');
-          router.navigate('/signin'); // Redirect to login page
-        })
-        .catch((error) => {
-          console.error('Error during logout:', error.message);
-        });
-    }
+  const navigate = useNavigate(); // Initialize navigate
+
+  // State to manage dialog visibility
+  const [openDialog, setOpenDialog] = useState(false);
+
+  // Handle opening the logout dialog
+  const handleLogoutClick = () => {
+    setOpenDialog(true);
   };
+
+  // Handle closing the dialog
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  // Handle confirming the logout action
+  const handleConfirmLogout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log('User logged out successfully');
+        navigate('/signin');  // Use navigate to redirect to the login page
+      })
+      .catch((error) => {
+        console.error('Error during logout:', error.message);
+      });
+    setOpenDialog(false); // Close the dialog after confirming logout
+  };
+
+  useEffect(() => {
+    console.log('Component mounted, window.confirm should be available now');
+  }, []);
 
   // Updated NAVIGATION array
   const NAVIGATION = [
@@ -141,109 +164,126 @@ export default function DashboardLayoutBasic(props) {
       theme={demoTheme}
       window={demoWindow}
     >
-      {/* Use your Navbar as the header */}
       <DashboardLayout>
-      <PageContainer>
-  {router.pathname === '/Profile' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Profile Screen
-    </div>
-  )}
-  {router.pathname === '/Deposit' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Deposit Screen
-    </div>
-  )}
-  {router.pathname === '/Withdraw' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Withdraw Screen
-    </div>
-  )}
-  {router.pathname === '/my bets' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the My Bets Screen
-    </div>
-  )}
-  {router.pathname === '/active bets' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Active Bets Screen
-    </div>
-  )}
-  {router.pathname === '/past bets' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Past Bets Screen
-    </div>
-  )}
-  {router.pathname === '/settings' && (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontSize: '24px',
-        fontWeight: 'bold',
-      }}
-    >
-      This is the Settings Screen
-    </div>
-  )}
-</PageContainer>
+        <PageContainer>
+          {router.pathname === '/Profile' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              <button type='button' onClick={handleLogoutClick}>Logout</button>
+            </div>
+          )}
+          {router.pathname === '/Deposit' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the Deposit Screen
+            </div>
+          )}
+          {router.pathname === '/Withdraw' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the Withdraw Screen
+            </div>
+          )}
+          {/* My Bets Screen */}
+          {location.pathname === '/my bets' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the My Bets Screen
+            </div>
+          )}
 
+          {location.pathname === '/my bets/active bets' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the Active Bets Screen
+            </div>
+          )}
+
+          {location.pathname === '/my bets/past bets' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the Past Bets Screen
+            </div>
+          )}
+
+          {router.pathname === '/settings' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '24px',
+                fontWeight: 'bold',
+              }}
+            >
+              This is the Settings Screen
+            </div>
+          )}
+
+          {/* Logout Confirmation Dialog */}
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>Confirm Logout</DialogTitle>
+            <DialogContent>
+              Are you sure you want to log out?
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleConfirmLogout} color="secondary">
+                Logout
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </PageContainer>
       </DashboardLayout>
     </AppProvider>
   );

@@ -19,6 +19,7 @@ function App() {
                 <Route path='/playfriend' element={<PlayFriend />} />
                 <Route path='/progames' element={<ProGamesPage/>} />
                 <Route path='/dashboard' element={<Dashboard/>}/>
+                
             </Routes>
         </Router>
     );
