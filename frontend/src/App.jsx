@@ -27,25 +27,3 @@ function App() {
 
 export default App;
 
-// import addNotification from 'react-push-notification';
-// import { Notifications } from 'react-push-notification';
-
-// function App() {
-//     function buttonOnClick() {
-//         addNotification({
-//             title: 'Warning',
-//             native: true
-//         })
-//     };
-//     return (
-//         <div className="App">
-//             <Notifications />
-//             <h1>Hey Geek!</h1>
-//             <button onClick={buttonOnClick}>
-//                 Push Notification
-//             </button>
-//         </div>
-//     );
-// }
-
-// export default App;

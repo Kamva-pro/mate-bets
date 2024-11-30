@@ -17,7 +17,7 @@ import AppTheme from '../shared-theme/AppTheme';
 import { GoogleIcon, FacebookIcon } from './CustomIcons';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import supabase from '../../../supabase-client';
+import supabase from '../../../../supabase-client';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { auth } from '../../../firebase'; 

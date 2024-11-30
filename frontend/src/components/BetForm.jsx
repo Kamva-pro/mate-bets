@@ -18,6 +18,7 @@ import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
 import supabase from '../../../supabase-client';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
+import axios from 'axios';
 import Alert from '@mui/material/Alert';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
@@ -91,46 +92,49 @@ export default function BetForm(props) {
     return () => unsubscribe();
   }, [auth]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    if (!opponentEmail || !gameFormat || !chessUsername || !stake) {
-      setError('Please fill out all fields.');
-      return;
+    // Check for errors before submitting
+    if (!name || !email || !password) {
+      setAlertMessage('Please fill out all fields.');
+      setAlertSeverity('error');
+      return; // If there are errors, don't submit
     }
 
-    setError('');      
+    setIsLoading(true);  // Show loading indicator
 
     try {
-        // Send the bet details to the backend
-        const response = await axios.post('/place-bet', {
-            opponentEmail,
-            chessUsername,
-            stake,
-            gameFormat,
-            gameSeries,
-            opp_chessUsername,
-        });
+      // Send data to your backend for user registration
+      const response = await axios.post('/api/signup', {
+        name,
+        email,
+        password,
+      });
 
-        if (response.status === 200) {
-            setAlertMessage('Bet placed successfully');
-            setAlertSeverity('success');
-        } else {
-            setAlertMessage(response.data.message || 'Error placing bet');
-            setAlertSeverity('error');
-        }
-        
+      if (response.status === 200) {
+        // Success: Handle user registration success, show a success message, etc.
+        setAlertMessage('Sign Up successful!');
+        setAlertSeverity('success');
+        setTimeout(() => {
+          setAlertMessage("");
+          // Handle login or redirect
+        }, 3000);
+      } else {
+        throw new Error('Sign up failed');
+      }
+
     } catch (error) {
-        setAlertMessage(error.message || 'An error occurred');
-        setAlertSeverity('error');
+      console.error('Error during registration:', error.message);
+      setAlertMessage('Something went wrong: ' + error.message);
+      setAlertSeverity('error');
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
+    } finally {
+      setIsLoading(false);  // Hide loading indicator
     }
-
-    // Reset the alert message after 3 seconds
-    setTimeout(() => {
-        setAlertMessage('');
-    }, 3000);
-};
-
+  };
 
     return (
       <AppTheme {...props}>
