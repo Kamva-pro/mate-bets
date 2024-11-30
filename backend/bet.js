@@ -1,7 +1,12 @@
+// const express = require('express');
 // const moment = require('moment');
-// const supabase = require("../../supabase-client");
+// const supabase = require("../supabase-client");  // Assuming supabase-client.js is in the correct location
 
-// const placeBet = async ({ opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername }) => {
+// const router = express.Router();
+
+// const placeBet = async (req, res) => {
+//     const { opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername } = req.body;
+
 //     try {
 //         // Fetch opponent data
 //         const { data: opponentData, error: opponentError } = await supabase
@@ -69,10 +74,13 @@
 //             throw new Error('Error updating balance');
 //         }
 
-//         return { message: 'Bet placed successfully' };
+//         res.status(200).json({ message: 'Bet placed successfully' });
 //     } catch (error) {
-//         throw new Error(error.message || 'An error occurred while placing the bet');
+//         res.status(500).json({ message: error.message });
 //     }
 // };
 
-// module.exports = { placeBet };
+// // Define the POST route for placing bets
+// router.post('/place-bet', placeBet);
+
+// module.exports = router;
