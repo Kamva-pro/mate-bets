@@ -44,8 +44,7 @@ const signup = async (req, res) => {
     
       } catch (error) {
         return res.status(500).json({"message: ": error.message});
-                    
+                          }
+};
 
-        // Handle any error that occurred during registration or database insertion
-      }
-}
+module.exports = {signup};
