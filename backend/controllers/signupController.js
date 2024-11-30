@@ -2,6 +2,7 @@ const supabase = require('../../supabase-client');
 
 
 const signup = async (req, res) => {
+    const {email, name, password} = req.body;
     try {
         // Register the user with Firebase
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);

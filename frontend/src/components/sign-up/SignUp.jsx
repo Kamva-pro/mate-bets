@@ -141,6 +141,32 @@ export default function SignUp(props) {
     //  finally {
     //   setIsLoading(false);  // Hide loading indicator
     // }
+
+    try{
+      const response = await axios.post('http://localhost:3000/api/sign-up', {
+        name,
+        email,
+        password
+      });
+
+      if(response.status === 200)
+      {
+        setAlertMessage("Account successfully created");
+        setAlertSeverity("success")
+        setTimeout(() => {
+          setAlertMessage("");
+        }, 3000);
+      }
+    
+    }
+
+    catch (error) {
+      setAlertMessage('Something went wrong: ' + error.message);
+      setAlertSeverity('error');
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
+    } 
   };
   
 
