@@ -136,11 +136,8 @@ export default function SignUp(props) {
     const email = data.get('email');
     const password = data.get('password');
   
-    // setIsLoading(true);  // Show loading indicator
+    setIsLoading(true);  // Show loading indicator
   
-    //  finally {
-    //   setIsLoading(false);  // Hide loading indicator
-    // }
 
     try{
       const response = await axios.post('http://localhost:3000/api/sign-up', {
@@ -166,7 +163,11 @@ export default function SignUp(props) {
       setTimeout(() => {
         setAlertMessage("");
       }, 3000);
-    } 
+    }
+    
+    finally {
+      setIsLoading(false);  // Hide loading indicator
+    }
   };
   
 
