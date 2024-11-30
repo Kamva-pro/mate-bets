@@ -27,7 +27,7 @@ const signup = async (req, res) => {
           ]);
     
         if (insertError) {
-          throw insertError;  // Handle any error from inserting into the database
+            return res.status(400).json({"message": insertError})
         }
   
         await updateProfile(firebaseUser, {
