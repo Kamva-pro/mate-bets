@@ -16,7 +16,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
-import supabase from '../../supabase-client';
+import supabase from '../../../supabase-client';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
 import Alert from '@mui/material/Alert';
 
