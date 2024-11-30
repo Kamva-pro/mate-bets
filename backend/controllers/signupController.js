@@ -27,34 +27,25 @@ const signup = async (req, res) => {
           ]);
     
         if (insertError) {
-            return res.status(400).json({"message": insertError})
+            return res.status(500).json({"message": insertError})
         }
   
         await updateProfile(firebaseUser, {
-          displayName: name, // Replace `name` with the user's display name
+          displayName: name,
         })
           .then(() => {
-            console.log("Display name updated successfully!");
+            return res.status(200).json({"message": "display name successfully updated"});
           })
           .catch((error) => {
-            console.error("Error updating display name:", error);
+            return res.status(400).json({"message: ": error.message})
           });  
-        // Success: Handle user registration success, show a success message, etc.
-        setAlertMessage('Sign Up successful!');
-        setAlertSeverity('success');
-        setTimeout(() => {
-          setAlertMessage("");
-          handleLogin();
-        }, 3000);
-        console.log('User registered and added to the database!', userData);
+        
+        return res.status(200).json({"message: ": "User successfully registered"});
     
       } catch (error) {
-        console.error('Error during registration or login:', error.message);
-        setAlertMessage('Something went wrong: ' + error.message);
-        setAlertSeverity('error');
-        setTimeout(() => {
-          setAlertMessage("");
-        }, 3000);
+        return res.status(500).json({"message: ": error.message});
+                    
+
         // Handle any error that occurred during registration or database insertion
       }
 }
