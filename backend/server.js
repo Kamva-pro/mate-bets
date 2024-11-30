@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const betRoutes = require('./routes/betRoutes');
 const signupRoutes = require('./routes/signupRoutes');
+const signinRoutes = require('./routes/signinRoutes');
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(cors({
 // Use the betRoutes
 app.use('/api', betRoutes);
 app.use('api', signupRoutes);
+app.use('api', signinRoutes);
 
 const PORT = 3000;
 

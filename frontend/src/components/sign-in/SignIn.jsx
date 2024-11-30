@@ -21,6 +21,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import { auth } from '../../../firebase'; 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";  
+import axios from 'axios';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -105,26 +106,24 @@ const handleSubmit = async (event) => {
   setIsLoading(true);
 
   try {
+
+    const response = await axios.post('http://localhost:3000/api/sign-in', {
+      email,
+      password
+    });
     // Initialize Firebase Auth
-    const auth = getAuth();
+    
+    if (response.status === 200)
+    {
+      console.log('Logged in user:', user);
+      setAlertMessage('Sign-in successful!');
+      setAlertSeverity('success');
+      setTimeout(() => {
+        setAlertMessage("");
+        navigate('/');
+      }, 3000);
 
-    // Attempt to sign in the user with Firebase Authentication
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-    const user = userCredential.user;  // Firebase user object
-    console.log('Logged in user:', user);
-    setAlertMessage('Sign-in successful!');
-    setAlertSeverity('success');
-    setTimeout(() => {
-      setAlertMessage("");
-      navigate('/');
-    }, 3000);
-
-    // Handle successful login (e.g., redirect to a different page or update UI)
-    // Example: Redirect user to dashboard or home page
-    // history.push('/dashboard');
-
-    // You can also store user data in state or session for use across the app
+    }
 
   } catch (error) {
     // Handle login error
