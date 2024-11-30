@@ -35,8 +35,8 @@ app.post('/place-bet', async (req, res) => {
         // Step 2: Check current user's balance
         const { data: userData, error: userError } = await supabase
             .from('users')
-            .select('id, balance')
-            .eq('email', chessUsername)
+            .select('id', 'balance')
+            .eq('email', opponentEmail)
             .single();
 
         if (userError || !userData) {
@@ -53,6 +53,7 @@ app.post('/place-bet', async (req, res) => {
             .from('p2p_bets')
             .insert([
                 {
+                    id: userData.id + oppUserId,
                     current_userid: userData.id,
                     opponent_userid: oppUserId,
                     opp_email: opponentEmail,
@@ -63,11 +64,12 @@ app.post('/place-bet', async (req, res) => {
                     bet_amount: stake,
                     status: 'pending',
                     result: 'in progress',
+                    opp_email: opponentEmail,
                 },
             ]);
 
         if (betError) {
-            return res.status(500).json({ message: 'Error placing bet' });
+            return res.status(500).json({ message: 'Error placing bet', betError });
         }
 
         // Step 5: Update user's balance
