@@ -84,7 +84,7 @@ const Navbar = () => {
               onClick={handleProfileClick}
               style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
             />
-            <span className="display-name"><span id='currency'>R</span>{balance}</span>
+            <span className="display-name"><span id='currency'>$</span>{balance}</span>
             <button
               onClick={handleDepositClick}
               className="navbar-button"
