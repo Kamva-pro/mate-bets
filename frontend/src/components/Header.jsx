@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa'; 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
+import supabase from '../../supabase-client';
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [user, setUser] = useState(null); 
   const navigate = useNavigate();
   const auth = getAuth();
+  const [balance, setBalance] = useState(null);
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -21,6 +23,24 @@ const Navbar = () => {
     return () => unsubscribe();
   }, [auth]);
 
+  useEffect(() => {
+    const updateBalance = async () => {
+      const {data: balanceData, balanceError} = await supabase
+      .from("users")
+      .select("balance")
+      .eq("id", user.uid)
+      .single();
+  
+      if (balanceError)
+      {
+        console.log("Error getting balance: ", balanceError);
+      }
+  
+      setBalance(balanceData.balance);
+    };
+
+    return () => updateBalance();
+  })
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -30,12 +50,15 @@ const Navbar = () => {
   };
 
   const handleProfileClick = () => {
-    navigate('/dashboard'); // Navigate to the profile page
+    navigate('/dashboard'); 
   };
 
   const handleButtonClick = () => {
     navigate('/signin');
   };
+
+  
+
 
   return (
     <nav className="navbar">
@@ -61,7 +84,7 @@ const Navbar = () => {
               onClick={handleProfileClick}
               style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
             />
-            <span className="display-name">{user.displayName}</span>
+            <span className="display-name"><span id='currency'>R</span>{balance}</span>
             <button
               onClick={handleDepositClick}
               className="navbar-button"
