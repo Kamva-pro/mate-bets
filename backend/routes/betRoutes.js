@@ -1,9 +1,10 @@
-// // routes/betRoutes.js
+// backend/routes/betRoutes.js
 const express = require('express');
-const router = express.Router();
-const { placeBetController } = require('../controllers/betController'); // Import the controller
+const { placeBet } = require('../controllers/betController');
 
-// Define the route for placing a bet
-router.post('/place-bet', placeBetController);
+const router = express.Router();
+
+// Define the /place-bet route
+router.post('/place-bet', placeBet);
 
 module.exports = router;

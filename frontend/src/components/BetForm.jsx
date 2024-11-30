@@ -106,7 +106,7 @@ export default function BetForm(props) {
 
     try {
       // Send data to your backend for user registration
-      const response = await axios.post('api/place-bet', {
+      const response = await axios.post('http://localhost:3000/api/place-bet', {
         opponentEmail,
         gameFormat,
         gameSeries,
