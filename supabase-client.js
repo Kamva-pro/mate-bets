@@ -1,4 +1,4 @@
-require('dotenv').config();  // Load environment variables from .env
+require('dotenv').config(); 
 
 const { createClient } = require('@supabase/supabase-js');
 

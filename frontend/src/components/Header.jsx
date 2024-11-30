@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa'; 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
-// import supabase from '../../../supabase-client';
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
