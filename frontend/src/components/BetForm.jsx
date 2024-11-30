@@ -101,104 +101,36 @@ export default function BetForm(props) {
 
     setError('');      
 
+    try {
+        // Send the bet details to the backend
+        const response = await axios.post('/place-bet', {
+            opponentEmail,
+            chessUsername,
+            stake,
+            gameFormat,
+            gameSeries,
+            opp_chessUsername,
+        });
 
-    const { data: userData, error: userError } = await supabase
-    .from('users')
-    .select('id')
-    .eq('email', opponentEmail)
-    .single();
-
-    if (userError) {
-      console.error('Error fetching opponent userID:', userError);
-      setAlertMessage('Error placing bet:', userError);
-      setAlertSeverity('error');
-    } 
-
-    const oppUserId = userData.id;
-
-    // oppUserId = userData.id
-
-    console.log("current UserID: ", user.uid);
-    console.log('opp userID: ', oppUserId);
-    console.log("opp email", opponentEmail);
-    console.log('Lichess username: ', chessUsername);
-    console.log('opp lichess username: ', opp_chessUsername);
-    console.log('Game format: ', gameFormat);
-    console.log('Game Series: ', gameSeries);
-    console.log('Bet Amount: ', stake);
-
-
-    const { data: balance_check, error: balance_error } = await supabase
-  .from("users")
-  .select("balance")
-  .eq("id", user.uid)
-  .single();
-
-if (balance_error) {
-  console.error(balance_error);
-  setAlertMessage("An error occurred while checking your balance.");
-  setAlertSeverity("error");
-  setTimeout(() => {
-    setAlertMessage("");
-  }, 3000);
-  return; // Exit early to prevent further execution
-}
-
-if (!balance_check || balance_check.balance < stake) {
-  setAlertMessage("You have insufficient funds to place this bet.");
-  setAlertSeverity("error");
-  setTimeout(() => {
-    setAlertMessage("");
-  }, 3000);
-  return; // Prevent further execution
-}
-
-    const { data: betData, error: betError } = await supabase
-    .from("p2p_bets")
-    .insert([
-      {
-        id: user.uid + oppUserId,
-        current_userid: user.uid,
-        opponent_userid: oppUserId,
-        opp_email: opponentEmail,
-        lichess_username: chessUsername,
-        opp_lichess_username: opp_chessUsername,
-        match_format: gameFormat,
-        match_type: gameSeries,
-        bet_amount: stake,
-        status: "pending",
-        result: "in progress",
-      },
-    ]);
-  
-
-      if(betError)
-      {
-        setAlertMessage('Error placing bet:', betError);
-        setAlertSeverity('error');
-        setTimeout(() => {
-          setAlertMessage("");
-        }, 3000);
+        if (response.status === 200) {
+            setAlertMessage('Bet placed successfully');
+            setAlertSeverity('success');
+        } else {
+            setAlertMessage(response.data.message || 'Error placing bet');
+            setAlertSeverity('error');
+        }
         
-      }
-      const new_balance = balance_check.balance - stake;
-
-
-      const { data: betMade, error: errorBet } = await supabase
-      .from("users")
-      .update({ balance: new_balance })
-      .eq("id", user.uid); // Ensure you filter by the correct user ID
-    
-
-      setAlertMessage('Bet has been successfully initiated');
-      setAlertSeverity('success');
-      setTimeout(() => {
-        setAlertMessage("");
-      }, 3000);
-      console.log(betData)
+    } catch (error) {
+        setAlertMessage(error.message || 'An error occurred');
+        setAlertSeverity('error');
     }
 
-  
+    // Reset the alert message after 3 seconds
+    setTimeout(() => {
+        setAlertMessage('');
+    }, 3000);
+};
+
 
     return (
       <AppTheme {...props}>

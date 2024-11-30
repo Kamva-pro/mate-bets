@@ -1,16 +1,21 @@
+require('dotenv').config({ path: '../.env' });
+
+// Access variables
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.VITE_SUPABASE_KEY;
+
+console.log("Supabase URL:", supabaseUrl);
+console.log("Supabase Key:", supabaseKey);
+
 const express = require('express');
 const app = express();
-const PORT = 3000;
 
-// Middleware for parsing JSON
-app.use(express.json());
-
-// Example route
 app.get('/', (req, res) => {
-  res.send('Server is running');
+  res.send('Backend is working and environment variables are loaded.');
 });
 
-// Start server
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
