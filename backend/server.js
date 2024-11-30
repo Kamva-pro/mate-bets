@@ -2,10 +2,18 @@
 const express = require('express');
 const supabase = require('../supabase-client'); // Import your Supabase client
 const dotenv = require('dotenv');
+const cors = require('cors');
+
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // To parse JSON request bodies
+
+// Allow requests from your frontend
+app.use(cors({
+    origin: 'http://127.0.0.1:5173', // Frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  }));
 
 // Endpoint to place a bet
 app.post('/place-bet', async (req, res) => {

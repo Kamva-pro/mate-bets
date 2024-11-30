@@ -16,7 +16,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
-import supabase from '../../../supabase-client';
+// import supabase from '../../../supabase-client';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
@@ -96,43 +96,43 @@ export default function BetForm(props) {
     event.preventDefault();
 
     // Check for errors before submitting
-    if (!name || !email || !password) {
+    if (!opponentEmail || !gameFormat || !gameSeries || !chessUsername || !opp_chessUsername || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
       return; // If there are errors, don't submit
     }
 
-    setIsLoading(true);  // Show loading indicator
+    // setIsLoading(true);  // Show loading indicator
 
     try {
       // Send data to your backend for user registration
-      const response = await axios.post('/api/signup', {
-        name,
-        email,
-        password,
+      const response = await axios.post('http://127.0.0.1:3000/place-bet', {
+        opponentEmail,
+        gameFormat,
+        gameSeries,
+        chessUsername,
+        opp_chessUsername,
+        stake
       });
 
-      if (response.status === 200) {
-        // Success: Handle user registration success, show a success message, etc.
-        setAlertMessage('Sign Up successful!');
-        setAlertSeverity('success');
+      if (response.status === 200)
+      {
+        setAlertMessage("Successfully placed bet");
+        setAlertSeverity("success")
         setTimeout(() => {
           setAlertMessage("");
-          // Handle login or redirect
         }, 3000);
-      } else {
-        throw new Error('Sign up failed');
       }
+      
 
     } catch (error) {
-      console.error('Error during registration:', error.message);
       setAlertMessage('Something went wrong: ' + error.message);
       setAlertSeverity('error');
       setTimeout(() => {
         setAlertMessage("");
       }, 3000);
     } finally {
-      setIsLoading(false);  // Hide loading indicator
+      // setIsLoading(false);  // Hide loading indicator
     }
   };
 
