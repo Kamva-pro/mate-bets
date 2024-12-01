@@ -1,52 +1,44 @@
 const supabase = require('../supabase-client');
-import { auth } from '../../frontend/firebase'; 
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";  
-
+const admin = require('../firebase-client');
 
 const signup = async (req, res) => {
-    const {email, name, password} = req.body;
+    const { email, name, password } = req.body;
+
     try {
-        // Register the user with Firebase
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const firebaseUser = userCredential.user;  // Firebase user object
-    
-        console.log('User object:', firebaseUser);
-        
-        // Now you have the Firebase user UID (string) and you can use that directly in the database
-        const userId = firebaseUser.uid;  // Use Firebase's UID, it's a string, not a UUID
-    
-        // Add the user to the database using the Firebase UID as the user ID
+        // Create a new user in Firebase Authentication
+        const firebaseUser = await admin.auth().createUser({
+            email,
+            password,
+            displayName: name,
+        });
+
+        console.log('User created in Firebase:', firebaseUser);
+
+        // Add the user to the database using Firebase UID
         const { data: userData, error: insertError } = await supabase
-          .from('users')
-          .insert([
-            {
-              id: userId,  
-              username: name,
-              email: email,
-              lichess_username: '',  
-              balance: 0,  
-            },
-          ]);
-    
+            .from('users')
+            .insert([
+                {
+                    id: firebaseUser.uid,  // Use Firebase's UID
+                    username: name,
+                    email: email,
+                    lichess_username: '',  
+                    balance: 0,  
+                },
+            ]);
+
         if (insertError) {
-            return res.status(500).json({"message": insertError})
+            return res.status(500).json({ message: insertError });
         }
-  
-        await updateProfile(firebaseUser, {
-          displayName: name,
-        })
-          .then(() => {
-            return res.status(200).json({"message": "display name successfully updated"});
-          })
-          .catch((error) => {
-            return res.status(400).json({"message: ": error.message})
-          });  
-        
-        return res.status(200).json({"message: ": "User successfully registered"});
-    
-      } catch (error) {
-        return res.status(500).json({"message: ": error.message});
-                          }
+
+        // Return success response
+        return res.status(200).json({ message: "User successfully registered" });
+
+    } catch (error) {
+        // Handle errors during user creation
+        console.error('Error creating user:', error);
+        return res.status(500).json({ message: error.message });
+    }
 };
 
-module.exports = {signup};
+module.exports = { signup };
