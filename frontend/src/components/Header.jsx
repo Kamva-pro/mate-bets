@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa'; 
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
+import axios from 'axios'; // To make API calls
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null); 
+  const [balance, setBalance] = useState(null); 
   const navigate = useNavigate();
-  const auth = getAuth();
-  const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    // Listen for authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+    // Fetch user information from the backend
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/auth/user', { withCredentials: true });
+        setUser(response.data.user);
+        setBalance(response.data.user.balance);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setUser(null);
+      }
+    };
 
-    // Cleanup the listener on component unmount
-    return () => unsubscribe();
-  }, [auth]);
+    fetchUser();
+  }, []);
 
-  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -38,9 +42,6 @@ const Navbar = () => {
   const handleButtonClick = () => {
     navigate('/signin');
   };
-
-  
-
 
   return (
     <nav className="navbar">
@@ -66,13 +67,12 @@ const Navbar = () => {
               onClick={handleProfileClick}
               style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
             />
-            <span className="display-name">{user.displayName}</span>
+            <span className="display-name">{user.displayName || 'User'}</span>
             <button
               onClick={handleDepositClick}
               className="navbar-button"
               style={{
                 marginLeft: '24px',
-                
               }}
             >
               Deposit
