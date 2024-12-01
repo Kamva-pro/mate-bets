@@ -1,5 +1,5 @@
 // backend/controllers/betController.js
-const supabase = require('../supabase-client');
+const supabase = require('../../supabase-client');
 
 const placeBet = async (req, res) => {
     const { opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername } = req.body;

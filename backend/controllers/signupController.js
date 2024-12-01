@@ -1,4 +1,4 @@
-const supabase = require('../supabase-client');
+const supabase = require('../../supabase-client');
 const admin = require('../firebase-client');
 
 const signup = async (req, res) => {

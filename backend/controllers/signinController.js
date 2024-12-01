@@ -1,4 +1,4 @@
-const supabase = require('../supabase-client');
+const supabase = require('../../supabase-client');
 const admin = require('../firebase-client'); // Import Firebase Admin SDK
 
 const signin = async (req, res) => {

@@ -25,4 +25,3 @@ const analytics = getAnalytics(app);
 
 // Export authentication instance for use in other files
 export { auth };
-Mihle14
