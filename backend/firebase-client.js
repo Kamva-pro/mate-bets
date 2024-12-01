@@ -5,3 +5,5 @@ var serviceAccount = require("./mate-bets-f533b-firebase-adminsdk-st6kj-09067bd3
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
+
+module.exports = admin;
