@@ -1,4 +1,4 @@
-const supabase = require('../../supabase-client');
+const supabase = require('../supabase-client');
 import { auth } from '../../frontend/firebase'; 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";  
 

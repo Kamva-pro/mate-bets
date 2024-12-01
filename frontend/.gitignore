@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+mate-bets-f533b-firebase-adminsdk-st6kj-09067bd31f.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
