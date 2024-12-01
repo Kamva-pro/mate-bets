@@ -16,10 +16,10 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
-// Use the betRoutes
+// Use the Routes
 app.use('/api', betRoutes);
-app.use('api', signupRoutes);
-app.use('api', signinRoutes);
+app.use('/api', signupRoutes);
+app.use('/api', signinRoutes);
 
 const PORT = 3000;
 

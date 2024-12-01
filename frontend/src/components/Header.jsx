@@ -22,24 +22,7 @@ const Navbar = () => {
     return () => unsubscribe();
   }, [auth]);
 
-  // useEffect(() => {
-  //   const updateBalance = async () => {
-  //     const {data: balanceData, balanceError} = await supabase
-  //     .from("users")
-  //     .select("balance")
-  //     .eq("id", user.uid)
-  //     .single();
   
-  //     if (balanceError)
-  //     {
-  //       console.log("Error getting balance: ", balanceError);
-  //     }
-  
-  //     setBalance(balanceData.balance);
-  //   };
-
-  //   return () => updateBalance();
-  // })
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };

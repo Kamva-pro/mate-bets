@@ -115,7 +115,7 @@ const handleSubmit = async (event) => {
     
     if (response.status === 200)
     {
-      console.log('Logged in user:', user);
+  
       setAlertMessage('Sign-in successful!');
       setAlertSeverity('success');
       setTimeout(() => {
