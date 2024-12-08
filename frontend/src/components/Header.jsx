@@ -9,19 +9,21 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null); 
   const [balance, setBalance] = useState(null); 
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user information from the backend
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user', {
-          headers: {
-            Authorization: `Bearer ${yourToken}`, // Replace `yourToken` with the actual token
-          },
-          withCredentials: true, // Include cookies in the request
-        });
-        console.log('User data:', response.data);
+        const response = await axios.get('http://localhost:3000/api/user');
+        const { user } = response.data; // Access user data from the API response
+          
+        // Update the state with the user data
+        setBalance(user.balance);
+        setEmail(user.email);
+        setUsername(user.username);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
