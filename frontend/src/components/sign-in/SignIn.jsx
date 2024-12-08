@@ -104,40 +104,27 @@ const handleSubmit = async (event) => {
 
   // Show loading state
   setIsLoading(true);
-
   try {
-
     const response = await axios.post('http://localhost:3000/api/sign-in', {
-      email,
-      password
+        email,
+        password,
     });
-    // Initialize Firebase Auth
-    
-    if (response.status === 200)
-    {
-  
-      setAlertMessage('Sign-in successful!');
-      setAlertSeverity('success');
-      setTimeout(() => {
-        setAlertMessage("");
+
+    if (response.status === 200) {
+        const { token } = response.data;
+        
+
+        // Store the token securely
+        localStorage.setItem('authToken', token);
+
+        // Optionally navigate the user to the homepage
+        setAlertMessage('Sign-in successful!');
         navigate('/');
-      }, 3000);
-
     }
+} catch (error) {
+    console.error('Login failed:', error.message);
+}
 
-  } catch (error) {
-    // Handle login error
-    console.error('Error during login:', error.message);
-    setAlertMessage('Something went wrong: ' + error.message);
-    setAlertSeverity('error');
-    // Display error to the user (e.g., show an error message in the UI)
-    setTimeout(() => {
-      setAlertMessage("");
-    }, 3000);
-  } finally {
-    // Hide loading state
-    setIsLoading(false);
-  }
 };
 
   const validateInputs = () => {

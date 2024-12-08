@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: '*',
+    origin: 'http://127.0.0.1:5173', // Frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
@@ -21,7 +21,7 @@ app.use(cors({
 app.use('/api', betRoutes);
 app.use('/api', signupRoutes);
 app.use('/api', signinRoutes);
-app.use('api', userRoutes);
+app.use('/api', userRoutes);
 
 const PORT = 3000;
 

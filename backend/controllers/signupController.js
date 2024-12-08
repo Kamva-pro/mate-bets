@@ -19,7 +19,7 @@ const signup = async (req, res) => {
             .from('users')
             .insert([
                 {
-                    id: firebaseUser.uid,  // Use Firebase's UID
+                    id: firebaseUser.uid,  
                     username: name,
                     email: email,
                     lichess_username: '',  

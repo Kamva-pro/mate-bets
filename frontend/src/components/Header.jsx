@@ -15,15 +15,18 @@ const Navbar = () => {
     // Fetch user information from the backend
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/auth/user', { withCredentials: true });
-        setUser(response.data.user);
-        setBalance(response.data.user.balance);
+        const response = await axios.get('http://localhost:3000/api/user', {
+          headers: {
+            Authorization: `Bearer ${yourToken}`, // Replace `yourToken` with the actual token
+          },
+          withCredentials: true, // Include cookies in the request
+        });
+        console.log('User data:', response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
-        setUser(null);
       }
     };
-
+    
     fetchUser();
   }, []);
 
