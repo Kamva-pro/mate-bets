@@ -12,11 +12,14 @@ import Grid from '@mui/material/Grid2';
 import Navbar from './Header'; // Your custom Navbar component
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Dialog from '@mui/material/Dialog'; // Add Dialog import
 import DialogActions from '@mui/material/DialogActions'; // Add DialogActions import
 import DialogContent from '@mui/material/DialogContent'; // Add DialogContent import
 import DialogTitle from '@mui/material/DialogTitle'; // Add DialogTitle import
 import Button from '@mui/material/Button'; // Add Button import
+import ProCard from './ProCard';
+import "../css/ProGames.css";
 
 const demoTheme = extendTheme({
   colorSchemes: { light: true, dark: true },
@@ -61,6 +64,11 @@ export default function DashboardLayoutBasic(props) {
 
   const navigate = useNavigate(); // Initialize navigate
 
+  const [username, setUsername] = useState('');
+  const [opp_username, setOppUsername] = useState('');
+  const [bets, setBets] = useState([]); // To store all bets
+
+
   // State to manage dialog visibility
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -88,8 +96,40 @@ export default function DashboardLayoutBasic(props) {
     setOpenDialog(false); 
   };
 
+
+
   useEffect(() => {
     console.log('Component mounted, window.confirm should be available now');
+
+    const fetchBets = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
+    
+        // Make the API call
+        const response = await axios.get(`http://localhost:3000/api/fetch-bets?userId=${userId}`);
+    
+        // Check if the response indicates success
+        if (response.status === 200 && response.data.success) {
+          const bets = response.data.data; 
+          setBets(bets); // Save the bets to state
+
+    
+          if (bets) {
+            bets.forEach(bet => {
+              setUsername(bet.lichess_username); 
+              setOppUsername(bet.opp_lichess_username); 
+            });
+          }
+          
+        } else {
+          console.error("Failed to fetch bets:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching bets:", error.message);
+      }
+    };
+    
+    fetchBets();
   }, []);
 
   // Updated NAVIGATION array
@@ -229,7 +269,15 @@ export default function DashboardLayoutBasic(props) {
                 fontWeight: 'bold',
               }}
             >
-              This is the Active Bets Screen
+              <div  className="progames-section" >
+              {bets.map((bet, index) => (
+              <ProCard
+                key={index}
+                playerOne={bet.lichess_username}
+                playerTwo={bet.opp_lichess_username} 
+              />
+            ))}
+              </div>
             </div>
           )}
 
