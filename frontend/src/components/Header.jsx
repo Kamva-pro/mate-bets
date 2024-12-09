@@ -7,7 +7,7 @@ import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null); 
+  // const [user, setUser] = useState(null); 
   const [balance, setBalance] = useState(null); 
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -61,7 +61,7 @@ const Navbar = () => {
 
       {/* User Section */}
       <div className="navbar-actions">
-        {user ? (
+        {username? (
           <div className="navbar-user-info">
             <FaBell
               className="notification-icon"
@@ -72,7 +72,7 @@ const Navbar = () => {
               onClick={handleProfileClick}
               style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
             />
-            <span className="display-name">{user.displayName || 'User'}</span>
+            <span className="display-name">{balance || 'User'}</span>
             <button
               onClick={handleDepositClick}
               className="navbar-button"

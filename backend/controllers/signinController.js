@@ -1,40 +1,34 @@
-const supabase = require('../../supabase-client');
 const admin = require('../firebase-client'); 
+const { getAuth, signInWithEmailAndPassword } = require('firebase/auth');
+const supabase = require('../../supabase-client');
 
 const signin = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Check if the user exists in Firebase
-        const userRecord = await admin.auth().getUserByEmail(email);
+        // Use Firebase Authentication to sign in the user
+        const firebaseAuth = getAuth(); // Initialize Firebase Authentication
+        const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
+        
+        const userRecord = userCredential.user; // Successfully authenticated Firebase user
 
         if (!userRecord) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // **Password validation**
-        // Use Firebase Authentication on the frontend to verify password
-        // If implementing custom password validation, fetch the hashed password from Supabase
+        // Fetch additional user data from Supabase (optional, if needed)
         const { data: userData, error: fetchError } = await supabase
             .from('users')
             .select('*')
             .eq('email', email)
             .single();
 
-        if (fetchError || !userData) {
-            return res.status(500).json({ message: "Error fetching user data from the database." });
+        if (fetchError) {
+            console.warn("Error fetching user data from Supabase:", fetchError.message);
         }
 
-        // Verify password (if stored in Supabase as hashed)
-        const isValidPassword = password === userData.password; // Replace with proper hash validation if needed
-        if (!isValidPassword) {
-            return res.status(401).json({ message: "Invalid password." });
-        }
-
-        // **Generate Firebase token**
+        // Generate a custom Firebase token
         const token = await admin.auth().createCustomToken(userRecord.uid);
-
-        localStorage.setItem("userId", userData.id);
 
         // Return success response with token and user details
         return res.status(200).json({
@@ -44,14 +38,12 @@ const signin = async (req, res) => {
                 uid: userRecord.uid,
                 email: userRecord.email,
                 displayName: userRecord.displayName,
-                databaseInfo: userData, 
+                databaseInfo: userData || null, // Include additional user data if available
             },
-
         });
-        
     } catch (error) {
         console.error('Error signing in user:', error);
-        return res.status(500).json({ message: error.message });
+        return res.status(401).json({ message: "Invalid email or password." });
     }
 };
 

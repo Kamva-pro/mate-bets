@@ -119,8 +119,22 @@ const handleSubmit = async (event) => {
 
         // Optionally navigate the user to the homepage
         setAlertMessage('Sign-in successful!');
+        setAlertSeverity("success");
+        setTimeout(() => {
+          setAlertMessage("");
+        }, 3000);
         navigate('/');
+    
     }
+    else if (response.status === 401)
+      {
+        setAlertMessage("Invalid Password");
+        setAlertSeverity("error");
+        setTimeout(() => {
+          setAlertMessage("");
+        }, 3000);
+      }
+
 } catch (error) {
     console.error('Login failed:', error.message);
 }

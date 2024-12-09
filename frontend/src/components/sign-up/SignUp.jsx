@@ -151,6 +151,7 @@ export default function SignUp(props) {
         setTimeout(() => {
           setAlertMessage("");
         }, 3000);
+        handleLogin();
       }
     
     }
