@@ -80,12 +80,12 @@ export default function DashboardLayoutBasic(props) {
     signOut(auth)
       .then(() => {
         console.log('User logged out successfully');
-        navigate('/signin');  // Use navigate to redirect to the login page
+        navigate('/signin'); 
       })
       .catch((error) => {
         console.error('Error during logout:', error.message);
       });
-    setOpenDialog(false); // Close the dialog after confirming logout
+    setOpenDialog(false); 
   };
 
   useEffect(() => {
@@ -118,25 +118,20 @@ export default function DashboardLayoutBasic(props) {
     },
     {
       kind: 'header',
-      title: 'Bets',
-    },
-    {
-      segment: 'Bets',
       title: 'My Bets',
-      icon: <BarChartIcon />,
-      children: [
+    },
+
         {
-          segment: 'ActiveBets',
+          segment: 'activebets',
           title: 'Active Bets',
           icon: <DescriptionIcon />,
         },
         {
-          segment: 'PastBets',
+          segment: 'pastbets',
           title: 'Past Bets',
           icon: <DescriptionIcon />,
         },
-      ],
-    },
+  
     {
       segment: 'settings',
       title: 'Settings',
@@ -208,7 +203,7 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
           {/* My Bets Screen */}
-          {location.pathname === '/Bets' && (
+          {/* {router.pathname === '/bets' && (
             <div
               style={{
                 display: 'flex',
@@ -221,9 +216,9 @@ export default function DashboardLayoutBasic(props) {
             >
               This is the My Bets Screen
             </div>
-          )}
+          )} */}
 
-          {location.pathname === '/Bets/ActiveBets' && (
+          {router.pathname === '/activebets' && (
             <div
               style={{
                 display: 'flex',
@@ -238,7 +233,7 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
 
-          {location.pathname === '/Bets/PastBets' && (
+          {router.pathname === '/pastbets' && (
             <div
               style={{
                 display: 'flex',
@@ -249,7 +244,7 @@ export default function DashboardLayoutBasic(props) {
                 fontWeight: 'bold',
               }}
             >
-              This is the Past Bets Screen
+              This is the past bets screen
             </div>
           )}
 
