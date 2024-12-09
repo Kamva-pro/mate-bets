@@ -22,7 +22,6 @@ app.use(cors({
 // Use the Routes
 app.use('/api', betRoutes);
 app.use('/api', signupRoutes);
-app.use('/api', signinRoutes);
 app.use('/api', userRoutes);
 
 const PORT = 3000;
