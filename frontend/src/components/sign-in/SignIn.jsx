@@ -90,34 +90,37 @@ export default function SignIn(props) {
   };
 
 
+
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
   
     try {
-      const auth = getAuth(); // Ensure this matches the imported auth instance
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User signed in:", userCredential.user);
+      const response = await axios.post("http://localhost:3000/api/sign-in", {
+        email,
+        password,
+      });
   
-      const user = auth.currentUser;
-      if (user) {
-        console.log("Current User:", user);
-        localStorage.setItem("userId", user.uid);
+      // Extract user details and handle successful login
+      if(response.status === 200)
+      {
+        const { userId } = response.data;
+  
+        console.log("User signed in:", userDetails);
+        localStorage.setItem("userId", userId);
         setAlertMessage("Sign-in successful!");
         setAlertSeverity("success");
         navigate("/");
-      } else {
-        console.log("No user found");
-        setAlertMessage("Unauthorized");
-        setAlertSeverity("error");
       }
+ 
     } catch (error) {
+      // Handle error response
       console.error("Login failed:", error);
-      setAlertMessage(error.message || "Sign-in failed. Please try again.");
+      const message = error.response?.data?.message || "Sign-in failed. Please try again.";
+      setAlertMessage(message);
       setAlertSeverity("error");
     }
   };
   
-
   const validateInputs = () => {
     const email = document.getElementById('email');
     const password = document.getElementById('password');

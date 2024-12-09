@@ -15,7 +15,6 @@ const signup = async (req, res) => {
             email,
             password,
             displayName: name,
-            password: hashedPassword
         });
 
         console.log('User created in Firebase:', firebaseUser);
@@ -30,6 +29,7 @@ const signup = async (req, res) => {
                     email: email,
                     lichess_username: '',  
                     balance: 0,  
+                    password: hashedPassword
                 },
             ]);
 
