@@ -1,6 +1,6 @@
 const supabase = require('../../supabase-client');
 const admin = require('../firebase-client');
-import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
 
 
 const signup = async (req, res) => {

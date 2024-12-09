@@ -1,7 +1,7 @@
 const supabase = require('../../supabase-client');
 
 const user = async (req, res) => {
-    const userId = req.cookies.userId; // Using cookies to get userId (or modify as per your auth strategy)
+    const { userId } = req.query;
 
     const { data: userData, error: fetchError } = await supabase
         .from('users')
@@ -10,6 +10,8 @@ const user = async (req, res) => {
         .single();
 
     if (fetchError || !userData) {
+        console.log(userData)
+        console.log(fetchError)
         return res.status(500).json({ message: "Error fetching user data from the database." });
     }
 
@@ -18,10 +20,9 @@ const user = async (req, res) => {
         message: "User data successfully retrieved",
         user: {
             email: userData.email,
-            username: userData.displayName, // Or the appropriate property
+            username: userData.username, 
             balance: userData.balance,
             lichess_username: userData.lichess_username,
-            databaseInfo: userData, // Include additional data as needed
         },
     });
 }

@@ -76,12 +76,17 @@ export default function SignUp(props) {
   const [snackbarMessage, setSnackbarMessage] = React.useState(''); // Message for snackbar
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false); // New state for password visibility
+
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLogin = () => {
-    navigate('/'); // Navigate to the Sign-In page
+    navigate('/signin'); // Navigate to the Sign-In page
   };
 
+  const handleShowPasswordToggle = () => {
+    setShowPassword(!showPassword); // Toggle the password visibility state
+  };
   const validateInputs = () => {
     const email = document.getElementById('email');
     const password = document.getElementById('password');
@@ -205,6 +210,7 @@ export default function SignUp(props) {
                 name="name"
                 required
                 fullWidth
+                
                 id="name"
                 placeholder="Jon Snow"
                 error={nameError}
@@ -234,7 +240,7 @@ export default function SignUp(props) {
                 fullWidth
                 name="password"
                 placeholder="••••••"
-                type="password"
+                type={showPassword ? 'text' : 'password'} // Toggle between 'password' and 'text'
                 id="password"
                 autoComplete="new-password"
                 variant="outlined"
@@ -244,7 +250,7 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox checked={showPassword} onChange={handleShowPasswordToggle} />} // Checkbox state tied to showPassword
               label="Show password"
             />
             <Button

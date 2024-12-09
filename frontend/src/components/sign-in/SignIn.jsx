@@ -19,8 +19,6 @@ import AppTheme from '../shared-theme/AppTheme';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
-import { auth } from '../../../firebase'; 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";  
 import axios from 'axios';
 
 
@@ -71,11 +69,23 @@ export default function SignIn(props) {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
+  const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
+
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
   const navigate = useNavigate();
+
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleShowPasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
 
   const [isLoading, setIsLoading] = React.useState(false); // Track loading state
@@ -93,31 +103,42 @@ export default function SignIn(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+    
+    // Validate email and password
+    if (!validateInputs()) {
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:3000/api/sign-in", {
-        email,
-        password,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,  // Password from DOM
       });
-  
+
       // Extract user details and handle successful login
       if(response.status === 200)
       {
         const { userId } = response.data;
-  
-        console.log("User signed in:", userDetails);
+
+        console.log("User signed in:", userId);
         localStorage.setItem("userId", userId);
         setAlertMessage("Sign-in successful!");
         setAlertSeverity("success");
+        setTimeout(() => {
+          setAlertMessage("");
+        }, 3000);
         navigate("/");
       }
- 
+
     } catch (error) {
       // Handle error response
       console.error("Login failed:", error);
       const message = error.response?.data?.message || "Sign-in failed. Please try again.";
       setAlertMessage(message);
       setAlertSeverity("error");
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
     }
   };
   
@@ -149,15 +170,15 @@ export default function SignIn(props) {
   };
 
   return (
-    
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
-        <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />      {alertMessage && (
-        <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
-          {alertMessage}
-        </Alert>
-      )}
+        <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+        {alertMessage && (
+          <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
+            {alertMessage}
+          </Alert>
+        )}
         <Card variant="outlined">
           <Typography
             component="h1"
@@ -196,29 +217,34 @@ export default function SignIn(props) {
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
                 name="password"
                 placeholder="••••••"
-                type="password"
+                type={showPassword ? "text" : "password"} 
                 id="password"
                 autoComplete="current-password"
-                required
                 fullWidth
                 variant="outlined"
-                color={passwordError ? 'error' : 'primary'}
+                value={password}
+                onChange={handlePasswordChange}
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={
+                <Checkbox
+                  value="showpassword"
+                  color="primary"
+                  checked={showPassword}
+                  onChange={handleShowPasswordToggle} 
+                />
+              }
+              label="Show Password"
             />
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
+              disabled={isLoading}
             >
               Sign in
             </Button>
@@ -234,32 +260,21 @@ export default function SignIn(props) {
           </Box>
           <Divider>or</Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Google')}
-              startIcon={<GoogleIcon />}
-            >
+            <Button variant="outlined" color="primary" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <GoogleIcon sx={{ marginRight: 2 }} />
               Sign in with Google
             </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
+            <Button variant="outlined" color="primary" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <FacebookIcon sx={{ marginRight: 2 }} />
               Sign in with Facebook
             </Button>
-            <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
-              <RouterLink
-                to="/signup"
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
-                Sign up
-              </RouterLink>
-            </Typography>
           </Box>
+          <Typography variant="body2" sx={{ alignSelf: 'center' }}>
+            Don't have an account?{' '}
+            <Link component={RouterLink} to="/signup">
+              Sign up
+            </Link>
+          </Typography>
         </Card>
       </SignInContainer>
     </AppTheme>

@@ -16,14 +16,21 @@ const Navbar = () => {
   useEffect(() => {
     // Fetch user information from the backend
     const fetchUser = async () => {
+
+      const userId = localStorage.getItem("userId");
       try {
-        const response = await axios.get('http://localhost:3000/api/user');
+        const response = await axios.get(`http://localhost:3000/api/user?userId=${userId}`);
+
         const { user } = response.data; // Access user data from the API response
           
         // Update the state with the user data
-        setBalance(user.balance);
-        setEmail(user.email);
-        setUsername(user.username);
+
+        // Update the state with the user data
+        if (user) {
+          setBalance(user.balance);
+          setEmail(user.email);
+          setUsername(user.username);
+      } 
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -72,7 +79,7 @@ const Navbar = () => {
               onClick={handleProfileClick}
               style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }} 
             />
-            <span className="display-name">{balance || 'User'}</span>
+            <span className="display-name">{username || 'User'}</span>
             <button
               onClick={handleDepositClick}
               className="navbar-button"

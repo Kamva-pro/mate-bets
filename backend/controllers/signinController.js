@@ -1,6 +1,6 @@
-import admin from "firebase-admin";
-import { supabase } from "./supabaseClient.js"; // Replace with your Supabase client initialization
-import bcrypt from "bcrypt"; // Assuming passwords are hashed
+const admin = require('../firebase-client');
+const supabase = require('../../supabase-client');
+const bcrypt = require('bcrypt');
 
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
@@ -9,18 +9,22 @@ if (!admin.apps.length) {
   });
 }
 
-export const signin = async (req, res) => {
+const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     // Fetch the user from Supabase
     const { data: users, error } = await supabase
-      .from("users")
-      .select("id, password, name, email")
-      .eq("email", email)
-      .limit(1);
+    .from("users")
+    .select("id, password, username, email")
+    .eq("email", email)
+    .limit(1);
+  
+
+    console.log('Users from Supabase:', users); // Log returned users
 
     if (error || users.length === 0) {
+      console.error("Supabase error:", error); // Log any error
       return res.status(404).json({ message: "User not found." });
     }
 
@@ -34,9 +38,12 @@ export const signin = async (req, res) => {
     }
 
     // Use Firebase to retrieve or verify the user's authentication data
-    const firebaseUser = await admin.auth().getUserByEmail(email);
-
-    if (!firebaseUser) {
+    let firebaseUser;
+    try {
+      firebaseUser = await admin.auth().getUserByEmail(email);
+      console.log('Firebase user:', firebaseUser); // Log Firebase user
+    } catch (err) {
+      console.error("Firebase error:", err); // Log Firebase error
       return res.status(404).json({ message: "Firebase user not found." });
     }
 
@@ -55,4 +62,4 @@ export const signin = async (req, res) => {
   }
 };
 
-module.exports = signin;
+module.exports = { signin };
