@@ -15,7 +15,6 @@ const user = async (req, res) => {
         return res.status(500).json({ message: "Error fetching user data from the database." });
     }
 
-    // Assuming 'userData' has properties like 'email', 'displayName', 'balance'
     return res.status(200).json({
         message: "User data successfully retrieved",
         user: {

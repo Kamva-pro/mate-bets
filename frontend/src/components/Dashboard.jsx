@@ -121,17 +121,17 @@ export default function DashboardLayoutBasic(props) {
       title: 'Bets',
     },
     {
-      segment: 'my bets',
+      segment: 'Bets',
       title: 'My Bets',
       icon: <BarChartIcon />,
       children: [
         {
-          segment: 'active bets',
+          segment: 'ActiveBets',
           title: 'Active Bets',
           icon: <DescriptionIcon />,
         },
         {
-          segment: 'past bets',
+          segment: 'PastBets',
           title: 'Past Bets',
           icon: <DescriptionIcon />,
         },
@@ -208,7 +208,7 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
           {/* My Bets Screen */}
-          {location.pathname === '/my bets' && (
+          {location.pathname === '/Bets' && (
             <div
               style={{
                 display: 'flex',
@@ -223,7 +223,7 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
 
-          {location.pathname === '/my bets/active bets' && (
+          {location.pathname === '/Bets/ActiveBets' && (
             <div
               style={{
                 display: 'flex',
@@ -238,7 +238,7 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
 
-          {location.pathname === '/my bets/past bets' && (
+          {location.pathname === '/Bets/PastBets' && (
             <div
               style={{
                 display: 'flex',
