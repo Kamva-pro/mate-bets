@@ -1,8 +1,13 @@
 const supabase = require('../../supabase-client');
 const admin = require('../firebase-client');
+import bcrypt from 'bcrypt';
+
 
 const signup = async (req, res) => {
     const { email, name, password } = req.body;
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     try {
         // Create a new user in Firebase Authentication
@@ -10,6 +15,7 @@ const signup = async (req, res) => {
             email,
             password,
             displayName: name,
+            password: hashedPassword
         });
 
         console.log('User created in Firebase:', firebaseUser);

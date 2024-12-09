@@ -90,56 +90,33 @@ export default function SignIn(props) {
   };
 
 
-const handleSubmit = async (event) => {
-  event.preventDefault();  // Prevent form submission
-
-  // Check for validation errors before proceeding
-  if (emailError || passwordError) {
-    return; // If there are errors, don't proceed
-  }
-
-  const data = new FormData(event.currentTarget);
-  const email = data.get('email');
-  const password = data.get('password');
-
-  // Show loading state
-  setIsLoading(true);
-  try {
-    const response = await axios.post('http://localhost:3000/api/sign-in', {
-        email,
-        password,
-    });
-
-    if (response.status === 200) {
-        const { token } = response.data;
-        
-
-        // Store the token securely
-        localStorage.setItem('authToken', token);
-
-        // Optionally navigate the user to the homepage
-        setAlertMessage('Sign-in successful!');
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+  
+    try {
+      const auth = getAuth(); // Ensure this matches the imported auth instance
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User signed in:", userCredential.user);
+  
+      const user = auth.currentUser;
+      if (user) {
+        console.log("Current User:", user);
+        localStorage.setItem("userId", user.uid);
+        setAlertMessage("Sign-in successful!");
         setAlertSeverity("success");
-        setTimeout(() => {
-          setAlertMessage("");
-        }, 3000);
-        navigate('/');
-    
-    }
-    else if (response.status === 401)
-      {
-        setAlertMessage("Invalid Password");
+        navigate("/");
+      } else {
+        console.log("No user found");
+        setAlertMessage("Unauthorized");
         setAlertSeverity("error");
-        setTimeout(() => {
-          setAlertMessage("");
-        }, 3000);
       }
-
-} catch (error) {
-    console.error('Login failed:', error.message);
-}
-
-};
+    } catch (error) {
+      console.error("Login failed:", error);
+      setAlertMessage(error.message || "Sign-in failed. Please try again.");
+      setAlertSeverity("error");
+    }
+  };
+  
 
   const validateInputs = () => {
     const email = document.getElementById('email');
