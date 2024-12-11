@@ -83,17 +83,18 @@ export default function DashboardLayoutBasic(props) {
   };
 
   // Handle confirming the logout action
-  const handleConfirmLogout = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log('User logged out successfully');
-        navigate('/signin'); 
-      })
-      .catch((error) => {
-        console.error('Error during logout:', error.message);
-      });
-    setOpenDialog(false); 
+  const handleConfirmLogout = async () => {
+      try {
+        // Step 1: Clear the user data from localStorage
+        localStorage.clear();
+        // Step 3: Redirect user to login page
+        window.location.href = '/signin';  
+    
+      } catch (error) {
+        console.error('Error during logout:', error);
+        // Optionally show an error message to the user
+      }
+    
   };
 
 

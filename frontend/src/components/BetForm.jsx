@@ -16,12 +16,10 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import AppTheme from './shared-theme/AppTheme';
 import { Link as RouterLink } from 'react-router-dom';
-// import supabase from '../../../supabase-client';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -77,20 +75,9 @@ export default function BetForm(props) {
   const [opponentEmail, setOpponentEmail]= useState('');
   const [stake, setStake] = useState('');
   const [error, setError] = useState('');
-  const [user, setUser] = useState(null); 
-  const auth = getAuth();
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
 
-  useEffect(() => {
-    // Listen for authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    // Cleanup the listener on component unmount
-    return () => unsubscribe();
-  }, [auth]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,6 +91,8 @@ export default function BetForm(props) {
 
     // setIsLoading(true);  // Show loading indicator
 
+    const userId = localStorage.getItem("userId");
+
     try {
       // Send data to your backend for user registration
       const response = await axios.post('http://localhost:3000/api/place-bet', {
@@ -112,10 +101,11 @@ export default function BetForm(props) {
         gameSeries,
         chessUsername,
         opp_chessUsername,
-        stake
+        stake,
+        userId
       });
 
-      if (response.status === 200)
+      if (response.status === 201)
       {
         setAlertMessage("Successfully placed bet");
         setAlertSeverity("success")

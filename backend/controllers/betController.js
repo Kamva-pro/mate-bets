@@ -1,12 +1,12 @@
 const supabase = require('../../supabase-client');
 
 const placeBet = async (req, res) => {
-    const { opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername } = req.body;
+    const { opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername, userId } = req.body;
 
     try {
         const { data: opponentData, error: opponentError } = await supabase
             .from('users')
-            .select('id')
+            .select('*')
             .eq('email', opponentEmail)
             .single();
 
@@ -17,8 +17,8 @@ const placeBet = async (req, res) => {
 
         const { data: userData, error: userError } = await supabase
             .from('users')
-            .select('id', 'balance')
-            .eq('email', opponentEmail)
+            .select("*")
+            .eq("id", userId)
             .single();
         
 
@@ -27,7 +27,7 @@ const placeBet = async (req, res) => {
         }
 
         if (userData.balance < stake) {
-            return res.status(400).json({ message: 'Insufficient funds to place the bet' });
+            return res.status(401).json({ message: 'Insufficient funds to place the bet' });
         }
 
         else if(opponentData.balance < stake)
@@ -40,7 +40,6 @@ const placeBet = async (req, res) => {
             .from('p2p_bets')
             .insert([
                 {
-                    id: userData.id + oppUserId,
                     current_userid: userData.id,
                     opponent_userid: oppUserId,
                     opp_email: opponentEmail,
@@ -71,7 +70,7 @@ const placeBet = async (req, res) => {
 
         const {error: oppUpdateError} = await supabase
             .from('users')
-            .select({balance: newOppBalance})
+            .update({balance: newOppBalance})
             .eq('id', opponentData.id);
         
         if (oppUpdateError)

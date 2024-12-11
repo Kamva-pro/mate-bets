@@ -18,6 +18,7 @@ const Navbar = () => {
     const fetchUser = async () => {
 
       const userId = localStorage.getItem("userId");
+
       try {
         const response = await axios.get(`http://localhost:3000/api/user?userId=${userId}`);
 
