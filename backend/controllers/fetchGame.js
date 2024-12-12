@@ -1,3 +1,4 @@
+// backend/controllers/fetchGame.js
 const axios = require("axios");
 
 // Helper function to fetch the current or last game for a user
@@ -45,12 +46,12 @@ const getGameBetweenPlayers = async (playerOne, playerTwo) => {
 
 // Controller function for the fetch-game endpoint
 const fetchGame = async (req, res) => {
-  const { playerOne, playerTwo } = req.body;
+  const { playerOne, playerTwo } = req.query; // Now using req.query for GET request
 
   if (!playerOne || !playerTwo) {
     return res.status(400).json({
       success: false,
-      message: "Both playerOne and playerTwo are required in the request body.",
+      message: "Both playerOne and playerTwo are required in the request query.",
     });
   }
 

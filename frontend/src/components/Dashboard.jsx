@@ -154,9 +154,11 @@ export default function DashboardLayoutBasic(props) {
     if (username && opp_username) {
       const fetchGame = async (playerOne, playerTwo) => {
         try {
-          const response = await axios.post("http://localhost:3000/api/fetch-game", {
-            playerOne,
-            playerTwo,
+          const response = await axios.get("http://localhost:3000/api/fetch-game", {
+            params: {
+              playerOne,
+              playerTwo,
+            },
           });
   
           if (response.status === 200 && response.data.success) {
@@ -172,6 +174,7 @@ export default function DashboardLayoutBasic(props) {
       fetchGame(username, opp_username);
     }
   }, [username, opp_username]);
+  
   
 
   // Updated NAVIGATION array
