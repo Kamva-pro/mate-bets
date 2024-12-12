@@ -66,7 +66,9 @@ export default function DashboardLayoutBasic(props) {
 
   const [username, setUsername] = useState('');
   const [opp_username, setOppUsername] = useState('');
-  const [bets, setBets] = useState([]); // To store all bets
+  const [pastBets, setPastBets] = useState([]); 
+  const [activeBets, setActiveBets] = useState([]);
+  const [bets, setBets] = useState([]);
 
 
   // State to manage dialog visibility
@@ -100,28 +102,44 @@ export default function DashboardLayoutBasic(props) {
 
 
   useEffect(() => {
-    console.log('Component mounted, window.confirm should be available now');
+    console.log("Component mounted, window.confirm should be available now");
 
     const fetchBets = async () => {
       try {
         const userId = localStorage.getItem("userId");
-    
+
         // Make the API call
-        const response = await axios.get(`http://localhost:3000/api/fetch-bets?userId=${userId}`);
-    
+        const response = await axios.get(
+          `http://localhost:3000/api/fetch-bets?userId=${userId}`
+        );
+
         // Check if the response indicates success
         if (response.status === 200 && response.data.success) {
-          const bets = response.data.data; 
-          setBets(bets); // Save the bets to state
+          const bets = response.data.data;
 
-    
+          setBets(bets);
+
           if (bets) {
-            bets.forEach(bet => {
-              setUsername(bet.lichess_username); 
-              setOppUsername(bet.opp_lichess_username); 
+            const active = [];
+            const past = [];
+
+            bets.forEach((bet) => {
+              if (bet.result === "in progress") {
+                active.push(bet);
+              } else if (bet.result === "completed") {
+                past.push(bet);
+              }
             });
+
+            setActiveBets(active);
+            setPastBets(past);
+
+            // Update usernames if necessary
+            if (active.length > 0) {
+              setUsername(active[0].lichess_username);
+              setOppUsername(active[0].opp_lichess_username);
+            }
           }
-          
         } else {
           console.error("Failed to fetch bets:", response.data.message);
         }
@@ -129,7 +147,7 @@ export default function DashboardLayoutBasic(props) {
         console.error("Error fetching bets:", error.message);
       }
     };
-    
+
     fetchBets();
   }, []);
 
@@ -271,7 +289,7 @@ export default function DashboardLayoutBasic(props) {
               }}
             >
               <div  className="progames-section" >
-              {bets.map((bet, index) => (
+              {activeBets.map((bet, index) => (
               <ProCard
                 key={index}
                 playerOne={bet.lichess_username}
@@ -288,14 +306,24 @@ export default function DashboardLayoutBasic(props) {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'start',
+                alignItems: 'start',
                 height: '100vh',
                 fontSize: '24px',
                 fontWeight: 'bold',
               }}
             >
-              This is the past bets screen
+               <div  className="progames-section" >
+              {pastBets.map((bet, index) => (
+              <ProCard
+                key={index}
+                playerOne={bet.lichess_username}
+                playerTwo={bet.opp_lichess_username} 
+                playerOneImg="../src/assets/avatar2.png"
+                playerTwoImg="../src/assets/dog.png"
+              />
+            ))}
+              </div>
             </div>
           )}
 
