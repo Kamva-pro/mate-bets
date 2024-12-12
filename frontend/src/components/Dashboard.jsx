@@ -263,8 +263,8 @@ export default function DashboardLayoutBasic(props) {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'start',
+                alignItems: 'start',
                 height: '100vh',
                 fontSize: '24px',
                 fontWeight: 'bold',
@@ -276,6 +276,8 @@ export default function DashboardLayoutBasic(props) {
                 key={index}
                 playerOne={bet.lichess_username}
                 playerTwo={bet.opp_lichess_username} 
+                playerOneImg="../src/assets/avatar2.png"
+                playerTwoImg="../src/assets/dog.png"
               />
             ))}
               </div>
