@@ -99,9 +99,7 @@ export default function DashboardLayoutBasic(props) {
     
   };
 
-
-
-  useEffect(() => {
+   useEffect(() => {
     console.log("Component mounted, window.confirm should be available now");
 
     const fetchBets = async () => {
@@ -138,7 +136,9 @@ export default function DashboardLayoutBasic(props) {
             if (active.length > 0) {
               setUsername(active[0].lichess_username);
               setOppUsername(active[0].opp_lichess_username);
+              
             }
+            
           }
         } else {
           console.error("Failed to fetch bets:", response.data.message);
@@ -150,6 +150,34 @@ export default function DashboardLayoutBasic(props) {
 
     fetchBets();
   }, []);
+
+  useEffect(() => {
+    const fetchGame = async (playerOne, playerTwo) => {
+      try {
+        const response = await axios.post("http://localhost:3000/api/fetch-game", {
+          playerOne,
+          playerTwo,
+        });
+
+        if (response.status === 200 && response.data.success) {
+          console.log("Game data:", response.data.data);
+        } else {
+          console.error("Failed to fetch game:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching game:", error.message);
+      }
+    };
+
+    playerOne = username;
+    playerTwo = opp_username;
+
+    fetchGame(playerOne, playerTwo);
+  }, []); 
+
+
+
+ 
 
   // Updated NAVIGATION array
   const NAVIGATION = [
