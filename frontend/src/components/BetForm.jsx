@@ -86,7 +86,7 @@ export default function BetForm(props) {
     if (!opponentEmail || !gameFormat || !gameSeries || !chessUsername || !opp_chessUsername || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
-      return; // If there are errors, don't submit
+      return;
     }
 
     // setIsLoading(true);  // Show loading indicator
@@ -170,7 +170,7 @@ export default function BetForm(props) {
                   type="email"
                   name="opponentEmail"
                   value={opponentEmail}
-                  onChange={(e) => setOpponentEmail(e.target.value)}
+                  onChange={(e) => setOpponentEmail(e.target.value.toLowerCase())}
                   placeholder="Enter opponent's email"
                   required
                   fullWidth

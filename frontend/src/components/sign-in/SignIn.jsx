@@ -88,7 +88,7 @@ export default function SignIn(props) {
   };
 
 
-  const [isLoading, setIsLoading] = React.useState(false); // Track loading state
+  const [isLoading, setIsLoading] = React.useState(false); 
 
 
   const handleClickOpen = () => {
@@ -121,6 +121,8 @@ export default function SignIn(props) {
         const { userId } = response.data;
 
         console.log("User signed in:", userId);
+
+        localStorage.clear();
         localStorage.setItem("userId", userId);
         setAlertMessage("Sign-in successful!");
         setAlertSeverity("success");

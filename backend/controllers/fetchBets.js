@@ -7,8 +7,7 @@ const fetchBets = async (req, res) => {
     const { data: userBets, error: userBetsError } = await supabase
     .from('p2p_bets')
     .select('*') // Retrieve all columns
-    .or(`current_userid.eq.${userId},opponent_userid.eq.${userId}`); // Match either current_userid or opponent_userid
-
+    .or(`current_userid.eq.${userId},opponent_userid.eq.${userId}`); 
   if (userBetsError) {
     console.error('Error fetching bets:', userBetsError.message);
     return {

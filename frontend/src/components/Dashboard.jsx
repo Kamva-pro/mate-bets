@@ -9,15 +9,15 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
-import Navbar from './Header'; // Your custom Navbar component
+import Navbar from './Header'; 
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Dialog from '@mui/material/Dialog'; // Add Dialog import
-import DialogActions from '@mui/material/DialogActions'; // Add DialogActions import
-import DialogContent from '@mui/material/DialogContent'; // Add DialogContent import
-import DialogTitle from '@mui/material/DialogTitle'; // Add DialogTitle import
-import Button from '@mui/material/Button'; // Add Button import
+import Dialog from '@mui/material/Dialog'; 
+import DialogActions from '@mui/material/DialogActions'; 
+import DialogContent from '@mui/material/DialogContent'; 
+import DialogTitle from '@mui/material/DialogTitle'; 
+import Button from '@mui/material/Button'; 
 import ProCard from './ProCard';
 import "../css/ProGames.css";
 
@@ -62,7 +62,7 @@ export default function DashboardLayoutBasic(props) {
   const router = useDemoRouter('/dashboard');
   const demoWindow = window ? window() : undefined;
 
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
 
   const [username, setUsername] = useState('');
   const [opp_username, setOppUsername] = useState('');
@@ -88,11 +88,11 @@ export default function DashboardLayoutBasic(props) {
         // Step 1: Clear the user data from localStorage
         localStorage.clear();
         // Step 3: Redirect user to login page
-        window.location.href = '/signin';  
+        navigate('/signin')
     
       } catch (error) {
         console.error('Error during logout:', error);
-        // Optionally show an error message to the user
+        
       }
     
   };
