@@ -99,28 +99,28 @@ export default function DashboardLayoutBasic(props) {
     
   };
 
-   useEffect(() => {
+  useEffect(() => {
     console.log("Component mounted, window.confirm should be available now");
-
+  
     const fetchBets = async () => {
       try {
         const userId = localStorage.getItem("userId");
-
+  
         // Make the API call
         const response = await axios.get(
           `http://localhost:3000/api/fetch-bets?userId=${userId}`
         );
-
+  
         // Check if the response indicates success
         if (response.status === 200 && response.data.success) {
           const bets = response.data.data;
-
+  
           setBets(bets);
-
+  
           if (bets) {
             const active = [];
             const past = [];
-
+  
             bets.forEach((bet) => {
               if (bet.result === "in progress") {
                 active.push(bet);
@@ -128,17 +128,15 @@ export default function DashboardLayoutBasic(props) {
                 past.push(bet);
               }
             });
-
+  
             setActiveBets(active);
             setPastBets(past);
-
+  
             // Update usernames if necessary
             if (active.length > 0) {
               setUsername(active[0].lichess_username);
               setOppUsername(active[0].opp_lichess_username);
-              
             }
-            
           }
         } else {
           console.error("Failed to fetch bets:", response.data.message);
@@ -147,37 +145,34 @@ export default function DashboardLayoutBasic(props) {
         console.error("Error fetching bets:", error.message);
       }
     };
-
+  
     fetchBets();
   }, []);
-
+  
   useEffect(() => {
-    const fetchGame = async (playerOne, playerTwo) => {
-      try {
-        const response = await axios.post("http://localhost:3000/api/fetch-game", {
-          playerOne,
-          playerTwo,
-        });
-
-        if (response.status === 200 && response.data.success) {
-          console.log("Game data:", response.data.data);
-        } else {
-          console.error("Failed to fetch game:", response.data.message);
+    // Only fetch game data when both usernames are set
+    if (username && opp_username) {
+      const fetchGame = async (playerOne, playerTwo) => {
+        try {
+          const response = await axios.post("http://localhost:3000/api/fetch-game", {
+            playerOne,
+            playerTwo,
+          });
+  
+          if (response.status === 200 && response.data.success) {
+            console.log("Game data:", response.data.data);
+          } else {
+            console.error("Failed to fetch game:", response.data.message);
+          }
+        } catch (error) {
+          console.error("Error fetching game:", error.message);
         }
-      } catch (error) {
-        console.error("Error fetching game:", error.message);
-      }
-    };
-
-    playerOne = username;
-    playerTwo = opp_username;
-
-    fetchGame(playerOne, playerTwo);
-  }, []); 
-
-
-
- 
+      };
+  
+      fetchGame(username, opp_username);
+    }
+  }, [username, opp_username]);
+  
 
   // Updated NAVIGATION array
   const NAVIGATION = [
