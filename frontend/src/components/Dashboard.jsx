@@ -69,6 +69,8 @@ export default function DashboardLayoutBasic(props) {
   const [pastBets, setPastBets] = useState([]); 
   const [activeBets, setActiveBets] = useState([]);
   const [bets, setBets] = useState([]);
+  const [gameData, setGameData] = useState(null);
+
 
 
   // State to manage dialog visibility
@@ -148,28 +150,37 @@ export default function DashboardLayoutBasic(props) {
   
     fetchBets();
   }, []);
-  
-  useEffect(() => {
-    if (username) {
-      const fetchGame = async (playerOne) => {
-        try {
-          const response = await axios.get("http://localhost:3000/api/fetch-game", {
-            params: { playerOne }, // Only pass playerOne
-          });
-  
-          if (response.status === 200 && response.data.success) {
-            console.log("Game data:", response.data.data);
-          } else {
-            console.error("Failed to fetch game:", response.data.message);
-          }
-        } catch (error) {
-          console.error("Error fetching game:", error.message);
-        }
-      };
-  
-      fetchGame(username); // Only pass username
+  const fetchGame = async (username, opp_username) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/fetch-game?playerOne=${username}&opponent=${opp_username}`
+      );
+      if (!response.ok) {
+        throw new Error('Failed to fetch game data');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
     }
-  }, [username]); // Remove opp_username since it's not used
+  };
+
+  // Function to handle fetching the game when both usernames are provided
+  const handleFetchGame = async () => {
+    if (!username || !opp_username) return;
+
+    const gameData = await fetchGame(username, opp_username);
+    if (gameData) {
+      setGameData(gameData); // Update game data in state
+    }
+  };
+
+  // useEffect to automatically call handleFetchGame whenever username or opp_username changes
+  useEffect(() => {
+    if (username && opp_username) {
+      handleFetchGame();
+    }
+  }, [username, opp_username]); // Dependency array, runs when either username or opp_username changes
+
   
 
   // Updated NAVIGATION array
