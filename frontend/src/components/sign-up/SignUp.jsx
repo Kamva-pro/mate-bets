@@ -136,7 +136,7 @@ export default function SignUp(props) {
   
     const data = new FormData(event.currentTarget);
     const name = data.get('name');
-    const email = data.get('email');
+    const email = data.get('email').toLowerCase();
     const password = data.get('password');
   
     setIsLoading(true);  // Show loading indicator

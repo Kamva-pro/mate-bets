@@ -7,7 +7,7 @@ const placeBet = async (req, res) => {
         const { data: opponentData, error: opponentError } = await supabase
             .from('users')
             .select('*')
-            .eq('email', opponentEmail.toLowerCase())
+            .eq('email', opponentEmail)
             .single();
 
         if (opponentError || !opponentData) {

@@ -135,10 +135,17 @@ export default function DashboardLayoutBasic(props) {
             setPastBets(past);
   
             // Update usernames if necessary
-            if (active.length > 0) {
+            if (active.length > 0 ) {
               setUsername(active[0].lichess_username);
               setOppUsername(active[0].opp_lichess_username);
             }
+            if(past.length > 0)
+            {
+              setUsername(past[0].lichess_username);
+              setOppUsername(past[0].opp_lichess_username);
+
+            }
+
           }
         } else {
           console.error("Failed to fetch bets:", response.data.message);
