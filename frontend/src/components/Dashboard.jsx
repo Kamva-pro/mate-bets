@@ -150,15 +150,11 @@ export default function DashboardLayoutBasic(props) {
   }, []);
   
   useEffect(() => {
-    // Only fetch game data when both usernames are set
-    if (username && opp_username) {
-      const fetchGame = async (playerOne, playerTwo) => {
+    if (username) {
+      const fetchGame = async (playerOne) => {
         try {
           const response = await axios.get("http://localhost:3000/api/fetch-game", {
-            params: {
-              playerOne,
-              playerTwo,
-            },
+            params: { playerOne }, // Only pass playerOne
           });
   
           if (response.status === 200 && response.data.success) {
@@ -171,10 +167,9 @@ export default function DashboardLayoutBasic(props) {
         }
       };
   
-      fetchGame(username, opp_username);
+      fetchGame(username); // Only pass username
     }
-  }, [username, opp_username]);
-  
+  }, [username]); // Remove opp_username since it's not used
   
 
   // Updated NAVIGATION array
