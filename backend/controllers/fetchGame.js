@@ -50,7 +50,7 @@ const fetchGame = async (req, res) => {
     console.error('Error fetching game:', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch games.',
+      message: `Error fetching games: ${error}`,
     });
   }
 };

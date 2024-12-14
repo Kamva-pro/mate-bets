@@ -53,7 +53,7 @@ const Skeleton = styled('div')(({ theme, height }) => ({
   backgroundColor: theme.palette.action.hover,
   borderRadius: theme.shape.borderRadius,
   height,
-  content: '" "',
+  content: '""',
 }));
 
 export default function DashboardLayoutBasic(props) {
@@ -70,7 +70,6 @@ export default function DashboardLayoutBasic(props) {
   const [activeBets, setActiveBets] = useState([]);
   const [bets, setBets] = useState([]);
   const [gameData, setGameData] = useState(null);
-
 
 
   // State to manage dialog visibility
@@ -134,7 +133,6 @@ export default function DashboardLayoutBasic(props) {
             setActiveBets(active);
             setPastBets(past);
   
-            // Update usernames if necessary
             if (active.length > 0 ) {
               setUsername(active[0].lichess_username);
               setOppUsername(active[0].opp_lichess_username);
@@ -171,26 +169,22 @@ export default function DashboardLayoutBasic(props) {
     }
   };
 
-  // Function to handle fetching the game when both usernames are provided
   const handleFetchGame = async () => {
     if (!username || !opp_username) return;
 
     const gameData = await fetchGame(username, opp_username);
     if (gameData) {
-      setGameData(gameData); // Update game data in state
+      setGameData(gameData); 
     }
   };
 
-  // useEffect to automatically call handleFetchGame whenever username or opp_username changes
   useEffect(() => {
     if (username && opp_username) {
       handleFetchGame();
     }
-  }, [username, opp_username]); // Dependency array, runs when either username or opp_username changes
-
+  }, [username, opp_username]); 
   
 
-  // Updated NAVIGATION array
   const NAVIGATION = [
     {
       kind: 'header',
@@ -252,7 +246,6 @@ export default function DashboardLayoutBasic(props) {
         ...item,
         onClick: () => handleNavigationClick(item),
       }))}
-      // header={<Navbar/>} 
       router={router}
       theme={demoTheme}
       window={demoWindow}

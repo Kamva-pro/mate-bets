@@ -170,7 +170,7 @@ export default function BetForm(props) {
                   type="email"
                   name="opponentEmail"
                   value={opponentEmail}
-                  onChange={(e) => setOpponentEmail(e.target.value.toLowerCase())}
+                  onChange={(e) => setOpponentEmail(e.target.value)}
                   placeholder="Enter opponent's email"
                   required
                   fullWidth

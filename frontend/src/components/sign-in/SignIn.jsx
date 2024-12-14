@@ -175,7 +175,7 @@ export default function SignIn(props) {
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
-        <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+        {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
         {alertMessage && (
           <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
             {alertMessage}
