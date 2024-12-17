@@ -7,40 +7,40 @@ function ProGames() {
         <div className="progames-section">
             <ProCard 
                 playerOne="Wesley So" 
-                playerOneImg="../src/assets/avatar2.png" 
-                playerTwo="Vidit Gujrathi" 
-                playerTwoImg="../src/assets/avatar1.png" 
+                playerOneImg="../src/assets/top-players/wesley.png" 
+                playerTwo="Levon Aronian" 
+                playerTwoImg="../src/assets/top-players/aronion.png" 
             />
             <ProCard 
                 playerOne="Ian Nepomniachtchi" 
-                playerOneImg="../src/assets/bear.png" 
+                playerOneImg="../src/assets/top-players/nepo.png" 
                 playerTwo="Magnus Carlsen" 
-                playerTwoImg="../src/assets/dog.png" 
+                playerTwoImg="../src/assets/top-players/magnus.png" 
             />
                <ProCard 
-                playerOne="Ding Liren" 
-                playerOneImg="../src/assets/meerkat.png" 
-                playerTwo="Gukesh Dommaraju" 
-                playerTwoImg="../src/assets/rabbit.png" 
+                playerOne="Vincent Keymer" 
+                playerOneImg="../src/assets/top-players/keymer.png" 
+                playerTwo="Wesley So" 
+                playerTwoImg="../src/assets/top-players/wesley.png" 
             />
             <ProCard 
                 playerOne="Alireza Firouzja" 
-                playerOneImg="../src/assets/cat.png" 
-                playerTwo="Hikaru Nakamura" 
-                playerTwoImg="../src/assets/dinosaur.png" 
+                playerOneImg="../src/assets/top-players/alireza.png" 
+                playerTwo="Ian Nepomniathtchi" 
+                playerTwoImg="../src/assets/top-players/nepo.png" 
             />   
             <ProCard 
-                playerOne="Levy Rozman" 
-                playerOneImg="../src/assets/dog.png" 
-                playerTwo="Pia Cramling" 
-                playerTwoImg="../src/assets/cat.png" 
+                playerOne="Maxime Vachier-Lagrave" 
+                playerOneImg="../src/assets/top-players/maxime.png" 
+                playerTwo="Denis Lazavik" 
+                playerTwoImg="../src/assets/top-players/denis.png" 
             />
 
             <ProCard 
-                playerOne="Arjun Erigaisi" 
-                playerOneImg="../src/assets/dinosaur.png" 
+                playerOne="Magnus Carslen" 
+                playerOneImg="../src/assets/top-players/magnus.png" 
                 playerTwo="Levon Aronian" 
-                playerTwoImg="../src/assets/meerkat.png" 
+                playerTwoImg="../src/assets/top-players/aronion.png" 
             />
         </div>
     );
