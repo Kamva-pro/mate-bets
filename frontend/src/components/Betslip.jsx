@@ -1,9 +1,6 @@
 import React from "react";
 
 
-/* Don't forget to download the CSS file too 
-OR remove the following line if you're already using Tailwind */
-
 import "./style.css";
 
 export const Betslip = () => {
