@@ -110,6 +110,8 @@ export default function SignIn(props) {
     }
 
     try {
+      setIsLoading(true);
+
       const response = await axios.post("http://localhost:3000/api/sign-in", {
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,  // Password from DOM
@@ -141,6 +143,9 @@ export default function SignIn(props) {
       setTimeout(() => {
         setAlertMessage("");
       }, 3000);
+    }
+    finally{
+      setIsLoading(false);
     }
   };
   
@@ -248,7 +253,7 @@ export default function SignIn(props) {
               variant="contained"
               disabled={isLoading}
             >
-              Sign in
+              {isLoading ? "Signing In" : "Sign In"}
             </Button>
             <Link
               component="button"
