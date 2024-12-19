@@ -8,8 +8,10 @@ function ProGames() {
             <ProCard 
                 playerOne="Wesley So" 
                 playerOneImg="../src/assets/top-players/wesley.png" 
+                playerOneOdds={"1.43"}
                 playerTwo="Levon Aronian" 
                 playerTwoImg="../src/assets/top-players/aronion.png" 
+                playerTwoOdds={"2.10"}
             />
             <ProCard 
                 playerOne="Ian Nepomniachtchi" 

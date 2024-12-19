@@ -25,9 +25,10 @@
 }
 
 .progames-card:hover {
-    background-color: #202020 !important;
-    cursor: pointer;
+    background-color: #1b1b1b !important;
+    cursor: auto;
     transform: scale(1.05); /* Adds a slight zoom effect */
+    
 }
 
 .progames-card h3 {
@@ -50,6 +51,16 @@
 .player-info .playername {
     margin-top: 8px;
     font-size: 1rem;
+}
+
+.picks{
+    background-color: rgb(82, 80, 80);
+    padding: 0px !important;
+}
+
+.picks:hover{
+    cursor: pointer;
+    background-color: #242121;
 }
 
 /* Responsive Design */
