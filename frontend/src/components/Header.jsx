@@ -14,7 +14,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user information from the backend
     const fetchUser = async () => {
 
       const userId = localStorage.getItem("userId");
@@ -22,11 +21,8 @@ const Navbar = () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/user?userId=${userId}`);
 
-        const { user } = response.data; // Access user data from the API response
+        const { user } = response.data; 
           
-        // Update the state with the user data
-
-        // Update the state with the user data
         if (user) {
           setBalance(user.balance);
           setEmail(user.email);
@@ -60,14 +56,12 @@ const Navbar = () => {
     <nav className="navbar">
       <Link to={'/'} className="navbar-brand">Mate<span id="bets-text"> Bets</span></Link>
 
-      {/* Desktop Navbar Links */}
       <div className="navbar-links">
         <Link id='home' to="/" className="navbar-link">Home</Link>
         <Link id='playfriend' to="/playfriend" className="navbar-link">Play a Friend</Link>
         <Link id='progames' to="/progames" className="navbar-link">Pro Games</Link>
       </div>
 
-      {/* User Section */}
       <div className="navbar-actions">
         {username? (
           <div className="navbar-user-info">
@@ -98,7 +92,6 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Menu Icon for Mobile */}
       <img
         id="menu"
         src="../src/assets/menu.png"
@@ -107,7 +100,6 @@ const Navbar = () => {
         onClick={toggleMenu}
       />
 
-      {/* Mobile Menu Links */}
       {isMenuOpen && (
         <div className="menu-links">
           <Link to="/" className="navbar-link active">Home</Link>

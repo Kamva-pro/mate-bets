@@ -72,25 +72,19 @@ export default function DashboardLayoutBasic(props) {
   const [gameData, setGameData] = useState(null);
 
 
-  // State to manage dialog visibility
   const [openDialog, setOpenDialog] = useState(false);
 
-  // Handle opening the logout dialog
   const handleLogoutClick = () => {
     setOpenDialog(true);
   };
 
-  // Handle closing the dialog
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
 
-  // Handle confirming the logout action
   const handleConfirmLogout = async () => {
       try {
-        // Step 1: Clear the user data from localStorage
         localStorage.clear();
-        // Step 3: Redirect user to login page
         navigate('/signin')
     
       } catch (error) {
@@ -374,7 +368,6 @@ export default function DashboardLayoutBasic(props) {
             </div>
           )}
 
-          {/* Logout Confirmation Dialog */}
           <Dialog open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle>Confirm Logout</DialogTitle>
             <DialogContent>
