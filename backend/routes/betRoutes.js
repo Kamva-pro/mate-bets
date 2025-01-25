@@ -1,4 +1,3 @@
-// backend/routes/betRoutes.js
 const express = require('express');
 const { placeBet } = require('../controllers/betController');
 const {fetchBets} = require('../controllers/fetchBets');

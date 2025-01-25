@@ -25,11 +25,10 @@ const fetchGame = async (req, res) => {
     });
 
     const games = response.data
-      .split('\n') // Split NDJSON response into individual games
-      .filter((game) => game.trim() !== '') // Remove empty lines
-      .map((game) => JSON.parse(game)); // Parse each game into JSON
+      .split('\n')
+      .filter((game) => game.trim() !== '')
+      .map((game) => JSON.parse(game)); 
 
-    // Find the latest game with the specified opponent
     const latestGameWithOpponent = games.find(
       (game) =>
         (game.players.white.user.name === opponent || game.players.black.user.name === opponent)

@@ -19,7 +19,7 @@ const signup = async (req, res) => {
 
         console.log('User created in Firebase:', firebaseUser);
 
-        // Add the user to the database using Firebase UID
+        // Add the user to the supabase database using their Firebase UID
         const { data: userData, error: insertError } = await supabase
             .from('users')
             .insert([
