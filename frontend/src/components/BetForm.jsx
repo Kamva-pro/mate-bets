@@ -82,19 +82,16 @@ export default function BetForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Check for errors before submitting
     if (!opponentEmail || !gameFormat || !gameSeries || !chessUsername || !opp_chessUsername || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
       return;
     }
 
-    // setIsLoading(true);  // Show loading indicator
 
     const userId = localStorage.getItem("userId");
 
     try {
-      // Send data to your backend for user registration
       const response = await axios.post('http://localhost:3000/api/place-bet', {
         opponentEmail,
         gameFormat,
@@ -122,7 +119,6 @@ export default function BetForm(props) {
         setAlertMessage("");
       }, 3000);
     } finally {
-      // setIsLoading(false);  // Hide loading indicator
     }
   };
 
@@ -152,17 +148,16 @@ export default function BetForm(props) {
                 display: 'grid',
                 gridTemplateColumns: '1fr',
                 gap: 2,
-                maxHeight: '80vh',  // Adjust the height as needed
-                overflowY: 'auto',  // Adds the scrollbar
-                paddingRight: '10px',  // Adjust for scrollbar visibility if needed
+                maxHeight: '80vh',  
+                overflowY: 'auto',  
+                paddingRight: '10px', 
                 '&::-webkit-scrollbar': {
-                  display: 'none',  // Hides scrollbar for Webkit browsers
+                  display: 'none', 
                 },
-                '-ms-overflow-style': 'none',  // Hides scrollbar for IE/Edge
-                'scrollbar-width': 'none',  // Hides scrollbar for Firefox
+                '-ms-overflow-style': 'none', 
+                'scrollbar-width': 'none',  
               }}
             >
-              {/* Opponent Username */}
               <FormControl>
                 <FormLabel htmlFor="opponentEmail">Opponent's Email</FormLabel>
                 <TextField
@@ -179,7 +174,6 @@ export default function BetForm(props) {
                 />
               </FormControl>
     
-              {/* Game Format */}
               <FormControl>
                 <FormLabel htmlFor="gameFormat">Game Format</FormLabel>
                 <TextField
@@ -199,7 +193,6 @@ export default function BetForm(props) {
                 </TextField>
               </FormControl>
     
-              {/* Match Type */}
               <FormControl>
                 <FormLabel htmlFor="gameseries">Game Series</FormLabel>
                 <TextField
@@ -219,7 +212,6 @@ export default function BetForm(props) {
                 </TextField>
               </FormControl>
     
-              {/* Chess Username */}
               <FormControl>
                 <FormLabel htmlFor="chessUsername">Lichess Username</FormLabel>
                 <TextField
@@ -234,7 +226,6 @@ export default function BetForm(props) {
                 />
               </FormControl>
             
-              {/* Opponent Chess Username */}
               <FormControl>
                 <FormLabel htmlFor="oppChessUsername">Opponent Lichess Username</FormLabel>
                 <TextField
@@ -249,7 +240,6 @@ export default function BetForm(props) {
                 />
               </FormControl>
     
-              {/* Stake */}
               <FormControl>
                 <FormLabel htmlFor="stake">Stake</FormLabel>
                 <TextField
@@ -270,7 +260,6 @@ export default function BetForm(props) {
     
               {error && <Typography sx={{ color: 'red' }}>{error}</Typography>}
     
-              {/* Submit Button */}
               <Button
                 type="submit"
                 fullWidth
