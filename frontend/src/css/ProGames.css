@@ -4,13 +4,13 @@
     align-items: center;
     justify-content: center;
     margin-top: 24px;
-    flex-wrap: wrap; /* Allows wrapping to the next line on smaller screens */
-    gap: 20px; /* Adds spacing between cards */
+    flex-wrap: wrap;
+    gap: 20px; 
 }
 
 .progames-card {
-    flex: 1 1 calc(50% - 40px); /* Take 50% of the width minus the gap on larger screens */
-    max-width: 550px; /* Limit the maximum width */
+    flex: 1 1 calc(50% - 40px);
+    max-width: 550px;
     padding: 16px;
     margin: 10px;
     background: #2c2c2c !important;
@@ -27,7 +27,7 @@
 .progames-card:hover {
     background-color: #1b1b1b !important;
     cursor: auto;
-    transform: scale(1.05); /* Adds a slight zoom effect */
+    transform: scale(1.05); 
     
 }
 
@@ -63,22 +63,18 @@
     background-color: #242121;
 }
 
-/* Responsive Design */
-
-/* Medium screens (tablets): Display 2 cards per row */
 @media (max-width: 1000px) {
     .progames-card {
-        flex: 1 1 calc(50% - 20px); /* 50% width for two cards per row */
+        flex: 1 1 calc(50% - 20px); 
     }
 }
 
-/* Small screens (mobile): Display 1 card per row */
 @media (max-width: 600px) {
     .progames-card {
-        flex: 1 1 100%; /* Full width for one card per row */
+        flex: 1 1 100%;
     }
 
     .progames-section {
-        gap: 16px; /* Reduce spacing between cards */
+        gap: 16px;
     }
 }
