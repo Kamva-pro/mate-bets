@@ -11,25 +11,24 @@ body {
 
 .hero-section {
     background-color: #121212;
-    width: 90vw; /* 90% of the viewport width */
-    height: 80vh; /* 80% of the viewport height */
+    width: 90vw; 
+    height: 80vh;
     display: flex;
     margin-top: 80px !important;
     padding-left: 40px;
     padding-top: 80px;
     align-items: center;
     justify-content: start;
-    position: relative; /* Ensures the overlay and content stack properly */
+    position: relative; 
     background-image: url("../assets/chess-player.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    margin: auto; /* Centers the hero section horizontally and vertically */
-    border-radius: 24px; /* Optional: Rounded corners for a polished look */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Optional: Adds depth */
+    margin: auto; 
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Overlay */
 .hero-section::before {
     content: "";
     position: absolute;
@@ -37,27 +36,26 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
-    border-radius: 24px; /* Matches the hero-section border-radius */
-    z-index: 1; /* Ensures it sits below the text */
+    background: rgba(0, 0, 0, 0.5); 
+    border-radius: 24px;
+    z-index: 1; 
 }
 
-/* Hero Content */
 .hero-content {
     color: white;
-    position: relative; /* Ensures content is above the overlay */
-    z-index: 2; /* Sits above the overlay */
+    position: relative; 
+    z-index: 2; 
 }
 
 .hero-content h1 {
     font-weight: bolder;
-    font-size: clamp(24px, 5vw, 48px); /* Minimum: 24px, Preferred: 5vw, Maximum: 48px */
+    font-size: clamp(24px, 5vw, 48px); 
     max-width: 700px;
 }
 
 .hero-content h6 {
     font-weight: 500;
-    font-size: clamp(14px, 2.5vw, 24px); /* Minimum: 14px, Preferred: 2.5vw, Maximum: 24px */
+    font-size: clamp(14px, 2.5vw, 24px);
     margin-top: 12px;
 }
 

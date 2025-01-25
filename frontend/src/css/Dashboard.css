@@ -1,4 +1,3 @@
-/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,11 +5,10 @@
   }
   
   body {
-    background-color: #f4f6f8; /* Consistent background color */
+    background-color: #f4f6f8; 
     font-family: Arial, sans-serif;
   }
   
-  /* Layout */
   .dashboard-layout {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -71,7 +69,6 @@
     align-items: center;
   }
   
-  /* Mobile Styles */
   @media (max-width: 600px) {
     .dashboard-layout {
       grid-template-columns: 1fr;

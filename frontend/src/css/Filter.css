@@ -1,22 +1,22 @@
 #filter-section {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    flex-wrap: wrap; 
     align-items: start;
-    gap: 16px; /* Consistent spacing */
+    gap: 16px; 
     margin-top: 36px;
-    justify-content: center; /* Align items to the end for larger screens */
+    justify-content: center; 
     margin-right: 72px;
 }
 
 #filter-section select {
     background-color: transparent;
-    padding: 14px; /* Consistent padding */
-    width: 200px; /* Fixed width for larger screens */
+    padding: 14px; 
+    width: 200px; 
     color: white;
     border-radius: 12px;
-    border: 1px solid white; /* Ensures consistent border visibility */
-    box-sizing: border-box; /* Ensures padding does not affect width */
-    transition: width 0.3s ease; /* Smooth width adjustment for responsiveness */
+    border: 1px solid white;
+    box-sizing: border-box; 
+    transition: width 0.3s ease;
 }
 
 #filter-section option {
@@ -28,7 +28,7 @@
     background-color: #2ECC71; 
     color: white;
     border: none;
-    padding: 14px 50px; /* Consistent button padding */
+    padding: 14px 50px; 
     font-weight: 700;
     font-size: 18px;
     border-radius: 12px;
@@ -36,44 +36,42 @@
 }
 
 #filter-button:hover {
-    background-color: #28A745; /* Slightly darker green for hover */
+    background-color: #28A745; 
     cursor: pointer;
 }
 
-/* Medium screens (tablets) */
 @media (max-width: 1000px) {
     #filter-section {
-        justify-content: center; /* Center items */
-        margin-right: 0; /* Remove right margin */
-        gap: 12px; /* Adjust spacing for medium screens */
+        justify-content: center; 
+        margin-right: 0;
+        gap: 12px; 
     }
 
     #filter-section select {
-        width: 180px; /* Slightly reduce width */
-        padding: 12px; /* Adjust padding */
+        width: 180px; 
+        padding: 12px; 
     }
 
     #filter-button {
-        padding: 12px 40px; /* Adjust button padding */
+        padding: 12px 40px; 
     }
 }
 
-/* Small screens (mobile) */
 @media (max-width: 600px) {
     #filter-section {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items */
-        gap: 16px; /* Maintain spacing for stacked layout */
-        margin-right: 0; /* Remove any side margins */
+        flex-direction: column;
+        align-items: center; 
+        gap: 16px; 
+        margin-right: 0;
     }
 
     #filter-section select {
-        width: 100%; /* Full width */
-        max-width: 250px; /* Limit maximum width */
+        width: 100%; 
+        max-width: 250px; 
     }
 
     #filter-button {
-        width: 100%; /* Full width */
-        max-width: 250px; /* Limit maximum width */
+        width: 100%; 
+        max-width: 250px;
     }
 }

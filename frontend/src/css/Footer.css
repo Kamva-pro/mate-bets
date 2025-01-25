@@ -1,14 +1,12 @@
-/* Grid Container */
 .footer-container {
   margin-top: 48px;
   background-color: #000;
     display: grid;
     padding: 12px;
-    grid-template-columns: 40% 1fr 1fr; /* 3 Columns: 40%, 30%, 30% */
-    gap: 16px; /* Spacing between columns */
+    grid-template-columns: 40% 1fr 1fr;
+    gap: 16px;
   }
   
-  /* Grid Items */
   .grid-item {
     padding: 16px;
     padding-left:64px;
@@ -87,10 +85,9 @@
     width: 160px;
   }
 
-  /* Responsive Design */
   @media screen and (max-width: 768px) {
     .footer-container {
-      grid-template-columns: 1fr; /* Single column for mobile */
+      grid-template-columns: 1fr; 
       gap: 0 !important;
       margin: 0;
     }
