@@ -26,7 +26,7 @@ const signup = async (req, res) => {
                 {
                     id: firebaseUser.uid,  
                     username: name,
-                    email: email,
+                    email: email.toLowerCase(),
                     lichess_username: '',  
                     balance: 0,  
                     password: hashedPassword
