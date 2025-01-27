@@ -32,7 +32,7 @@ const placeBet = async (req, res) => {
 
         else if(opponentData.balance < stake)
         {
-            return res.status(401).json({ message: 'Opponent has Insufficient funds to place the bet' });
+            return res.status(402).json({ message: 'Opponent has Insufficient funds to place the bet' });
 
         }
 
