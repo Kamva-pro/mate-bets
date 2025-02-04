@@ -82,6 +82,10 @@ export default function DashboardLayoutBasic(props) {
     setOpenDialog(false);
   };
 
+  const handleCardClick = (bet_id) => {
+    navigate('/betdetails', bet_id)
+  }
+
   const handleConfirmLogout = async () => {
       try {
         localStorage.clear();
@@ -314,9 +318,12 @@ export default function DashboardLayoutBasic(props) {
                 fontWeight: 'bold',
               }}
             >
-              <div  className="progames-section" >
+              <div className="progames-section" >
               {activeBets.map((bet, index) => (
-              <ProCard
+                
+
+              <ProCard 
+                onClick={() => handleCardClick(bet.bet_id)}
                 key={index}
                 playerOne={bet.lichess_username}
                 playerTwo={bet.opp_lichess_username} 
@@ -324,8 +331,11 @@ export default function DashboardLayoutBasic(props) {
                 playerTwoImg="../src/assets/dog.png"
               />
             ))}
+            
+            
               </div>
             </div>
+            
           )}
 
           {router.pathname === '/pastbets' && (

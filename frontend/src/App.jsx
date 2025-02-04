@@ -8,6 +8,7 @@ import PlayFriend from './components/PlayFriend';
 import Home from './components/HomePage'; 
 import ProGamesPage from './components/ProGamesPage';
 import Dashboard from './components//Dashboard';
+import BetDetails from './components/BetDetails';
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                 <Route path='/playfriend' element={<PlayFriend />} />
                 <Route path='/progames' element={<ProGamesPage/>} />
                 <Route path='/dashboard' element={<Dashboard/>}/>
-                
+                <Route path='/betdetails' element={<BetDetails/>} />
             </Routes>
         </Router>
     );

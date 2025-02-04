@@ -2,7 +2,7 @@ import React from "react";
 import "../css/ProGames.css";
 import { useNavigate } from "react-router-dom";
 
-const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoImg, playerTwoOdds}) => {
+const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoImg, playerTwoOdds, onClick}) => {
 
 
     return (
