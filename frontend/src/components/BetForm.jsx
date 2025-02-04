@@ -102,10 +102,11 @@ export default function BetForm(props) {
         userId
       });
 
-      if (response.status === 201)
+      if (response.status === 200)
       {
         setAlertMessage("Successfully placed bet");
         setAlertSeverity("success")
+        
         setTimeout(() => {
           setAlertMessage("");
         }, 3000);

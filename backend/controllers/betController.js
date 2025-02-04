@@ -42,7 +42,7 @@ const placeBet = async (req, res) => {
             .from('p2p_bets')
             .insert([
                 {
-                    bet_id: current_userid+opponent_userid + now,
+                    bet_id: userData.id + oppUserId + now,
                     current_userid: userData.id,
                     opponent_userid: oppUserId,
                     opp_email: opponentEmail,
@@ -81,7 +81,7 @@ const placeBet = async (req, res) => {
             return res.status(501).json({message: `Error updating opponent balance`});
         }
 
-        res.status(201).json({ message: 'Bet placed successfully' });
+        res.status(200).json({ message: 'Bet placed successfully' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'An error occurred while placing the bet' });
