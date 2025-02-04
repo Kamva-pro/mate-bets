@@ -6,7 +6,7 @@ const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoI
 
 
     return (
-        <div className="progames-card">
+        <div className="progames-card" onClick={onClick}>
             <div className="player-info">
                 <img className="profile-thumbnail" src={playerOneImg} alt={playerOne} />
                 <p className="playername">{playerOne}</p>

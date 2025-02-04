@@ -83,7 +83,7 @@ export default function DashboardLayoutBasic(props) {
   };
 
   const handleCardClick = (bet_id) => {
-    navigate('/betdetails', bet_id)
+    navigate('/betdetails', { state: { bet_id } });
   }
 
   const handleConfirmLogout = async () => {
