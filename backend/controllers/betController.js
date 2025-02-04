@@ -36,10 +36,13 @@ const placeBet = async (req, res) => {
 
         }
 
+        const now = new Date();
+
         const { data: betData, error: betError } = await supabase
             .from('p2p_bets')
             .insert([
                 {
+                    bet_id: current_userid+opponent_userid + now,
                     current_userid: userData.id,
                     opponent_userid: oppUserId,
                     opp_email: opponentEmail,

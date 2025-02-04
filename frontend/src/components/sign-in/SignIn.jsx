@@ -100,18 +100,17 @@ export default function SignIn(props) {
     setOpen(false);
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     const data = new FormData(event.currentTarget);
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
-    
+
     // Validate email and password
-    if (!validateInputs()) {
-      return;
-    }
+    // if (!validateInputs()) {
+    //   return;
+    // }
 
     try {
       setIsLoading(true);
@@ -121,7 +120,6 @@ export default function SignIn(props) {
         password
       });
 
-      // Extract user details and handle successful login
       if(response.status === 200)
       {
         const { userId } = response.data;
@@ -139,7 +137,6 @@ export default function SignIn(props) {
       }
 
     } catch (error) {
-      // Handle error response
       console.error("Login failed:", error);
       const message = error.response?.data?.message || "Sign-in failed. Please try again.";
       setAlertMessage(message);
@@ -153,32 +150,7 @@ export default function SignIn(props) {
     }
   };
   
-  const validateInputs = () => {
-    const email = document.getElementById('email')
-    const password = document.getElementById('password');
 
-    let isValid = true;
-
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
-
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
-
-    return isValid;
-  };
 
   return (
     <AppTheme {...props}>
