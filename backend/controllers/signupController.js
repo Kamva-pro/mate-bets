@@ -34,7 +34,7 @@ const signup = async (req, res) => {
             ]);
 
         if (insertError) {
-            return res.status(500).json({ message: insertError });
+            return res.status(501).json({ message: insertError.message });
         }
 
         // Return success response

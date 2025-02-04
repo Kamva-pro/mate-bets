@@ -70,6 +70,7 @@ export default function SignIn(props) {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [password, setPassword] = React.useState('');
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
@@ -100,9 +101,12 @@ export default function SignIn(props) {
   };
 
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email').toLowerCase();
+    const password = data.get('password');
     
     // Validate email and password
     if (!validateInputs()) {
@@ -113,8 +117,8 @@ export default function SignIn(props) {
       setIsLoading(true);
 
       const response = await axios.post("http://localhost:3000/api/sign-in", {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,  // Password from DOM
+        email,
+        password
       });
 
       // Extract user details and handle successful login
@@ -150,12 +154,10 @@ export default function SignIn(props) {
   };
   
   const validateInputs = () => {
-    const email = document.getElementById('email');
+    const email = document.getElementById('email')
     const password = document.getElementById('password');
 
     let isValid = true;
-
-    email = email.toLowerCase();
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
