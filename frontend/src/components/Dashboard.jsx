@@ -82,8 +82,8 @@ export default function DashboardLayoutBasic(props) {
     setOpenDialog(false);
   };
 
-  const handleCardClick = (bet_id) => {
-    navigate('/betdetails', { state: { bet_id } });
+  const handleCardClick = (bet_id, player_one_lichess_username, player_two_lichess_username, format, status, bet_amount,  result, ) => {
+    navigate('/betdetails', { state: { bet_id, player_one_lichess_username, player_two_lichess_username, format, status, bet_amount,  result, } });
   }
 
   const handleConfirmLogout = async () => {
@@ -323,7 +323,9 @@ export default function DashboardLayoutBasic(props) {
                 
 
               <ProCard 
-                onClick={() => handleCardClick(bet.bet_id)}
+                onClick={() => handleCardClick(bet.bet_id, bet.lichess_username, bet.opp_lichess_username, bet.match_format,
+                  bet.status, bet.bet_amount,  bet.result
+                )}
                 key={index}
                 playerOne={bet.lichess_username}
                 playerTwo={bet.opp_lichess_username} 
