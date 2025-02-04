@@ -155,6 +155,8 @@ export default function SignIn(props) {
 
     let isValid = true;
 
+    email = email.toLowerCase();
+
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
       setEmailErrorMessage('Please enter a valid email address.');

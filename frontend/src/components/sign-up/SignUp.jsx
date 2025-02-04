@@ -139,7 +139,7 @@ export default function SignUp(props) {
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
   
-    setIsLoading(true);  // Show loading indicator
+    setIsLoading(true); 
   
 
     try{
