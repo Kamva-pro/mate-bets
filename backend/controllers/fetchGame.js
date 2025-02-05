@@ -58,7 +58,7 @@ const fetchGame = async (req, res) => {
 
     res.status(500).json({
         success: false,
-        message: `Error fetching games: ${error.message}`,
+        message: `Error fetching game data: ${error.message}`,
     });
 }
 
