@@ -47,11 +47,21 @@ const fetchGame = async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching game:', error);
+    if (error.response) {
+        console.error('Response Data:', error.response.data);
+        console.error('Response Status:', error.response.status);
+    } else if (error.request) {
+        console.error('No response received:', error.request);
+    } else {
+        console.error('Error Message:', error.message);
+    }
+
     res.status(500).json({
-      success: false,
-      message: `Error fetching games: ${error}`,
+        success: false,
+        message: `Error fetching games: ${error.message}`,
     });
-  }
+}
+
 };
 
 module.exports = { fetchGame };

@@ -153,6 +153,8 @@ export default function DashboardLayoutBasic(props) {
   
     fetchBets();
   }, []);
+
+  
   const fetchGame = async (username, opp_username) => {
     try {
       const response = await fetch(
