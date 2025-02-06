@@ -163,7 +163,8 @@ export default function DashboardLayoutBasic(props) {
       if (!response.ok) {
         throw new Error('Failed to fetch game data');
       }
-      return await response.json();
+      return await response.data.data;
+      
     } catch (error) {
       console.error(error);
     }

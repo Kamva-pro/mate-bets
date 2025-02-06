@@ -37,7 +37,7 @@ const fetchGame = async (req, res) => {
     if (!latestGameWithOpponent) {
       return res.status(404).json({
         success: false,
-        message: `No recent game found between ${playerOne} and ${opponent}.`,
+        message: `No recent game found between these 2 players`,
       });
     }
 
@@ -45,20 +45,14 @@ const fetchGame = async (req, res) => {
       success: true,
       data: latestGameWithOpponent,
     });
+
   } catch (error) {
     console.error('Error fetching game:', error);
-    if (error.response) {
-        console.error('Response Data:', error.response.data);
-        console.error('Response Status:', error.response.status);
-    } else if (error.request) {
-        console.error('No response received:', error.request);
-    } else {
-        console.error('Error Message:', error.message);
-    }
-
+  
     res.status(500).json({
         success: false,
-        message: `Error fetching game data: ${error.message}`,
+        message: `Error fetching game data`,
+        error: error.message,
     });
 }
 
