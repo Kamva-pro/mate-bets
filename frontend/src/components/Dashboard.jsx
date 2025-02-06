@@ -170,7 +170,16 @@ export default function DashboardLayoutBasic(props) {
   };
 
   const handleFetchGame = async () => {
-    if (!username || !opp_username) return;
+    if (!username) {
+      console.error('username not found');
+      return;
+    }
+
+    else if (!opp_username)
+    {
+      console.error("Opponent username doesn't exist");
+      return;
+    }
 
     const gameData = await fetchGame(username, opp_username);
     if (gameData) {

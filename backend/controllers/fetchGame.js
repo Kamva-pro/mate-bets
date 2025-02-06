@@ -11,7 +11,7 @@ const fetchGame = async (req, res) => {
   }
 
   if (!opponent) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: 'Opponent is required.',
     });
