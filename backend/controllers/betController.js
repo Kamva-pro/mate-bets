@@ -27,7 +27,7 @@ const placeBet = async (req, res) => {
         }
 
         if (userData.balance < stake) {
-            return res.status(401).json({ message: 'Insufficient funds to place the bet' });
+            return res.status(402).json({ message: 'Insufficient funds to place the bet' });
         }
 
         else if(opponentData.balance < stake)
@@ -78,7 +78,7 @@ const placeBet = async (req, res) => {
         
         if (oppUpdateError)
         {
-            return res.status(501).json({message: `Error updating opponent balance`});
+            return res.status(500).json({message: `Error updating opponent balance`});
         }
 
         res.status(200).json({ message: 'Bet placed successfully' });
