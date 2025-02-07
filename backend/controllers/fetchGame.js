@@ -4,7 +4,7 @@ const fetchGame = async (req, res) => {
   const { playerOne, opponent } = req.query;
 
   if (!playerOne) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: 'PlayerOne is required.',
     });
@@ -44,6 +44,7 @@ const fetchGame = async (req, res) => {
     res.status(200).json({
       success: true,
       data: latestGameWithOpponent,
+      message: "Game data successfully retrieved"
     });
 
   } catch (error) {
