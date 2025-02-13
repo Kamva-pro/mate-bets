@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function ChessBettingApp() {
+export default function LiveGames() {
   const [games, setGames] = useState([]);
   const [selectedBet, setSelectedBet] = useState({ gameId: "", player: "", amount: "" });
 

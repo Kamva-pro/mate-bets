@@ -4,7 +4,7 @@ import HeroSection from "./HeroSection";
 import ProGames from "./ProGames";
 import FilterGames from "./Filter";
 import Footer from "./Footer";
-import { Betslip } from "./Betslip";
+import LiveGames from "./LiveGames";
 
 export default function Home ()
 {
@@ -13,7 +13,7 @@ export default function Home ()
             <Navbar/>
             <HeroSection/>
             <FilterGames/>
-            <ProGames/>
+            <LiveGames/>
             {/* <Betslip/> */}
             <Footer/>
         </div>
