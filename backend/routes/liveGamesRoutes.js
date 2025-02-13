@@ -1,5 +1,5 @@
 const express = require("express");
-const { fetchLiveGames } = require("../controllers/liveBetsController.js");
+const { fetchLiveGames } = require("../controllers/liveBetsController");
 
 const router = express.Router();
 

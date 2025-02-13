@@ -24,7 +24,7 @@ app.use('/api', betRoutes);
 app.use('/api', signupRoutes);
 app.use('/api', userRoutes);
 app.use('/api', signinRoutes);
-app.use('/api/', gameRoutes);
+app.use('/api', gameRoutes);
 
 const PORT = 3000;
 
