@@ -1,6 +1,6 @@
 const bets = [];
 
-export const placeBet = (req, res) => {
+export const placeLiveBet = (req, res) => {
   const { gameId, player, amount } = req.body;
 
   if (!gameId || !player || !amount) {
