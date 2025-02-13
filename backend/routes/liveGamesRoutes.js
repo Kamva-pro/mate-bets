@@ -1,8 +1,8 @@
-import express from "express";
-import { fetchLiveGames } from "../controllers/gameController.js";
+const express = require("express");
+const { fetchLiveGames } = require("../controllers/liveBetsController.js");
 
 const router = express.Router();
 
 router.get("/games", fetchLiveGames);
 
-export default router;
+module.exports = router;
