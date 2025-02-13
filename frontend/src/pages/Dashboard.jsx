@@ -9,7 +9,7 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
-import Navbar from './Header'; 
+import Navbar from '../components/Header'; 
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -18,7 +18,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent'; 
 import DialogTitle from '@mui/material/DialogTitle'; 
 import Button from '@mui/material/Button'; 
-import ProCard from './ProCard';
+import ProCard from '../components/ProCard';
 import "../css/ProGames.css";
 
 const demoTheme = extendTheme({

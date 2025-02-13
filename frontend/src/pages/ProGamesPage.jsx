@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "./Header";
-import ProGames from "./ProGames";
-import FilterGames from "./Filter";
+import Navbar from "../components/Header";
+import ProGames from "../components/ProGames";
+import FilterGames from "../components/Filter";
 import "../css/ProGamesPage.css";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 const ProGamesPage = () => {
     return(
