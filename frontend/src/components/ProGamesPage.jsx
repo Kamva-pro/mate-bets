@@ -9,7 +9,7 @@ const ProGamesPage = () => {
     return(
         <div id="progamespage"> 
             <Navbar/>
-            <h4 id="heading">Bet on Professional Chess Games</h4>
+            <h4 className="heading">Bet on Professional Chess Games</h4>
             <FilterGames/>
             <ProGames/>
             <Footer/>

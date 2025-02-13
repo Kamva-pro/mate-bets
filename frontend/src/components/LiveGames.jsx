@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../css/ProGamesPage.css";
+
 
 export default function LiveGames() {
   const [games, setGames] = useState([]);
@@ -23,7 +25,7 @@ export default function LiveGames() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Live Chess Betting</h1>
+      <h4 className="heading mt-4">Bet on Live Games</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {games.map(game => (
           <div key={game.id} className="p-4 border rounded-lg shadow-md">
