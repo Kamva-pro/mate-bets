@@ -14,7 +14,7 @@ export default function ChessBettingApp() {
   const placeBet = async () => {
     if (!selectedBet.gameId || !selectedBet.player || !selectedBet.amount) return;
     try {
-      await axios.post("http://localhost:5000/api/bet", selectedBet);
+      await axios.post("http://localhost:5000/api/live-bet", selectedBet);
       alert("Bet placed successfully!");
     } catch (error) {
       alert("Failed to place bet");

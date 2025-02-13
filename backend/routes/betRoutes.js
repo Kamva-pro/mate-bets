@@ -9,6 +9,6 @@ const router = express.Router();
 router.post('/place-bet', placeBet);
 router.get('/fetch-bets', fetchBets);
 router.get('/fetch-game', fetchGame);
-router.get('/place-live-bet', placeLiveBet);
+router.get('/live-bet', placeLiveBet);
 
 module.exports = router;
