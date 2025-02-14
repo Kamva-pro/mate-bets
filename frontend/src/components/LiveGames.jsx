@@ -7,22 +7,23 @@ export default function ChessBettingApp() {
   const [games, setGames] = useState([]);
   const [selectedBet, setSelectedBet] = useState({ gameId: "", player: "", amount: "" });
   
+  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/games")
       .then(response => setGames(response.data))
       .catch(error => console.error("Error fetching games:", error));
-  }, [games]);
+  }, []);
 
-  // const placeBet = async () => {
-  //   if (!selectedBet.gameId || !selectedBet.player || !selectedBet.amount) return;
-  //   try {
-  //     await axios.post("http://localhost:3000/api/bet", selectedBet);
-  //     alert("Bet placed successfully!");
-  //   } catch (error) {
-  //     alert("Failed to place bet");
-  //   }
-  // };
+  const placeBet = async () => {
+    if (!selectedBet.gameId || !selectedBet.player || !selectedBet.amount) return;
+    try {
+      await axios.post("http://localhost:3000/api/bet", {selectedBet, userId});
+      alert("Bet placed successfully!");
+    } catch (error) {
+      alert("Failed to place bet");
+    }
+  };
 
   return (
     <div className="p-6">
