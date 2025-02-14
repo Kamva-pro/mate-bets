@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/ProGamesPage.css";
 import ProCard from "./ProCard";
+import { meerkat, cat, dog, dinosaur, avatar1, avatar2, rabbit, bear } from "../assets";
 
 export default function ChessBettingApp() {
   const [games, setGames] = useState([]);
   const [selectedBet, setSelectedBet] = useState({ gameId: "", player: "", amount: "" });
   
   const userId = localStorage.getItem('userId')
+
+  const avatars =  [meerkat, cat, dog, dinosaur, avatar1, avatar2, rabbit, bear];
+  
+  const selectRandom = () => {
+    return Math.random(0, avatars.length);
+  }
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/games")
@@ -44,9 +51,11 @@ export default function ChessBettingApp() {
           playerOne={game.player1.username}
           playerOneRating={game.player1.rating}
           playerOneOdds={game.odds.player1}
+          playerOneImg={selectRandom()}
           playerTwo={game.player2.username}
           playerTwoRating={game.player2.rating}
           playerTwoOdds={game.odds.player2}
+          playerTwoImg={selectRandom()}
           />
         })}
 
