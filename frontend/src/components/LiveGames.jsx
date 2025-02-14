@@ -10,7 +10,7 @@ export default function ChessBettingApp() {
   
   const userId = localStorage.getItem('userId')
 
-  const avatars =  [meerkat, cat, dog, dinosaur, avatar1, avatar2, rabbit, bear];
+  const avatars = [meerkat, cat, dog, dinosaur, avatar1, avatar2, rabbit, bear];
   
   const selectRandom = () => {
     return Math.random(0, avatars.length);
@@ -51,11 +51,11 @@ export default function ChessBettingApp() {
           playerOne={game.player1.username}
           playerOneRating={game.player1.rating}
           playerOneOdds={game.odds.player1}
-          playerOneImg={selectRandom()}
+          playerOneImg={avatars[selectRandom()]}
           playerTwo={game.player2.username}
           playerTwoRating={game.player2.rating}
           playerTwoOdds={game.odds.player2}
-          playerTwoImg={selectRandom()}
+          playerTwoImg={avatars[selectRandom()]}
           />
         })}
 
