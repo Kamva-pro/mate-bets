@@ -2,7 +2,7 @@ import React from "react";
 import "../css/ProGames.css";
 import { useNavigate } from "react-router-dom";
 
-const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoImg, playerTwoOdds, onClick}) => {
+const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerOneRating, playerTwo, playerTwoImg, playerTwoOdds, playerTwoRating, onClick}) => {
 
 
     return (
@@ -10,6 +10,8 @@ const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoI
             <div className="player-info">
                 <img className="profile-thumbnail" src={playerOneImg} alt={playerOne} />
                 <p className="playername">{playerOne}</p>
+                <p className="playerRating">{playerOneRating}</p>
+
                 <div className="picks">
                     <p className="odds">{playerOneOdds}</p>
                 </div>
@@ -18,6 +20,7 @@ const ProCard = ({ playerOne, playerOneImg, playerOneOdds, playerTwo, playerTwoI
             <div className="player-info">
                 <img className="profile-thumbnail" src={playerTwoImg} alt={playerTwo} />
                 <p className="playername">{playerTwo}</p>
+                <p className="playerRating">{playerTwoRating}</p>
                 <div className="picks">
                     <p className="odds">{playerTwoOdds}</p>
                 </div>

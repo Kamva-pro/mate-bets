@@ -5,11 +5,14 @@ const fetchLiveGames = async (req, res) => {
         const response = await axios.get("https://lichess.org/api/tv/feed");
         const rawGames = response.data;
 
+        // const filteredGames = rawGames
+        //     .filter(game => 
+        //         game.moves.split(" ").length < 10 && 
+        //         Math.abs(game.evaluation) <= 5
+        //     )
         const filteredGames = rawGames
             .filter(game => 
-                game.moves.split(" ").length < 10 && 
-                Math.abs(game.evaluation) <= 5 && 
-                !game.mate
+                Math.abs(game.evaluation) <= 5
             )
             .map(game => {
                 const { id, players, evaluation } = game;
