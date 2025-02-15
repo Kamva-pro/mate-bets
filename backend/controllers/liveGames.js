@@ -7,12 +7,11 @@ const url = 'https://lichess.org/api/tv/feed';
 
 const fetchLiveGames = async (req, res) => {
     try {
-
         const response = await axios({
             method: 'get',
             url: url,
             responseType: 'stream',
-            timeout: 10000, // 10-second timeout
+            timeout: 10000, 
         });
 
         const stream = response.data.pipe(ndjson.parse());
