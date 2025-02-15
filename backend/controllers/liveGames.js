@@ -1,54 +1,44 @@
-const axios = require("axios");
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']); // Use Google DNS
+
+const axios = require('axios');
+const ndjson = require('ndjson');
+const url = 'https://lichess.org/api/tv/feed';
 
 const fetchLiveGames = async (req, res) => {
     try {
-        const response = await axios.get("https://lichess.org/api/tv/feed");
-        const rawGames = response.data;
 
-        // const filteredGames = rawGames
-        //     .filter(game => 
-        //         game.moves.split(" ").length < 10 && 
-        //         Math.abs(game.evaluation) <= 5
-        //     )
-        const filteredGames = rawGames
-            .filter(game => 
-                Math.abs(game.evaluation) <= 5
-            )
-            .map(game => {
-                const { id, players, evaluation } = game;
+        const response = await axios({
+            method: 'get',
+            url: url,
+            responseType: 'stream',
+            timeout: 10000, // 10-second timeout
+        });
 
-                const player1 = {
-                    username: players.white.user.name,
-                    rating: players.white.rating,
-                };
-                const player2 = {
-                    username: players.black.user.name,
-                    rating: players.black.rating,
-                };
+        const stream = response.data.pipe(ndjson.parse());
 
-                const odds = calculateOdds(player1.rating, player2.rating, evaluation);
+        stream.on('data', (data) => {
+            if (data.t === 'featured') {
+                console.log('New featured game:', data.d);
+            } else if (data.t === 'fen') {
+                console.log('Game update:', data.d);
+            }
+        });
 
-                return { id, player1, player2, odds };
-            });
+        stream.on('error', (err) => {
+            console.error('Error reading stream:', err);
+        });
 
-        res.json(filteredGames);
-    } catch (error) {
-        console.error("Error fetching live games:", error);
-        res.status(500).json({ message: "Error fetching games" });
+        stream.on('end', () => {
+            console.log('Stream ended');
+        });
+    }  catch (error) {    
+        res.status(500).json({
+            message: "Error fetching games",
+            error: error.message,
+        });
     }
-};
-
-const calculateOdds = (rating1, rating2, eval) => {
-    const ratingDiff = rating1 - rating2;
-    const evalWeight = eval * 10;
-
-    const player1Odds = 50 + ratingDiff / 10 + evalWeight;
-    const player2Odds = 100 - player1Odds;
-
-    return {
-        player1: `${player1Odds.toFixed(2)}%`,
-        player2: `${player2Odds.toFixed(2)}%`,
-    };
+    
 };
 
 module.exports = { fetchLiveGames };

@@ -51,4 +51,4 @@ const placeLiveBet = async(req, res) =>
     }
 }
 
-module.exports = placeLiveBet;
+module.exports = {placeLiveBet};
