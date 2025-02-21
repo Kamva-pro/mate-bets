@@ -79,7 +79,7 @@
   .social-links .social-link:hover{
     transition: 0.2s 0.3;
     transform: scale(1.1);
-    filter: sepia(1000);
+    filter: sepia(100);
   }
 
   .socials .social-links .social-link.lichess{

@@ -5,12 +5,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/sign-in/SignIn';
 import SignUp from './components/sign-up/SignUp';
 
-import Home from './pages/HomePage'; 
+const Home  = lazy(()=> import("./pages/HomePage"))
 const PlayFriend = lazy(() => import("./pages/PlayFriend"))
-// import PlayFriend from './pages/PlayFriend';
-import ProGamesPage from './pages/ProGamesPage';
-import Dashboard from './pages//Dashboard';
-import BetDetails from './pages/BetDetails';
+const ProGamesPage = lazy(() => import("./pages/ProGamesPage"))
+const Dashboard = lazy(() => import("./pages/Dashboard"))
+const BetDetails = lazy(() => import("./pages/BetDetails"))
 
 function App() {
     return (
