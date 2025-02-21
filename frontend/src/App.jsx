@@ -1,11 +1,13 @@
 // App.js
 import React from 'react';
+import { lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/sign-in/SignIn';
 import SignUp from './components/sign-up/SignUp';
 
 import Home from './pages/HomePage'; 
-import PlayFriend from './pages/PlayFriend';
+const PlayFriend = lazy(() => import("./pages/PlayFriend"))
+// import PlayFriend from './pages/PlayFriend';
 import ProGamesPage from './pages/ProGamesPage';
 import Dashboard from './pages//Dashboard';
 import BetDetails from './pages/BetDetails';

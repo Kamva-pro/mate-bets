@@ -1,5 +1,5 @@
 const dns = require('dns');
-dns.setServers(['8.8.8.8', '8.8.4.4']); // Use Google DNS
+dns.setServers(['8.8.8.8', '8.8.4.4']); 
 const axios = require('axios');
 
 const fetchGame = async (req, res) => {
