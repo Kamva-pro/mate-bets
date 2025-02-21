@@ -70,8 +70,6 @@ const BetContainer = styled(Stack)(({ theme }) => ({
 export default function BetForm(props) {
   const [gameFormat, setGameFormat] = useState('');
   const [gameSeries, setGameSeries] = useState('');
-  const [chessUsername, setChessUsername] = useState('');
-  const [opp_chessUsername, setOppChessUsername] = useState('');
   const [opponentEmail, setOpponentEmail]= useState('');
   const [stake, setStake] = useState('');
   const [error, setError] = useState('');
@@ -82,7 +80,7 @@ export default function BetForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!opponentEmail || !gameFormat || !gameSeries || !chessUsername || !opp_chessUsername || !stake) {
+    if (!opponentEmail || !gameFormat || !gameSeries || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
       return;
@@ -96,8 +94,6 @@ export default function BetForm(props) {
         opponentEmail,
         gameFormat,
         gameSeries,
-        chessUsername,
-        opp_chessUsername,
         stake,
         userId
       });
@@ -213,7 +209,7 @@ export default function BetForm(props) {
                 </TextField>
               </FormControl>
     
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel htmlFor="chessUsername">Lichess Username</FormLabel>
                 <TextField
                   id="chessUsername"
@@ -239,7 +235,7 @@ export default function BetForm(props) {
                   fullWidth
                   variant="outlined"
                 />
-              </FormControl>
+              </FormControl> */}
     
               <FormControl>
                 <FormLabel htmlFor="stake">Stake</FormLabel>
