@@ -1,7 +1,7 @@
 const supabase = require('../../supabase-client');
 
 const placeBet = async (req, res) => {
-    const { opponentEmail, chessUsername, stake, gameFormat, gameSeries, opp_chessUsername, userId } = req.body;
+    const { opponentEmail, stake, gameFormat, gameSeries, userId } = req.body;
 
     try {
         const { data: opponentData, error: opponentError } = await supabase
@@ -46,8 +46,8 @@ const placeBet = async (req, res) => {
                     current_userid: userData.id,
                     opponent_userid: oppUserId,
                     opp_email: opponentEmail,
-                    lichess_username: chessUsername,
-                    opp_lichess_username: opp_chessUsername,
+                    lichess_username: userData.lichess_username,
+                    opp_lichess_username: opponentData.lichess_username,
                     match_format: gameFormat,
                     match_type: gameSeries,
                     bet_amount: stake,
