@@ -93,6 +93,7 @@ export default function SignUp(props) {
     const name = data.get('name');
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
+    const lichess_username = data.get('lichess_username')
   
     setIsLoading(true); 
   
@@ -100,6 +101,7 @@ export default function SignUp(props) {
       const response = await axios.post('http://localhost:3000/api/sign-up', {
         name,
         email,
+        lichess_username,
         password
       });
 
