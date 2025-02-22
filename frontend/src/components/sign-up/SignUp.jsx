@@ -54,13 +54,6 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
     position: 'absolute',
     zIndex: -1,
     inset: 0,
-    backgroundImage:
-      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-    backgroundRepeat: 'no-repeat',
-    ...theme.applyStyles('dark', {
-      backgroundImage:
-        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-    }),
   },
 }));
 
@@ -69,33 +62,31 @@ export default function SignUp(props) {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [lichessError, setLichessError] = React.useState(false);
+  const [lichessErrorMessage, setLichessErrorMessage] = React.useState('');
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false); // Track loading state
-  const [openSnackbar, setOpenSnackbar] = React.useState(false); // Snackbar state for success message
-  const [snackbarMessage, setSnackbarMessage] = React.useState(''); // Message for snackbar
+  const [isLoading, setIsLoading] = React.useState(false); 
+  const [openSnackbar, setOpenSnackbar] = React.useState(false); 
+  const [snackbarMessage, setSnackbarMessage] = React.useState(''); 
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(false); // New state for password visibility
-
-  const navigate = useNavigate(); // Hook for navigation
+  const [showPassword, setShowPassword] = React.useState(false); 
+  const navigate = useNavigate(); 
 
   const handleLogin = () => {
-    navigate('/signin'); // Navigate to the Sign-In page
+    navigate('/signin');
   };
 
   const handleShowPasswordToggle = () => {
     setShowPassword(!showPassword); 
   };
   
-  
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    // Check for errors before submitting
     if (nameError || emailError || passwordError) {
-      return; // If there are errors, don't submit
+      return; 
     }
   
     const data = new FormData(event.currentTarget);
@@ -105,7 +96,6 @@ export default function SignUp(props) {
   
     setIsLoading(true); 
   
-
     try{
       const response = await axios.post('http://localhost:3000/api/sign-up', {
         name,
@@ -134,20 +124,18 @@ export default function SignUp(props) {
     }
     
     finally {
-      setIsLoading(false);  // Hide loading indicator
+      setIsLoading(false); 
     }
   };
   
 
   
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false); // Close snackbar after it's shown
+    setOpenSnackbar(false);
   };
 
   return (
     <AppTheme {...props}>
-      <CssBaseline enableColorScheme />
-      <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
       <SignUpContainer direction="column" justifyContent="space-between">
       {alertMessage && (
         <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
@@ -174,7 +162,6 @@ export default function SignUp(props) {
                 name="name"
                 required
                 fullWidth
-                
                 id="name"
                 placeholder="Jon Snow"
                 error={nameError}
@@ -198,13 +185,27 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControl>
+              <FormLabel htmlFor="lichess_username">Lichess Username</FormLabel>
+              <TextField
+                autoComplete="Lichess Username"
+                name="lichess_username"
+                required
+                fullWidth
+                id="lichess_username"
+                placeholder="DNGER_LVLS"
+                error={lichessError}
+                helperText={lichessErrorMessage}
+                color={lichessError ? 'error' : 'primary'}
+              />
+            </FormControl>
+            <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
                 required
                 fullWidth
                 name="password"
                 placeholder="••••••"
-                type={showPassword ? 'text' : 'password'} // Toggle between 'password' and 'text'
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="new-password"
                 variant="outlined"
@@ -214,7 +215,7 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox checked={showPassword} onChange={handleShowPasswordToggle} />} // Checkbox state tied to showPassword
+              control={<Checkbox checked={showPassword} onChange={handleShowPasswordToggle} />} 
               label="Show password"
             />
             <Button
@@ -231,7 +232,6 @@ export default function SignUp(props) {
               justifyContent="center"
               alignItems="center"
               gap={1}
-              mt={1}
             >
               <Typography
                 variant="subtitle2"

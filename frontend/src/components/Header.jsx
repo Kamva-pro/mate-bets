@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa'; 
-import axios from 'axios'; // To make API calls
+import axios from 'axios'; 
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
@@ -101,11 +101,14 @@ const Navbar = () => {
       />
 
       {isMenuOpen && (
-        <div className="menu-links">
-          <Link to="/" className="navbar-link active">Home</Link>
-          <Link to="/playfriend" className="navbar-link">Play a Friend</Link>
-          <Link to="/progames" className="navbar-link">Pro Games</Link>
-        </div>
+
+      <div className="menu-links">
+            <Link to="/" className="navbar-link active">Home</Link>
+            <Link to="/playfriend" className="navbar-link">Play a Friend</Link>
+            <Link to="/progames" className="navbar-link">Pro Games</Link>
+            
+      </div>
+        
       )}
     </nav>
   );

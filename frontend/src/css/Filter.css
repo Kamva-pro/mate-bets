@@ -11,13 +11,14 @@
 #filter-section select {
     background-color: transparent;
     padding: 14px; 
-    width: 200px; 
+    width: 200px !important; 
     color: white;
     border-radius: 12px;
     border: 1px solid white;
     box-sizing: border-box; 
     transition: width 0.3s ease;
 }
+
 
 #filter-section option {
     background-color: #121212;
@@ -30,6 +31,7 @@
     border: none;
     padding: 14px 50px; 
     font-weight: 700;
+    width: 200px;
     font-size: 18px;
     border-radius: 12px;
     transition: background-color 0.3s, width 0.3s ease;
@@ -70,8 +72,8 @@
         max-width: 250px; 
     }
 
-    #filter-button {
+    /* #filter-button {
         width: 100%; 
         max-width: 250px;
-    }
+    } */
 }

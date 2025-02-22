@@ -54,13 +54,13 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
     position: 'absolute',
     zIndex: -1,
     inset: 0,
-    backgroundImage:
-      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-    backgroundRepeat: 'no-repeat',
-    ...theme.applyStyles('dark', {
-      backgroundImage:
-        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-    }),
+    // backgroundImage:
+    //   'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
+    // backgroundRepeat: 'no-repeat',
+    // ...theme.applyStyles('dark', {
+    //   backgroundImage:
+    //     'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
+    // }),
   },
 }));
 
@@ -106,11 +106,6 @@ export default function SignIn(props) {
     const data = new FormData(event.currentTarget);
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
-
-    // Validate email and password
-    // if (!validateInputs()) {
-    //   return;
-    // }
 
     try {
       setIsLoading(true);
@@ -242,16 +237,16 @@ export default function SignIn(props) {
             </Link>
           </Box>
           <Divider>or</Divider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button variant="outlined" color="primary" sx={{ display: 'flex', justifyContent: 'center' }}>
-              <GoogleIcon sx={{ marginRight: 2 }} />
-              Sign in with Google
+          {/* <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <Button variant="outlined" color="primary" sx={{ display: 'flex',  justifyContent: 'center' }}>
+              <GoogleIcon/>
+               <p alignSelf={"center"} justifyContent={"center"}>Sign in with Google</p>
             </Button>
             <Button variant="outlined" color="primary" sx={{ display: 'flex', justifyContent: 'center' }}>
               <FacebookIcon sx={{ marginRight: 2 }} />
-              Sign in with Facebook
+               Sign in with Facebook
             </Button>
-          </Box>
+          </Box> */}
           <Typography variant="body2" sx={{ alignSelf: 'center' }}>
             Don't have an account?{' '}
             <Link component={RouterLink} to="/signup">

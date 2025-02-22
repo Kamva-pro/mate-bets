@@ -47,7 +47,7 @@ function ProGames() {
             />
 
             <ProCard 
-                playerOne="Magnus Carslen" 
+                playerOne="Magnus Carlsen" 
                 playerOneImg="../src/assets/top-players/magnus.png" 
                 playerTwo="Levon Aronian" 
                 playerTwoImg="../src/assets/top-players/aronion.png" 

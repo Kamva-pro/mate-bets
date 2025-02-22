@@ -20,6 +20,7 @@ const FilterGames = () => {
         <div id="filter-section">
    <div>
             <select 
+            
                 id="options-dropdown" 
                 value={selectedFormat} 
                 onChange={handleFormatChange}
