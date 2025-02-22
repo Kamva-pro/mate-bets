@@ -50,7 +50,7 @@ const FilterGames = () => {
             
         </div>
 
-        <div>
+        {/* <div>
             <select 
                 id="options-dropdown" 
                 value={selectedDate} 
@@ -63,7 +63,7 @@ const FilterGames = () => {
             </select>
 
             
-        </div>
+        </div> */}
 
 
         <button id="filter-button">Filter</button>
