@@ -1,0 +1,18 @@
+runtime: nodejs20
+
+env_variables:
+  NODE_ENV: 'production'
+  # Add other env vars here or use Secret Manager
+  # PORT is set by App Engine automatically (8080)
+
+handlers:
+  - url: /api/.*
+    script: auto
+    secure: always
+
+  # Serve static files for frontend (if we merge them)
+  # But typically we let Node serve it via express.static or use handlers map
+  # Using express.static in server.js is easier for SPA routing.
+  - url: /.*
+    script: auto
+    secure: always

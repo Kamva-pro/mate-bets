@@ -113,7 +113,7 @@ export default function DashboardLayoutBasic(props) {
 
         // Make the API call with header
         const response = await axios.get(
-          `http://localhost:3000/api/fetch-bets?userId=${userId}`,
+          `${import.meta.env.VITE_API_URL}/api/fetch-bets?userId=${userId}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`
@@ -179,7 +179,7 @@ export default function DashboardLayoutBasic(props) {
     if (!userToken) return;
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/fetch-game?playerOne=${username}&opponent=${opp_username}`,
+        `${import.meta.env.VITE_API_URL}/api/fetch-game?playerOne=${username}&opponent=${opp_username}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`
@@ -324,7 +324,7 @@ export default function DashboardLayoutBasic(props) {
                     const amount = document.getElementById('depositAmount').value;
                     if (!amount) return alert("Enter amount");
                     try {
-                      const response = await axios.post('http://localhost:3000/api/deposit', { amount }, {
+                      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/deposit`, { amount }, {
                         headers: { Authorization: `Bearer ${userToken}` }
                       });
                       if (response.status === 200) alert("Deposit successful!");
@@ -400,7 +400,7 @@ export default function DashboardLayoutBasic(props) {
                       onClick={async (e) => {
                         e.stopPropagation();
                         try {
-                          const response = await axios.post('http://localhost:3000/api/verify-result', { betId: bet.bet_id }, {
+                          const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/verify-result`, { betId: bet.bet_id }, {
                             headers: { Authorization: `Bearer ${userToken}` }
                           });
                           alert(response.data.message);

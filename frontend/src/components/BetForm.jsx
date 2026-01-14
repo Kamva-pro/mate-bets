@@ -64,7 +64,7 @@ const BetContainer = styled(Stack)(({ theme }) => ({
 export default function BetForm(props) {
   const [gameFormat, setGameFormat] = useState('');
   const [gameSeries, setGameSeries] = useState('');
-  const [opponentEmail, setOpponentEmail] = useState('');
+  const [opponentLichess, setOpponentLichess] = useState('');
   const [stake, setStake] = useState('');
   const [error, setError] = useState('');
   const [alertMessage, setAlertMessage] = React.useState('');
@@ -82,7 +82,7 @@ export default function BetForm(props) {
       return;
     }
 
-    if (!opponentEmail || !gameFormat || !gameSeries || !stake) {
+    if (!opponentLichess || !gameFormat || !gameSeries || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
       return;
@@ -92,8 +92,8 @@ export default function BetForm(props) {
     const userId = currentUser ? currentUser.uid : localStorage.getItem("userId");
 
     try {
-      const response = await axios.post('http://localhost:3000/api/place-bet', {
-        opponentEmail,
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/place-bet`, {
+        opponentLichess,
         gameFormat,
         gameSeries,
         stake,
@@ -161,14 +161,14 @@ export default function BetForm(props) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="opponentEmail">Opponent's Email</FormLabel>
+              <FormLabel htmlFor="opponentLichess">Opponent's Lichess Username</FormLabel>
               <TextField
-                id="opponentEmail"
-                type="email"
-                name="opponentEmail"
-                value={opponentEmail}
-                onChange={(e) => setOpponentEmail(e.target.value)}
-                placeholder="Enter opponent's email"
+                id="opponentLichess"
+                type="text"
+                name="opponentLichess"
+                value={opponentLichess}
+                onChange={(e) => setOpponentLichess(e.target.value)}
+                placeholder="Enter opponent's Lichess username"
                 required
                 fullWidth
                 variant="outlined"

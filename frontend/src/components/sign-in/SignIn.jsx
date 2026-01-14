@@ -118,7 +118,7 @@ export default function SignIn(props) {
       const idToken = await user.getIdToken();
 
       // Verify with backend and get profile
-      const response = await axios.post("http://localhost:3000/api/sign-in", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/sign-in`, {
         idToken
       });
 

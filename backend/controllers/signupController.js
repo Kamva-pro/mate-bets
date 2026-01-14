@@ -17,13 +17,15 @@ const signup = async (req, res) => {
         /* TODO: authenticate the user on lichess with their username */
         // For now, we assume the username is valid or we verify existence.
         // real implementation would involve Lichess OAuth or public API check.
-        if (lichess_username) {
-            try {
-                // simple check if user exists
-                await axios.get(`https://lichess.org/api/user/${lichess_username}`);
-            } catch (error) {
-                return res.status(400).json({ message: "Invalid Lichess username" });
-            }
+        if (!lichess_username) {
+            return res.status(400).json({ message: "Lichess username is required" });
+        }
+
+        try {
+            // Verify user exists on Lichess
+            await axios.get(`https://lichess.org/api/user/${lichess_username}`);
+        } catch (error) {
+            return res.status(400).json({ message: "Invalid Lichess username (not found on Lichess)" });
         }
 
         // Create a new user in Firebase Authentication
@@ -40,7 +42,7 @@ const signup = async (req, res) => {
             uid: firebaseUser.uid,
             username: name,
             email: email,
-            lichess_username: lichess_username || null,
+            lichess_username: lichess_username,
             chesscom_username: null, // Placeholder for future
             balance: 0,
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
