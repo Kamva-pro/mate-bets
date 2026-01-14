@@ -1,61 +1,42 @@
-const admin = require('../firebase-client');
-const supabase = require('../../supabase-client');
-const bcrypt = require('bcrypt');
-
-// Initialize Firebase Admin SDK
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
-}
+const { admin, db } = require('../firebase-client');
 
 const signin = async (req, res) => {
-  const { email, password } = req.body;
+  // We expect the frontend to send the ID Token obtained from Firebase Client SDK
+  const { idToken } = req.body;
+
+  if (!idToken) {
+    return res.status(400).json({ message: "ID Token is required" });
+  }
 
   try {
-    // Fetch the user from Supabase
-    const { data: users, error } = await supabase
-    .from("users")
-    .select("id, password, username, email")
-    .eq("email", email)
-    .limit(1);
-  
+    // Verify the ID token
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
 
-    console.log('Users from Supabase:', users); 
+    // Fetch user profile from Firestore
+    const userDoc = await db.collection('users').doc(uid).get();
 
-    if (error || users.length === 0) {
-      console.error("Supabase error:", error); 
-      return res.status(404).json({ message: "User not found." });
+    if (!userDoc.exists) {
+      return res.status(404).json({ message: "User profile not found in database." });
     }
 
-    const dbUser = users[0];
-
-    const isPasswordValid = await bcrypt.compare(password, dbUser.password);
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials." });
-    }
-
-    let firebaseUser;
-    try {
-      firebaseUser = await admin.auth().getUserByEmail(email);
-      console.log('Firebase user:', firebaseUser); 
-    } catch (err) {
-      console.error("Firebase error:", err); 
-      return res.status(404).json({ message: "Firebase user not found." });
-    }
+    const userData = userDoc.data();
 
     return res.status(200).json({
       message: "Sign-in successful.",
-      userId: firebaseUser.uid,
+      userId: uid,
       userDetails: {
-        email: firebaseUser.email,
-        name: dbUser.name,
+        email: userData.email,
+        name: userData.username,
+        balance: userData.balance,
+        lichess_username: userData.lichess_username,
+        // Add other fields as needed
       },
     });
+
   } catch (error) {
     console.error("Sign-in error:", error);
-    return res.status(500).json({ message: "Internal server error." });
+    return res.status(401).json({ message: "Invalid or expired token." });
   }
 };
 

@@ -20,6 +20,8 @@ import ColorModeSelect from '../shared-theme/ColorModeSelect';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase';
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -89,7 +91,7 @@ export default function SignIn(props) {
   };
 
 
-  const [isLoading, setIsLoading] = React.useState(false); 
+  const [isLoading, setIsLoading] = React.useState(false);
 
 
   const handleClickOpen = () => {
@@ -102,7 +104,7 @@ export default function SignIn(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     const data = new FormData(event.currentTarget);
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
@@ -110,19 +112,25 @@ export default function SignIn(props) {
     try {
       setIsLoading(true);
 
+      // Sign in with Firebase Client SDK
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const idToken = await user.getIdToken();
+
+      // Verify with backend and get profile
       const response = await axios.post("http://localhost:3000/api/sign-in", {
-        email,
-        password
+        idToken
       });
 
-      if(response.status === 200)
+      if (response.data) // response.status === 200 is implied by no error catch
       {
-        const { userId } = response.data;
-
+        const { userId, userDetails } = response.data;
         console.log("User signed in:", userId);
 
-        localStorage.clear();
+        // Context handles basic auth state, but we might want to store extra details
+        // userDetails could be stored in a separate UserContext or just localStorage for now
         localStorage.setItem("userId", userId);
+
         setAlertMessage("Sign-in successful!");
         setAlertSeverity("success");
         setTimeout(() => {
@@ -133,18 +141,23 @@ export default function SignIn(props) {
 
     } catch (error) {
       console.error("Login failed:", error);
-      const message = error.response?.data?.message || "Sign-in failed. Please try again.";
+      let message = "Sign-in failed. Please try again.";
+      if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+        message = "Invalid email or password.";
+      } else if (error.response?.data?.message) {
+        message = error.response.data.message;
+      }
       setAlertMessage(message);
       setAlertSeverity("error");
       setTimeout(() => {
         setAlertMessage("");
       }, 3000);
     }
-    finally{
+    finally {
       setIsLoading(false);
     }
   };
-  
+
 
 
   return (
@@ -197,7 +210,7 @@ export default function SignIn(props) {
               <TextField
                 name="password"
                 placeholder="••••••"
-                type={showPassword ? "text" : "password"} 
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
                 fullWidth
@@ -212,7 +225,7 @@ export default function SignIn(props) {
                   value="showpassword"
                   color="primary"
                   checked={showPassword}
-                  onChange={handleShowPasswordToggle} 
+                  onChange={handleShowPasswordToggle}
                 />
               }
               label="Show Password"

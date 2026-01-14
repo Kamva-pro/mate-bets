@@ -1,9 +1,12 @@
-var admin = require("firebase-admin");
+const admin = require("firebase-admin");
 
-var serviceAccount = require("./mate-bets-f533b-firebase-adminsdk-st6kj-678d27b38f.json");
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+  });
+}
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+const db = admin.firestore();
+const auth = admin.auth();
 
-module.exports = admin;
+module.exports = { admin, db, auth };

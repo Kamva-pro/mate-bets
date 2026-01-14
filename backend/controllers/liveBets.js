@@ -1,54 +1,55 @@
-const supabase = require('../../supabase-client');
+const { db, admin } = require('../firebase-client');
 
-const placeLiveBet = async(req, res) =>
-{
-    const {selectedBet, userId} = req.body;
+const placeLiveBet = async (req, res) => {
+    const { selectedBet, userId } = req.body;
+
+    if (!selectedBet || !userId || !selectedBet.amount) {
+        return res.status(400).json({ message: 'Invalid bet data' });
+    }
 
     try {
-        const { data: userData, error: userError } = await supabase
-            .from('users')
-            .select("*")
-            .eq("id", userId)
-            .single();
-            
-        if (userError || !userData) {
-            return res.status(403).json({ message: 'User not authenticated', userError });
-        }
+        await db.runTransaction(async (t) => {
+            const userRef = db.collection('users').doc(userId);
+            const userDoc = await t.get(userRef);
 
-        if (userData.balance < selectedBet.amount) {
-            return res.status(402).json({ message: 'Insufficient funds to place the bet' });
-        }
+            if (!userDoc.exists) {
+                throw new Error('User not authenticated');
+            }
 
-        const { data: betData, error: betError } = await supabase
-            .from('live-bets')
-            .insert([
-                {
-                    current_userId: userId,
-                    game_id: selectedBet.gameId,
-                    stake: selectedBet.amount,
-                    player_picked: selectedBet.player,
-                    result: "in progress"
-                }
-            ])
-        if (betError || !betData) {
-            return res.status(500).json({ message: 'Error placing bet: ', betError });
-        }
+            const userData = userDoc.data();
 
-        const newBalance = userData.balance - amount;
-        const { error: updateError } = await supabase
-            .from('users')
-            .update({ balance: newBalance })
-            .eq('id', userId);
+            if (userData.balance < selectedBet.amount) {
+                throw new Error('Insufficient funds to place the bet');
+            }
 
-        if (updateError) {
-            return res.status(503).json({ message: 'Error updating balance: ', updateError});
-        }
+            const betRef = db.collection('live_bets').doc();
+            const now = admin.firestore.FieldValue.serverTimestamp();
+
+            const betData = {
+                bet_id: betRef.id, // storing ID in doc is redundant if doc ID is same, but fine
+                current_userId: userId,
+                game_id: selectedBet.gameId,
+                stake: selectedBet.amount,
+                player_picked: selectedBet.player,
+                result: "in progress",
+                createdAt: now
+            };
+
+            t.set(betRef, betData);
+
+            const newBalance = userData.balance - selectedBet.amount;
+            t.update(userRef, { balance: newBalance });
+        });
 
         res.status(200).json({ message: 'Bet placed successfully' });
 
     } catch (error) {
-        res.status(500).json({ message: 'An unexpected error occured: ', error });
+        console.error('Error placing live bet:', error);
+        if (error.message.includes('Insufficient funds') || error.message.includes('not authenticated')) {
+            return res.status(403).json({ message: error.message });
+        }
+        res.status(500).json({ message: 'An unexpected error occured: ', error: error.message });
     }
 }
 
-module.exports = {placeLiveBet};
+module.exports = { placeLiveBet };
