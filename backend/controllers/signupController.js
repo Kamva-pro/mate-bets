@@ -1,5 +1,4 @@
 const { admin, db } = require('../firebase-client');
-const bcrypt = require('bcrypt');
 const dns = require("dns")
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 const axios = require('axios');

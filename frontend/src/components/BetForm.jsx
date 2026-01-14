@@ -71,6 +71,8 @@ export default function BetForm(props) {
   const [alertSeverity, setAlertSeverity] = React.useState('');
 
 
+  const [isRandomMatch, setIsRandomMatch] = useState(false);
+
   const { userToken, currentUser } = useAuth();
 
   const handleSubmit = async (event) => {
@@ -82,7 +84,7 @@ export default function BetForm(props) {
       return;
     }
 
-    if (!opponentLichess || !gameFormat || !gameSeries || !stake) {
+    if ((!isRandomMatch && !opponentLichess) || !gameFormat || !gameSeries || !stake) {
       setAlertMessage('Please fill out all fields.');
       setAlertSeverity('error');
       return;
@@ -92,17 +94,18 @@ export default function BetForm(props) {
     const userId = currentUser ? currentUser.uid : localStorage.getItem("userId");
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/place-bet`, {
-        opponentLichess,
-        gameFormat,
-        gameSeries,
-        stake,
-        userId
-      }, {
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        }
-      });
+      let response;
+      const headers = { Authorization: `Bearer ${userToken}` };
+      const commonData = { gameFormat, gameSeries, stake, userId };
+
+      if (isRandomMatch) {
+        response = await axios.post(`${import.meta.env.VITE_API_URL}/api/find-match`, commonData, { headers });
+      } else {
+        response = await axios.post(`${import.meta.env.VITE_API_URL}/api/place-bet`, {
+          ...commonData,
+          opponentLichess
+        }, { headers });
+      }
 
       if (response.status === 200) {
         setAlertMessage("Successfully placed bet");
@@ -160,21 +163,35 @@ export default function BetForm(props) {
               'scrollbar-width': 'none',
             }}
           >
-            <FormControl>
-              <FormLabel htmlFor="opponentLichess">Opponent's Lichess Username</FormLabel>
-              <TextField
-                id="opponentLichess"
-                type="text"
-                name="opponentLichess"
-                value={opponentLichess}
-                onChange={(e) => setOpponentLichess(e.target.value)}
-                placeholder="Enter opponent's Lichess username"
-                required
-                fullWidth
-                variant="outlined"
-                color={'primary'}
-              />
-            </FormControl>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isRandomMatch}
+                  onChange={(e) => setIsRandomMatch(e.target.checked)}
+                  color="primary"
+                />
+              }
+              label="Random Match"
+              sx={{ alignSelf: 'start', mb: 2 }}
+            />
+
+            {!isRandomMatch && (
+              <FormControl>
+                <FormLabel htmlFor="opponentLichess">Opponent's Lichess Username</FormLabel>
+                <TextField
+                  id="opponentLichess"
+                  type="text"
+                  name="opponentLichess"
+                  value={opponentLichess}
+                  onChange={(e) => setOpponentLichess(e.target.value)}
+                  placeholder="Enter opponent's Lichess username"
+                  required={!isRandomMatch}
+                  fullWidth
+                  variant="outlined"
+                  color={'primary'}
+                />
+              </FormControl>
+            )}
 
             <FormControl>
               <FormLabel htmlFor="gameFormat">Game Format</FormLabel>

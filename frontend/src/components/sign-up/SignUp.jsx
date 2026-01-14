@@ -66,47 +66,46 @@ export default function SignUp(props) {
   const [lichessErrorMessage, setLichessErrorMessage] = React.useState('');
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false); 
-  const [openSnackbar, setOpenSnackbar] = React.useState(false); 
-  const [snackbarMessage, setSnackbarMessage] = React.useState(''); 
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertSeverity, setAlertSeverity] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(false); 
-  const navigate = useNavigate(); 
+  const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate('/signin');
   };
 
   const handleShowPasswordToggle = () => {
-    setShowPassword(!showPassword); 
+    setShowPassword(!showPassword);
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     if (nameError || emailError || passwordError) {
-      return; 
+      return;
     }
-  
+
     const data = new FormData(event.currentTarget);
     const name = data.get('name');
     const email = data.get('email').toLowerCase();
     const password = data.get('password');
     const lichess_username = data.get('lichess_username')
-  
-    setIsLoading(true); 
-  
-    try{
-      const response = await axios.post('http://localhost:3000/api/sign-up', {
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/sign-up`, {
         name,
         email,
         lichess_username,
         password
       });
 
-      if(response.status === 200)
-      {
+      if (response.status === 200) {
         setAlertMessage("Account successfully created");
         setAlertSeverity("success")
         setTimeout(() => {
@@ -114,7 +113,7 @@ export default function SignUp(props) {
         }, 3000);
         handleLogin();
       }
-    
+
     }
 
     catch (error) {
@@ -124,14 +123,14 @@ export default function SignUp(props) {
         setAlertMessage("");
       }, 3000);
     }
-    
+
     finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
-  
 
-  
+
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -139,11 +138,11 @@ export default function SignUp(props) {
   return (
     <AppTheme {...props}>
       <SignUpContainer direction="column" justifyContent="space-between">
-      {alertMessage && (
-        <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
-          {alertMessage}
-        </Alert>
-      )}
+        {alertMessage && (
+          <Alert variant="outlined" severity={alertSeverity} style={{ marginBottom: '20px' }}>
+            {alertMessage}
+          </Alert>
+        )}
         <Card variant="outlined">
           <Typography
             component="h1"
@@ -217,7 +216,7 @@ export default function SignUp(props) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox checked={showPassword} onChange={handleShowPasswordToggle} />} 
+              control={<Checkbox checked={showPassword} onChange={handleShowPasswordToggle} />}
               label="Show password"
             />
             <Button
