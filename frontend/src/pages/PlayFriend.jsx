@@ -1,18 +1,25 @@
-import {React, useState} from "react";
-import "../css/PlayFriend.css";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Navbar from "../components/Header";
 import BetForm from "../components/BetForm";
 
 
 const PlayFriend = () => {
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
-    const active_link = document.getElementById('#playfriend');
-    return(
-    <div>
-        <Navbar/>
-        <BetForm/>
-        
-    </div>
+    useEffect(() => {
+        if (!currentUser) {
+            navigate("/signin");
+        }
+    }, [currentUser, navigate]);
+
+    return (
+        <div>
+            <Navbar />
+            <BetForm />
+        </div>
     )
 }
 

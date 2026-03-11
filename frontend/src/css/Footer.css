@@ -1,104 +1,112 @@
 .footer-container {
   margin-top: 48px;
   background-color: #000;
-    display: grid;
-    padding: 12px;
-    grid-template-columns: 40% 1fr 1fr;
-    gap: 16px;
+  display: grid;
+  padding: 12px;
+  grid-template-columns: 40% 1fr 1fr;
+  gap: 16px;
+}
+
+.grid-item {
+  padding: 16px;
+  padding-left: 64px;
+}
+
+.site-map {
+  margin-top: 16px;
+  color: #fff;
+}
+
+
+.site-map ul a {
+  text-decoration: underline;
+  color: white;
+
+}
+
+.site-map ul a li {
+  list-style: none;
+  margin-left: -28px;
+}
+
+.grid-item.first .navbar-brand {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.grid-item.first .navbar-brand #bets-text {
+  color: #e0c97f;
+}
+
+.grid-item.grid-item.first .footer-summary p {
+  max-width: 400px;
+}
+
+.footer-summary {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  padding: 12px;
+  color: white;
+  text-align: start;
+}
+
+.socials {
+  margin-top: 16px;
+  color: white;
+}
+
+.socials .social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: start;
+  align-items: center;
+  max-width: 200px;
+
+
+}
+
+.socials .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.social-links .social-link {
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.socials .social-links a:hover {
+  border-color: #e0c97f;
+  background: #252520;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(224, 201, 127, 0.25);
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
   }
-  
+
+  .grid-item.first {
+    padding-left: 8px;
+
+  }
+
   .grid-item {
-    padding: 16px;
-    padding-left:64px;
+    padding-left: 18px;
   }
-
-  .site-map{
-    margin-top: 16px;
-    color: #fff; 
-  }
-
-
-  .site-map ul a{
-    text-decoration: underline;
-    color: white;
-
-  }
-
-  .site-map ul a li{
-    list-style: none;
-    margin-left: -28px;
-  }
-
-  .grid-item.first .navbar-brand {
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-  }
-
-  .grid-item.grid-item.first .footer-summary p{
-    max-width: 400px;
-  }
-
-  .footer-summary{
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    padding: 12px;
-    color: white;
-    text-align: start;
-  }
-
-  .socials{
-    margin-top: 16px;
-    color: white;
-  }
-
-  .socials .social-links{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: start;
-    align-items: center;
-    max-width: 200px;
-
-
-  }
-
-  .socials .social-links img{
-    width: 40px;
-  }
-
-  .social-links .social-link{
-    border-radius: 12px;
-    transition: 0.2s;
-  }
-
-  .social-links .social-link:hover{
-    transition: 0.2s 0.3;
-    transform: scale(1.1);
-    filter: sepia(100);
-  }
-
-  .socials .social-links .social-link.lichess{
-    width: 160px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .footer-container {
-      grid-template-columns: 1fr; 
-      margin: 0 !important;
-      padding: 0 !important;
-      gap: 0 !important;
-    }
-
-    .grid-item.first{
-      padding-left: 8px;
-      
-    }
-
-    .grid-item{
-      padding-left: 18px;
-    }
-  }
-  
+}

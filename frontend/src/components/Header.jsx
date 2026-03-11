@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa';
 import axios from 'axios';
+import menuIcon from "../assets/menu.png";
 import "../css/Responsive.css";
 import "../css/Navbar.css";
 
@@ -94,7 +95,7 @@ const Navbar = () => {
 
       <img
         id="menu"
-        src="../src/assets/menu.png"
+        src={menuIcon}
         alt="Menu Icon"
         className="menu-icon"
         onClick={toggleMenu}

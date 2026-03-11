@@ -1,5 +1,5 @@
 const dns = require('dns');
-dns.setServers(['8.8.8.8', '8.8.4.4']); 
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const axios = require('axios');
 const ndjson = require('ndjson');
@@ -7,37 +7,43 @@ const url = 'https://lichess.org/api/tv/feed';
 
 const fetchLiveGames = async (req, res) => {
     try {
-        const response = await axios({
-            method: 'get',
-            url: url,
-            responseType: 'stream',
-            timeout: 10000, 
-        });
+        // 1. Get current top games in each channel
+        const channelsResponse = await axios.get('https://lichess.org/api/tv/channels');
+        const channels = channelsResponse.data;
 
-        const stream = response.data.pipe(ndjson.parse());
+        // 2. We want to fetch the full game details for the top channels (blitz, rapid, bullet, classical)
+        const targetChannels = ['blitz', 'rapid', 'bullet', 'classical', 'best'];
+        const gamePromises = targetChannels
+            .filter(ch => channels[ch] && channels[ch].gameId)
+            .map(async (ch) => {
+                const gameId = channels[ch].gameId;
+                try {
+                    const gameDetails = await axios.get(`https://lichess.org/game/export/${gameId}`, {
+                        headers: { Accept: 'application/json' }
+                    });
+                    return {
+                        channel: ch,
+                        ...gameDetails.data
+                    };
+                } catch (err) {
+                    console.error(`Error fetching game ${gameId}:`, err.message);
+                    return null;
+                }
+            });
 
-        stream.on('data', (data) => {
-            if (data.t === 'featured') {
-                console.log('New featured game:', data.d);
-            } else if (data.t === 'fen') {
-                console.log('Game update:', data.d);
-            }
-        });
+        const games = (await Promise.all(gamePromises)).filter(g => g !== null);
 
-        stream.on('error', (err) => {
-            console.error('Error reading stream:', err);
+        res.status(200).json({
+            success: true,
+            data: games,
         });
-
-        stream.on('end', () => {
-            console.log('Stream ended');
-        });
-    }  catch (error) {    
+    } catch (error) {
+        console.error('Error fetching games:', error);
         res.status(500).json({
-            message: "Error fetching games",
+            message: "Error fetching games snapshot",
             error: error.message,
         });
     }
-    
 };
 
 module.exports = { fetchLiveGames };

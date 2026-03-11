@@ -1,0 +1,363 @@
+/* ===== Home Bet Form Section ===== */
+.home-bet-section {
+    width: 100%;
+    background-color: #121212;
+    padding: 120px 20px 80px;
+    /* 120px top clears fixed navbar */
+}
+
+.home-bet-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.home-bet-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.home-bet-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 1px solid #333;
+    color: #e0c97f;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+}
+
+.home-bet-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 14px;
+}
+
+.home-bet-subtitle {
+    color: #888;
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===== Card Wrapper ===== */
+.home-bet-card {
+    display: flex;
+    gap: 40px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #161616 100%);
+    border: 1px solid #2a2a2a;
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 8px 60px rgba(0, 0, 0, 0.6);
+    align-items: flex-start;
+}
+
+/* ===== Form Side ===== */
+.home-bet-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Fields */
+.hbf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hbf-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #aaa;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hbf-field input,
+.hbf-field select {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    padding: 13px 16px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.hbf-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 14px) center;
+    padding-right: 40px;
+}
+
+.hbf-field option {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.hbf-field input:focus,
+.hbf-field select:focus {
+    border-color: #e0c97f;
+    box-shadow: 0 0 0 3px rgba(224, 201, 127, 0.12);
+}
+
+.hbf-field input::placeholder {
+    color: #555;
+}
+
+/* Stake input with prefix */
+.stake-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stake-input-wrapper:focus-within {
+    border-color: #e0c97f;
+    box-shadow: 0 0 0 3px rgba(224, 201, 127, 0.12);
+}
+
+.stake-prefix {
+    padding: 13px 14px;
+    color: #666;
+    font-size: 16px;
+    font-weight: 700;
+    border-right: 1px solid #2a2a2a;
+    background: #222;
+}
+
+.stake-input-wrapper input {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    flex: 1;
+}
+
+.stake-input-wrapper input:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* Toggle */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-switch {
+    width: 46px;
+    height: 26px;
+    background: #2a2a2a;
+    border-radius: 100px;
+    position: relative;
+    transition: background 0.25s;
+    border: 1px solid #3a3a3a;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle-switch.active {
+    background: #e0c97f;
+}
+
+.toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-switch.active .toggle-knob {
+    transform: translateX(20px);
+}
+
+.toggle-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+/* Submit Button */
+.hbf-submit-btn {
+    margin-top: 6px;
+    background: linear-gradient(135deg, #e0c97f, #c8a84b);
+    color: #0a0a0a;
+    border: none;
+    padding: 15px 28px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 20px rgba(224, 201, 127, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.hbf-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(224, 201, 127, 0.45);
+    filter: brightness(1.08);
+}
+
+.hbf-submit-btn:active {
+    transform: translateY(0);
+}
+
+.hbf-btn-arrow {
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.hbf-submit-btn:hover .hbf-btn-arrow {
+    transform: translateX(4px);
+}
+
+.hbf-note {
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    margin-top: -6px;
+}
+
+/* ===== Decoration Side ===== */
+.home-bet-deco {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-top: 8px;
+}
+
+.deco-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.deco-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #e0c97f;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1;
+}
+
+.deco-label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.deco-divider {
+    width: 80%;
+    height: 1px;
+    background: #2a2a2a;
+}
+
+.deco-board {
+    margin-top: 28px;
+    position: relative;
+    width: 160px;
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #2a2a2a;
+}
+
+.chess-sq {
+    aspect-ratio: 1;
+}
+
+.chess-sq.light {
+    background-color: #2a2a2a;
+}
+
+.chess-sq.dark {
+    background-color: #141414;
+}
+
+.deco-glow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba(224, 201, 127, 0.25), transparent 70%);
+    filter: blur(8px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 780px) {
+    .home-bet-card {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 32px;
+    }
+
+    .home-bet-deco {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .deco-stat {
+        width: auto;
+        padding: 12px 24px;
+    }
+
+    .deco-divider {
+        width: 1px;
+        height: 40px;
+    }
+
+    .deco-board {
+        display: none;
+    }
+}

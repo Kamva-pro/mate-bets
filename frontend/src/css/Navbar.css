@@ -1,132 +1,130 @@
  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  } 
-  
-  body {
-    font-family: 'Montserrat', sans-serif !important; 
-}
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
 
-  .navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px !important;
-    background-color: #121212;
-    color: white;
-    position: fixed !important;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0px 1px 20px #999;
-  }
-  
-  .navbar .navbar-brand {
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-  }
+ body {
+   font-family: 'Montserrat', sans-serif !important;
+ }
 
-  .navbar .navbar-brand:hover{
-    color: #fff;
-  }
+ .navbar {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 5vw !important;
+   background-color: #121212;
+   color: white;
+   position: fixed !important;
+   top: 0;
+   z-index: 1000;
+   box-shadow: 0px 1px 20px #999;
+ }
 
-  #bets-text{
-    color: #238B57;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 80px;
-  }
-  
-  .navbar-links .navbar-link {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 400;
-    transition: color 0.3s;
-  }
-  
-  .navbar-link:hover {
-    color: hsl(150, 60%, 34%); 
-    
-  }
+ .navbar .navbar-brand {
+   font-size: 28px;
+   font-weight: bold;
+   color: #fff;
+ }
 
-  .navbar-links .navbar-link.active{
-    font-weight: 600;
-    font-size: 18px;
-    color: #238B57;
-  }
-  
-  .navbar-button {
-    background-color: #0a8f4c; 
-    color: white;
-    border: none;
-    padding: 10px 50px;
-    font-weight: 700;
-    font-size: 18px;
-    border-radius: 4px;
-    transition:0.3s;
-    box-shadow: 0 1px 12px rgba(255, 255, 255, 0.479);     
+ .navbar .navbar-brand:hover {
+   color: #fff;
+ }
 
-  }
+ #bets-text {
+   color: #e0c97f;
+ }
 
-  .navbar-button:hover{
-    cursor: pointer;
-  }
-  
-   #menu{
-    display: none;
-  }
+ .navbar-links {
+   display: flex;
+   gap: 80px;
+ }
 
-  .menu-links {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: #121212;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 10;
-  }
-  
-  .menu-links .navbar-link {
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .menu-links .navbar-link:hover,
-  .menu-links .navbar-link.active {
-    background-color: #121212;
-  }
-  
+ .navbar-links .navbar-link {
+   color: white;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: 400;
+   transition: color 0.3s;
+ }
 
-  .navbar-actions {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-icon {
-    color: #ffffff;
-    transition: color 0.3s;
-  }
-  
-  .profile-icon:hover {
-    color: #0a8f4c;
-  }
-  
+ .navbar-link:hover {
+   color: #e0c97f;
+ }
 
-  .display-name{
-    font-weight: 700;
-    font-size: 14px;
-  }
+ .navbar-links .navbar-link.active {
+   font-weight: 600;
+   font-size: 18px;
+   color: #e0c97f;
+ }
 
-  .display-name #currency{
-    font-size: 18px;
-  }
+ .navbar-button {
+   background: linear-gradient(135deg, #e0c97f, #c8a84b);
+   color: #0a0a0a;
+   border: none;
+   padding: 10px 50px;
+   font-weight: 700;
+   font-size: 18px;
+   border-radius: 8px;
+   transition: 0.3s;
+   box-shadow: 0 4px 16px rgba(224, 201, 127, 0.3);
+ }
+
+ .navbar-button:hover {
+   cursor: pointer;
+ }
+
+ #menu {
+   display: none;
+ }
+
+ .menu-links {
+   display: flex;
+   flex-direction: column;
+   position: absolute;
+   top: 60px;
+   right: 20px;
+   background-color: #121212;
+   border-radius: 8px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   padding: 10px;
+   z-index: 10;
+ }
+
+ .menu-links .navbar-link {
+   padding: 10px 20px;
+   color: white;
+   text-decoration: none;
+   font-size: 16px;
+ }
+
+ .menu-links .navbar-link:hover,
+ .menu-links .navbar-link.active {
+   background-color: #121212;
+ }
+
+
+ .navbar-actions {
+   display: flex;
+   align-items: center;
+ }
+
+ .profile-icon {
+   color: #ffffff;
+   transition: color 0.3s;
+ }
+
+ .profile-icon:hover {
+   color: #e0c97f;
+ }
+
+
+ .display-name {
+   font-weight: 700;
+   font-size: 14px;
+ }
+
+ .display-name #currency {
+   font-size: 18px;
+ }

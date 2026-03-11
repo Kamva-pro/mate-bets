@@ -1,5 +1,4 @@
-// App.js
-import React from 'react';
+import React, { Suspense } from 'react';
 import { lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/sign-in/SignIn';
@@ -16,15 +15,17 @@ const FAQ = lazy(() => import("./pages/FAQ"))
 function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path='/playfriend' element={<PlayFriend />} />
-                <Route path='/progames' element={<ProGamesPage />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/betdetails' element={<BetDetails />} />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path='/playfriend' element={<PlayFriend />} />
+                    <Route path='/progames' element={<ProGamesPage />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/betdetails' element={<BetDetails />} />
+                </Routes>
+            </Suspense>
         </Router>
     );
 }
